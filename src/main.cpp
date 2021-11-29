@@ -37,7 +37,7 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 	}
 	
-	SDL_Window* window 		= SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 2000, 1000, 0);
+	SDL_Window* window 		= SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
 	SDL_Renderer* renderer 	= SDL_CreateRenderer(window, -1, 0);
 
 	std::cout <<  (imagePath + "bg.jpg").c_str() << std::endl;
