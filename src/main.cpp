@@ -3,9 +3,13 @@
 #include "Session.h"
 #include "Button.h"
 #include <string>
+#include <iostream>
 
 // Paths to resource folders. Change to your own path!
 std::string resPath = "./resources/";
+std::string imagesPath = "./images/";
+std::string fontsPath = "./fonts/";
+std::string soundsPath = "./sounds/";
 
 using namespace std;
 using namespace cwing;
@@ -38,9 +42,11 @@ private:
 
 int main(int argc, char** argv) {
 	Session ses;
-	Backgroud* bg = Background::;
-	ses.add(bg);
+	// Backgroud* bg = Background::;
+	// ses.add(bg);	
+
 	Label* lbl = Label::getInstance(270, 100, 100, 70, "0");
+
 	ses.add(lbl);
 	Button* b = new OkaKnapp(lbl);
 	ses.add(b);

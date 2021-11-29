@@ -25,6 +25,6 @@ namespace cwing {
 	};
 }
 
-extern std::string resPath;
+extern std::string imagesPath;
 
 #endif
