@@ -37,17 +37,20 @@ int main(int argc, char* argv[]) {
 		return EXIT_FAILURE;
 	}
 	
-	SDL_Window* window 		= SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1000, 1000, 0);
+	SDL_Window* window 		= SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 2000, 1000, 0);
 	SDL_Renderer* renderer 	= SDL_CreateRenderer(window, -1, 0);
 
 	std::cout <<  (imagePath + "bg.jpg").c_str() << std::endl;
 
-	SDL_Surface* bg_sur = IMG_Load( (imagePath + "bg.jpg").c_str() );
+	SDL_Surface* bg_sur = IMG_Load( (imagePath + "bg.png").c_str() );
 
 	SDL_Texture* bg_tex = SDL_CreateTextureFromSurface(renderer, bg_sur);
 	SDL_FreeSurface(bg_sur);
 
 	std::cout << "Avsluta programmet genom \"quit\" från fönstrets meny eller genom att stänga fönstret!" << std::endl;
+
+    //The background scrolling offset
+    // int scrollingOffset = 0;
 
 	// Loop till dess att programmet avslutas!
 	bool running = true;
