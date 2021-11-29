@@ -9,8 +9,8 @@ namespace cwing {
 		SDL_Surface* surf = TTF_RenderText_Solid(sys.get_font(), txt.c_str(), { 0,0,0 });
 		texture = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
 		SDL_FreeSurface(surf);
-		upIcon = IMG_LoadTexture(sys.get_ren(), (resPath + "images/UppKnapp.png").c_str() );
-		downIcon = IMG_LoadTexture(sys.get_ren(), (resPath + "images/NerKnapp.png").c_str() );
+		upIcon = IMG_LoadTexture(sys.get_ren(), "./images/UppKnapp.png" );
+		downIcon = IMG_LoadTexture(sys.get_ren(), "./images/NerKnapp.png" );
 	}
 
 	Button::~Button()

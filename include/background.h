@@ -1,18 +1,26 @@
-// void Background::render(SDL_Renderer *renderer){
-//     int Xoffset = 0;
-//     int Yoffset = 0;
-//     for(int y = 0; (y * 411) < 1080; y++){
-//         for(int x = 0; (x * 405) < 1920; x++){
-//             Xoffset = 0;
-//             Yoffset = 0;
-//             if(GameManager::GetInstance().getGlobalX() + (405 * x) + 405 < 0){
-//                 Xoffset = 1920;
-//             }
-//             if(GameManager::GetInstance().getGlobalY() + (411 * y) + 411 < 0){
-//                 Yoffset = 1080;
-//             }
-//             SDL_Rect backRect = {GameManager::GetInstance().getGlobalX() + (405 * x) + Xoffset, GameManager::GetInstance().getGlobalY() + (411 * y) + Yoffset, 405, 411};
-//             SDL_RenderCopy(renderer, ResourceManager::GetInstance().getTexture("background"), 0, &backRect);
-//         }
-//     }
-// }
+#ifndef BACKGROUND_H
+#define BACKGROUND_H
+
+#include "Component.h"
+#include <SDL2/SDL.h>
+
+namespace cwing {
+	class Background : public Component
+	{
+	public:
+		virtual ~Background();
+		virtual void mouseDown(const SDL_Event&) {}
+		virtual void mouseUp(const SDL_Event&) {}
+		virtual void keyDown(const SDL_Event&) {}
+		virtual void keyUp(const SDL_Event&) {}
+		virtual void draw() const = 0;
+		const SDL_Rect& getRect() const { return rect; }
+	protected:
+		Background(int x, int y, int w, int h);
+	private:
+		SDL_Rect rect;
+		Background(const Background&) = delete;
+		const Background& operator=(const Background&) = delete;
+	};
+}
+#endif

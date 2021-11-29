@@ -9,7 +9,7 @@ namespace cwing {
 			SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
-		font = TTF_OpenFont( (resPath + "fonts/origintech.ttf").c_str(), 36);
+		font = TTF_OpenFont( "./fonts/origintech.ttf", 36);
 	}
 
 
