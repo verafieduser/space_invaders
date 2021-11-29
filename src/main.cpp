@@ -2,62 +2,64 @@
 #include <string>
 
 // Alla dessa SDL inkluderingsfiler används inte i detta testprogram.
-// Bifogas endast för test av SDL installation! 
+// Bifogas endast för test av SDL installation!
 
-#include <SDL2/SDL.h>			
-#include <SDL2/SDL_image.h> 	
-#include <SDL2/SDL_mixer.h> 	
-#include <SDL2/SDL_ttf.h> 	
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_mixer.h>
+#include <SDL2/SDL_ttf.h>
 
 //#define FPS 60
 
-
-int main(int argc, char* argv[]) {
+int main(int argc, char *argv[])
+{
 
 	// Paths to resources
 	//std::string imagePath = "../../images/";
 	std::string imagePath = "./images/";
-	
+
 	//std::string fontPath = "../../fonts/";
 	std::string fontPath = "./fonts/";
 
 	//std::string soundPath = "../../sounds/";
 	std::string soundPath = "./sounds/";
 
-	if (SDL_Init(SDL_INIT_EVERYTHING) < 0) 
+	if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
 	{
 		std::cout << "Error SDL2 Initialization : " << SDL_GetError();
 		return EXIT_FAILURE;
 	}
-
 
 	if (TTF_Init() < 0)
 	{
 		std::cout << "Error SDL_ttf Initialization : " << SDL_GetError();
 		return EXIT_FAILURE;
 	}
-	
-	SDL_Window* window 		= SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
-	SDL_Renderer* renderer 	= SDL_CreateRenderer(window, -1, 0);
 
-	std::cout <<  (imagePath + "bg.jpg").c_str() << std::endl;
+	SDL_Window *window = SDL_CreateWindow("Window", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
+	SDL_Renderer *renderer = SDL_CreateRenderer(window, -1, 0);
 
-	SDL_Surface* bg_sur = IMG_Load( (imagePath + "bg.png").c_str() );
+	std::cout << (imagePath + "bg.jpg").c_str() << std::endl;
 
-	SDL_Texture* bg_tex = SDL_CreateTextureFromSurface(renderer, bg_sur);
+	SDL_Surface *bg_sur = IMG_Load((imagePath + "bg.png").c_str());
+
+	SDL_Texture *bg_tex = SDL_CreateTextureFromSurface(renderer, bg_sur);
 	SDL_FreeSurface(bg_sur);
 
 	std::cout << "Avsluta programmet genom \"quit\" från fönstrets meny eller genom att stänga fönstret!" << std::endl;
 
-    //The background scrolling offset
-    // int scrollingOffset = 0;
+	//The background scrolling offset
+	// int scrollingOffset = 0;
 
 	// Loop till dess att programmet avslutas!
 	bool running = true;
-	while (running) {
+	while (running)
+	{
 		SDL_Event e;
-		if (SDL_PollEvent(&e)) {
-			if (e.type == SDL_QUIT) {
+		if (SDL_PollEvent(&e))
+		{
+			if (e.type == SDL_QUIT)
+			{
 				running = false;
 			}
 		}
@@ -75,6 +77,6 @@ int main(int argc, char* argv[]) {
 
 	TTF_Quit();
 	SDL_Quit();
-	
+
 	return EXIT_SUCCESS;
 }
