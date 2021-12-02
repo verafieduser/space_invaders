@@ -2,19 +2,19 @@
 #include "System.h"
 #include <SDL2/SDL.h>
 #include <iostream>
-namespace cwing {
+namespace cwing
+{
 
 	System::System()
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		win = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
+							   SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
 		// std::cout << fontsPath << " : font path";
 		font = TTF_OpenFont((fontsPath + "./fonts/origintech.ttf").c_str(), 36);
 	}
-
 
 	System::~System()
 	{
@@ -25,13 +25,14 @@ namespace cwing {
 		SDL_Quit();
 	}
 
-	SDL_Renderer* System::get_ren() const {
+	SDL_Renderer *System::get_ren() const
+	{
 		return ren;
 	}
 
-	TTF_Font* System::get_font() const {
+	TTF_Font *System::get_font() const
+	{
 		return font;
 	}
 	System sys;
 }
-
