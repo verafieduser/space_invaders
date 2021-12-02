@@ -21,10 +21,11 @@ namespace cwing {
 	};
 	
 	extern System sys;
+	
 }
 
 extern std::string fontsPath;
-extern std::string imagesPath;
-extern std::string soundsPath;
+// extern std::string imagesPath;
+// extern std::string soundsPath;
 
 #endif

@@ -21,4 +21,7 @@ namespace cwing {
 	};
 
 }
+
+extern std::string fontsPath;
+
 #endif

@@ -11,8 +11,8 @@ namespace cwing {
 			SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
-
-		font = TTF_OpenFont((fontsPath + "origintech.ttf").c_str(), 36);
+		// std::cout << fontsPath << " : font path";
+		font = TTF_OpenFont((fontsPath + "./fonts/origintech.ttf").c_str(), 36);
 	}
 
 
@@ -34,3 +34,4 @@ namespace cwing {
 	}
 	System sys;
 }
+

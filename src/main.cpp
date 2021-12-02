@@ -41,6 +41,7 @@ private:
 
 
 int main(int argc, char** argv) {
+			std::cout << fontsPath << " : font path";
 	Session ses;
 	// Backgroud* bg = Background::;
 	// ses.add(bg);	
