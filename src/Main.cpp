@@ -7,10 +7,9 @@
 #include <iostream>
 
 // Paths to resource folders. Change to your own path!
-std::string resPath = "./resources/";
-std::string imagesPath = "./images/";
-std::string fontsPath = "./fonts/";
-std::string soundsPath = "./sounds/";
+//std::string resPath = "./resources/";
+std::string IMAGES_PATH = "./images/";
+std::string SOUNDS_PATH = "./sounds/";
 
 using namespace std;
 using namespace cwing;
@@ -47,7 +46,7 @@ private:
 
 int main(int argc, char **argv)
 {
-	std::cout << fontsPath << " : font path";
+
 	Session ses;
 
 	Background *bg = Background::getInstance(1600, 720);
@@ -61,6 +60,7 @@ int main(int argc, char **argv)
 
 	Button *b2 = new MinskaKnapp(lbl);
 	ses.add(b2);
+	// std::cout << fontsPath << " : font path";
 	ses.run();
 
 	return 0;

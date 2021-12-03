@@ -23,6 +23,6 @@ namespace cwing
     };
 }
 
-extern std::string imagesPath;
+extern std::string IMAGES_PATH;
 
 #endif
