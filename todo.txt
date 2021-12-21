@@ -1,0 +1,16 @@
+Sprite class: 
+    movements! (up / down - left / right)
+    action
+    Subclasses:
+        Protagonist 
+        Enemies (hard coded movements?)
+
+Attacks:
+    Laser
+    Canon?
+
+
+
+
+If-we-have-time:
+    Paralax background
