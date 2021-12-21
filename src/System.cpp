@@ -4,7 +4,8 @@
 #include <iostream>
 
 std::string FONTS_PATH = "./fonts/";
-
+int SCREEN_WIDTH = 1600;
+int SCREEN_HEIGHT = 720;
 namespace cwing
 {
 
@@ -12,7 +13,7 @@ namespace cwing
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);
 		win = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_CENTERED,
-							   SDL_WINDOWPOS_CENTERED, 1600, 720, 0);
+							   SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
 		ren = SDL_CreateRenderer(win, -1, 0);
 		TTF_Init();
 		// std::cout << " " << fontsPath << " : font path";

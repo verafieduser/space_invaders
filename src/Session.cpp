@@ -11,25 +11,34 @@ namespace cwing {
 	void Session::run() {
 		bool quit = false;
 		while (!quit) {
-			SDL_Event eve;
-			while (SDL_PollEvent(&eve)) {
-				switch (eve.type) {
+			SDL_Event event;
+			while (SDL_PollEvent(&event)) {
+				switch (event.type) {
 				case SDL_QUIT: quit = true; break;
 				case SDL_MOUSEBUTTONDOWN:
 					for (Component* c : comps)
-						c->mouseDown(eve);
+						c->mouseDown(event);
 					break;
 				case SDL_MOUSEBUTTONUP:
 					for (Component* c : comps)
-						c->mouseUp(eve);
+						c->mouseUp(event);
 					break;
 				case SDL_KEYDOWN:
-					for (Component* c : comps)
-						c->keyDown(eve);
+					for (Component* c : comps) { 
+						//TODO: move this switch into a "perform()" or something inside component - and then override in relevant subclasses. 
+						if(instanceof<Sprite>(c)) {
+							switch (event.key.keysym.sym) {
+								case SDLK_RIGHT: c->moveUp(); break;
+								case SDLK_LEFT: c->moveDown(); break;
+								case SDLK_UP: c->moveLeft(); break;
+								case SDLK_DOWN: c->moveRight(); break;
+							}
+						}
+					}
 					break;
 				case SDL_KEYUP:
 					for (Component* c : comps)
-						c->keyUp(eve);
+						c->keyUp(event);
 					break;
 
 				} // switch

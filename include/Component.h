@@ -16,6 +16,10 @@ namespace cwing
 		virtual void draw() const = 0;
 		//virtual void tick() = 0;
 		const SDL_Rect &getRect() const { return rect; }
+		void setY(int &value) {rect.y += value;};
+		void setX(int &value) {rect.x += value;};
+		// const int getY() const {return rect.y;};
+		// const int getX() const {return rect.x;};
 
 	protected:
 		Component(int x, int y, int w, int h);
