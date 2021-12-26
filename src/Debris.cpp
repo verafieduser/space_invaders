@@ -45,6 +45,10 @@ namespace cwing
 
         moveLeft();
         spinDebris(SPEED);
+
+        if(isOutOfBoundsLeft()){
+            kill();
+        }
     }
 
     void Debris::draw() const

@@ -3,6 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include <SDL2/SDL_image.h>
+#include <iostream>
 
 namespace cwing
 {
@@ -47,6 +48,7 @@ namespace cwing
     void Protagonist::perform(SDL_Event event)
     {
         //implement this
+
         switch (event.key.keysym.sym)
         {
         case SDLK_RIGHT:

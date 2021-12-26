@@ -30,6 +30,22 @@ namespace cwing
 		return outOfBounds;
 	}
 
+	const bool Sprite::isOutOfBoundsLeft(){
+		bool outOfBounds = false;
+		if(getX() < 0){
+			outOfBounds = true;
+		}
+		return outOfBounds;
+	}
+
+	const bool Sprite::isOutOfBoundsRight(){
+		bool outOfBounds = false;
+		if(getX() > SCREEN_WIDTH-getW()){
+			outOfBounds = true;
+		}
+		return outOfBounds;
+	}
+
 	const bool Sprite::isMovementAllowed(Direction dir){
 		switch (dir)
 		{
@@ -96,6 +112,10 @@ namespace cwing
 			setX(SPEED);			
 		}
 
+	}
+
+	void Sprite::kill(){
+		killed = true;
 	}
 
 	void Sprite::perform(SDL_Event event)

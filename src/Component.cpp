@@ -7,6 +7,8 @@ namespace cwing {
 	}
 
 
+
+
 	Component::~Component()
 	{
 	}
