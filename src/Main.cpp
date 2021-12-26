@@ -4,6 +4,7 @@
 #include "Session.h"
 #include "Button.h"
 #include "Sprite.h"
+#include "Debris.h"
 #include "Protagonist.h"
 #include <string>
 #include <iostream>
@@ -56,6 +57,12 @@ int main(int argc, char **argv)
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	ses.add(protagonist);
+
+	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", 5);
+	ses.add(debris1);
+
+	Debris *debris2 = Debris::getInstance(1800, 550, 50, 50, "asteroid2.png", 5);
+	ses.add(debris2);
 	// Label *lbl = Label::getInstance(270, 100, 100, 70, "0");
 	// ses.add(lbl);
 

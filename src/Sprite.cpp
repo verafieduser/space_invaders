@@ -21,26 +21,81 @@ namespace cwing
 	{
 		return new Sprite(x, y, w, h, image_path);
 	}
+
+	const bool Sprite::isOutOfBounds(){
+		bool outOfBounds = false;
+		if(getY() < 0 || getY() > SCREEN_HEIGHT-getH() || getX() < 0 || getX() > SCREEN_WIDTH-getW()){
+			outOfBounds = true;
+		}
+		return outOfBounds;
+	}
+
+	const bool Sprite::isMovementAllowed(Direction dir){
+		switch (dir)
+		{
+		case RIGHT:
+			if(getX() < SCREEN_WIDTH-getW()){
+				return true;
+			}
+			break;
+		case LEFT:
+			if(getX() > 0){
+				return true;
+			}
+			break;
+		case DOWN:
+			if(getY() < SCREEN_HEIGHT-getH()){
+				return true;
+			}
+			break;
+		case UP:
+			if(getY() > 0){
+				return true;
+			}
+			break;
+
+		default:
+			break;
+		}
+
+		return false;
+	}
+
+
+
 	void Sprite::moveUp()
 	{
-		setX(SPEED);
+		if(isMovementAllowed(UP)){
+			int value = -1 * SPEED;
+			setY(value);
+			
+		}
+
 	}
 
 	void Sprite::moveDown()
 	{
-		int value = -1 * SPEED;
-		setX(value);
+		if(isMovementAllowed(DOWN)){
+			setY(SPEED);
+		}
+
 	}
 
 	void Sprite::moveLeft()
 	{
-		int value = -1 * SPEED;
-		setY(value);
+		if(isMovementAllowed(LEFT)){
+			int value = -1 * SPEED;
+			setX(value);	
+		}
+		
 	}
 
 	void Sprite::moveRight()
 	{
-		setY(SPEED);
+		if(isMovementAllowed(RIGHT)){
+			setX(SPEED);			
+		}
+
 	}
 
 	void Sprite::perform(SDL_Event event)

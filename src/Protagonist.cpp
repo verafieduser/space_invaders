@@ -50,16 +50,16 @@ namespace cwing
         switch (event.key.keysym.sym)
         {
         case SDLK_RIGHT:
-            moveUp();
+            moveRight();
             break;
         case SDLK_LEFT:
-            moveDown();
-            break;
-        case SDLK_UP:
             moveLeft();
             break;
+        case SDLK_UP:
+            moveUp();
+            break;
         case SDLK_DOWN:
-            moveRight();
+            moveDown();
             break;
         }
     }

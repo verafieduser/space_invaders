@@ -6,12 +6,13 @@
 std::string IMAGES_PATH = "./images/";
 std::string SOUNDS_PATH = "./sounds/";
 std::string FONTS_PATH = "./fonts/";
+int SCREEN_WIDTH = 1600;
+int SCREEN_HEIGHT = 720;
 
 namespace cwing
 {
 
-	int SCREEN_WIDTH = 1600;
-	int SCREEN_HEIGHT = 720;
+
 	System::System()
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);

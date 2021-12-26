@@ -10,8 +10,11 @@ namespace cwing
 	class Sprite : public Component
 	{
 	public:
+		enum Direction {UP, DOWN, LEFT, RIGHT};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
-		int SPEED = 5;
+		int SPEED = 20;
+		const bool isOutOfBounds();
+		const bool isMovementAllowed(Direction dir);
 		void moveUp();
 		void moveDown();
 		void moveLeft();
@@ -30,5 +33,7 @@ namespace cwing
 }
 
 extern std::string IMAGES_PATH;
+extern int SCREEN_WIDTH;
+extern int SCREEN_HEIGHT;
 
 #endif
