@@ -24,7 +24,7 @@ namespace cwing
 		const bool isOutOfBoundsLeft();
 		const bool isMovementAllowed(Direction dir);
 		void kill();
-		void updateMovement(Direction dir);
+
 		void moveUp();
 		void moveDown();
 		void moveLeft();
@@ -33,15 +33,7 @@ namespace cwing
 		void draw() const;
 		~Sprite();
 
-		struct Keystates
-		{
-			bool left = false;
-			bool right = false;
-			bool up = false;
-			bool down = false;
-		};
 
-		Keystates keystates;
 
 	protected:
 		Sprite(int x, int y, int w, int h, std::string images_path);

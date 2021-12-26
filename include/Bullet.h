@@ -20,7 +20,6 @@ namespace cwing
         const bool isMovementAllowed(Direction dir);
         void moveRight();
         void perform(SDL_Event event);
-        void draw() const;
         ~Bullet();
 
     protected:

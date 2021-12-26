@@ -47,35 +47,87 @@ namespace cwing
     // }
     void Protagonist::spaceDown()
     {
-        Bullet *b = Bullet::getInstance(getX(), getY(), 10, 10, "laser.jpg", 10);
-        ses.add(b);
+        //Bullet *b = Bullet::getInstance(getX(), getY(), 10, 10, "laser.jpg", 10);
+        //ses.add(b);
+    }
+
+    void Protagonist::updateMovement(Direction dir)
+    {
+        switch (dir)
+        {
+        case UP:
+            moveUp();
+            if (keystates.left)
+            {
+                moveLeft();
+            }
+            else if (keystates.right)
+            {
+                moveRight();
+            }
+        case DOWN:
+            moveDown();
+            if (keystates.left)
+            {
+                moveLeft();
+            }
+            else if (keystates.right)
+            {
+                moveRight();
+            }
+        case LEFT:
+            moveLeft();
+            if (keystates.up)
+            {
+                moveUp();
+            }
+            else if (keystates.down)
+            {
+                moveDown();
+            }
+        case RIGHT:
+            moveRight();
+            if (keystates.up)
+            {
+                moveUp();
+            }
+            else if (keystates.down)
+            {
+                moveDown();
+            }
+        }
     }
 
     void Protagonist::perform(SDL_Event event)
     {
         if (event.type == SDL_KEYDOWN)
         {
+            Direction dir;
+
             switch (event.key.keysym.sym)
             {
             case SDLK_RIGHT:
+                dir = RIGHT;
                 keystates.right = true;
-                updateMovement(RIGHT);
                 break;
             case SDLK_LEFT:
+                dir = LEFT;
                 keystates.left = true;
-                updateMovement(LEFT);
                 break;
             case SDLK_UP:
+                dir = UP;
                 keystates.up = true;
-                updateMovement(UP);
                 break;
             case SDLK_DOWN:
+                dir = DOWN;
                 keystates.down = true;
-                updateMovement(DOWN);
                 break;
             }
-        } else if(event.type == SDL_KEYUP){
-                        switch (event.key.keysym.sym)
+            updateMovement(dir);
+        }
+        else if (event.type == SDL_KEYUP)
+        {
+            switch (event.key.keysym.sym)
             {
             case SDLK_RIGHT:
                 keystates.right = false;
@@ -90,6 +142,10 @@ namespace cwing
                 keystates.down = false;
                 break;
             }
+            keystates.up = false;
+            keystates.down = false;
+            keystates.right = false;
+            keystates.left = false;
         }
     }
 

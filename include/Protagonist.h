@@ -13,8 +13,20 @@ namespace cwing
         // void moveLeft();
         // void moveRight();
         void spaceDown();
+        void updateMovement(Direction dir);
         void perform(SDL_Event event);
         ~Protagonist();
+
+        //bool states[4] ={false,false,false,false};
+        struct Keystates
+		{
+			bool left = false;
+			bool right = false;
+			bool up = false;
+			bool down = false;
+		};
+
+		Keystates keystates;
 
     protected:
         Protagonist(int x, int y, int w, int h, std::string images_path);

@@ -2,6 +2,7 @@
 #include <SDL2/SDL.h>
 #include "System.h"
 
+
 namespace cwing
 {
 #define FPS 60;
