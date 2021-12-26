@@ -1,5 +1,6 @@
 #include "Protagonist.h"
 #include "Sprite.h"
+#include "Bullet.h"
 #include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include <SDL2/SDL_image.h>
@@ -43,6 +44,11 @@ namespace cwing
     // {
     //     setY(SPEED);
     // }
+    void Protagonist::spaceDown()
+    {
+        Bullet *b = Bullet::getInstance(getX(), getY(), 10, 10, "laser.jpg", 10);
+        ses.add(b);
+    }
 
     void Protagonist::perform(SDL_Event event)
     {

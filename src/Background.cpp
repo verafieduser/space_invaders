@@ -4,7 +4,6 @@
 #include <SDL2/SDL_image.h>
 namespace cwing
 {
-
     Background::Background(int w, int h) : Component(0,
                                                      0, w, h)
     {

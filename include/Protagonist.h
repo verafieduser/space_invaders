@@ -12,6 +12,7 @@ namespace cwing
         // void moveDown();
         // void moveLeft();
         // void moveRight();
+        void spaceDown();
         void perform(SDL_Event event);
         ~Protagonist();
 

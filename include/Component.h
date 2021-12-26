@@ -9,6 +9,7 @@ namespace cwing
 	{
 	public:
 		virtual ~Component();
+		virtual void spaceDown(const SDL_Event &) {}
 		virtual void mouseDown(const SDL_Event &) {}
 		virtual void mouseUp(const SDL_Event &) {}
 		virtual void keyDown(const SDL_Event &) {}
@@ -19,10 +20,10 @@ namespace cwing
 		const SDL_Rect &getRect() const { return rect; }
 		void setY(int &value) { rect.y += value; };
 		void setX(int &value) { rect.x += value; };
-		const int getY() {return rect.y;};
-		const int getX() {return rect.x;};
-		const int getW() {return rect.w;};
-		const int getH() {return rect.h;};
+		const int getY() { return rect.y; };
+		const int getX() { return rect.x; };
+		const int getW() { return rect.w; };
+		const int getH() { return rect.h; };
 		// const int getY() const {return rect.y;};
 		// const int getX() const {return rect.x;};
 
