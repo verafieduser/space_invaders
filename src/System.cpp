@@ -2,6 +2,7 @@
 #include "System.h"
 #include <SDL2/SDL.h>
 #include <iostream>
+#include "Session.h"
 
 std::string IMAGES_PATH = "./images/";
 std::string SOUNDS_PATH = "./sounds/";
@@ -11,8 +12,6 @@ int SCREEN_HEIGHT = 720;
 
 namespace cwing
 {
-
-
 	System::System()
 	{
 		SDL_Init(SDL_INIT_EVERYTHING);

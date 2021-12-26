@@ -2,6 +2,7 @@
 #define SPRITE_H
 
 #include "Component.h"
+#include "Session.h"
 #include <SDL2/SDL.h>
 #include <string>
 
@@ -17,7 +18,7 @@ namespace cwing
 			LEFT,
 			RIGHT
 		};
-		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
+		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path, Session &session);
 		int SPEED = 20;
 		const bool isOutOfBounds();
 		const bool isOutOfBoundsRight();
@@ -44,7 +45,8 @@ namespace cwing
 		Keystates keystates;
 
 	protected:
-		Sprite(int x, int y, int w, int h, std::string images_path);
+		Sprite(int x, int y, int w, int h, std::string images_path, Session &session);
+		Session session;
 
 	private:
 		SDL_Texture *texture;

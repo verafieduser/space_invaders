@@ -7,7 +7,7 @@
 namespace cwing
 {
 
-    Debris::Debris(int x, int y, int w, int h, std::string image_path, int speed) : Sprite(x, y, w, h, image_path)
+    Debris::Debris(int x, int y, int w, int h, std::string image_path, Session &session, int speed) : Sprite(x, y, w, h, image_path, session)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
@@ -19,9 +19,9 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Debris *Debris::getInstance(int x, int y, int w, int h, std::string image_path, int speed)
+    Debris *Debris::getInstance(int x, int y, int w, int h, std::string image_path, Session &session, int speed)
     {
-        return new Debris(x, y, w, h, image_path, speed);
+        return new Debris(x, y, w, h, image_path, session, speed);
     }
 
     void Debris::moveLeft()
@@ -30,13 +30,14 @@ namespace cwing
         setX(value);
     }
 
-
-    void Debris::spinDebris(const int& speed) {
-        //TODO: randomize spin direction! 
-        setAngle(angle+speed);
+    void Debris::spinDebris(const int &speed)
+    {
+        //TODO: randomize spin direction!
+        setAngle(angle + speed);
     }
 
-    void Debris::setAngle(const int& newAngle) {
+    void Debris::setAngle(const int &newAngle)
+    {
         angle = newAngle;
     }
 
@@ -46,7 +47,8 @@ namespace cwing
         moveLeft();
         spinDebris(SPEED);
 
-        if(isOutOfBoundsLeft()){
+        if (isOutOfBoundsLeft())
+        {
             kill();
         }
     }

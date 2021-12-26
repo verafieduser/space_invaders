@@ -2,6 +2,7 @@
 #define BULLET_H
 
 #include "Sprite.h"
+#include "Session.h"
 #include <SDL2/SDL.h>
 #include <string>
 
@@ -14,17 +15,16 @@ namespace cwing
         {
             RIGHT
         };
-        static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed);
+        static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, Session &session, int speed);
         int SPEED = 40;
         const bool isOutOfBounds();
         const bool isMovementAllowed(Direction dir);
-        void moveRight();
         void perform(SDL_Event event);
-        void draw() const;
+        // void draw() const;
         ~Bullet();
 
     protected:
-        Bullet(int x, int y, int w, int h, std::string images_path, int speed);
+        Bullet(int x, int y, int w, int h, std::string images_path, Session &session, int speed);
 
     private:
         SDL_Texture *texture;

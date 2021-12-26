@@ -8,6 +8,7 @@
 #include "Protagonist.h"
 #include <string>
 #include <iostream>
+#include "Bullet.h"
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -16,7 +17,7 @@ using namespace std;
 using namespace cwing;
 
 int value = 0;
-
+Session ses;
 /*
 class OkaKnapp : public Button
 {
@@ -49,29 +50,21 @@ private:
 
 int main(int argc, char **argv)
 {
-
-	Session ses;
-
 	Background *bg = Background::getInstance(1600, 720);
 	ses.add(bg);
 
-	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
+	Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", ses, 30);
+	ses.add(bullet);
+
+	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png", ses);
 	ses.add(protagonist);
 
-	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", 5);
+	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", ses, 5);
 	ses.add(debris1);
 
-	Debris *debris2 = Debris::getInstance(1800, 550, 50, 50, "asteroid2.png", 5);
+	Debris *debris2 = Debris::getInstance(1800, 550, 50, 50, "asteroid2.png", ses, 5);
 	ses.add(debris2);
-	// Label *lbl = Label::getInstance(270, 100, 100, 70, "0");
-	// ses.add(lbl);
 
-	// Button *b = new OkaKnapp(lbl);
-	// ses.add(b);
-
-	// Button *b2 = new MinskaKnapp(lbl);
-	// ses.add(b2);
-	// std::cout << fontsPath << " : font path";
 	ses.run();
 
 	return 0;
