@@ -10,11 +10,21 @@ namespace cwing
 	class Sprite : public Component
 	{
 	public:
-		enum Direction {UP, DOWN, LEFT, RIGHT};
+		enum Direction
+		{
+			UP,
+			DOWN,
+			LEFT,
+			RIGHT
+		};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
 		int SPEED = 20;
 		const bool isOutOfBounds();
+		const bool isOutOfBoundsRight();
+		const bool isOutOfBoundsLeft();
 		const bool isMovementAllowed(Direction dir);
+		void kill();
+		void updateMovement(Direction dir);
 		void moveUp();
 		void moveDown();
 		void moveLeft();
@@ -22,6 +32,16 @@ namespace cwing
 		void perform(SDL_Event event);
 		void draw() const;
 		~Sprite();
+
+		struct Keystates
+		{
+			bool left = false;
+			bool right = false;
+			bool up = false;
+			bool down = false;
+		};
+
+		Keystates keystates;
 
 	protected:
 		Sprite(int x, int y, int w, int h, std::string images_path);

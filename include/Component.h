@@ -17,6 +17,7 @@ namespace cwing
 		virtual void draw() const = 0;
 		virtual void perform(SDL_Event event) = 0;
 		//virtual void tick() = 0;
+		const bool isKilled() const {return killed;};
 		const SDL_Rect &getRect() const { return rect; }
 		void setY(int &value) { rect.y += value; };
 		void setX(int &value) { rect.x += value; };
@@ -29,11 +30,13 @@ namespace cwing
 
 	protected:
 		Component(int x, int y, int w, int h);
+		bool killed = false;
 
 	private:
 		SDL_Rect rect;
 		Component(const Component &) = delete;
 		const Component &operator=(const Component &) = delete;
+
 	};
 }
 #endif
