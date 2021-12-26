@@ -49,6 +49,9 @@ namespace cwing
     {
         //implement this
 
+        if(event.type != SDL_KEYDOWN){
+            return;
+        }
         switch (event.key.keysym.sym)
         {
         case SDLK_RIGHT:

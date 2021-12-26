@@ -14,15 +14,20 @@ namespace cwing
 	void Session::run()
 	{
 		bool quit = false;
+		const int tickInterval = 1000/FPS;
 		while (!quit)
 		{
+			Uint32 nextTick = SDL_GetTicks() + tickInterval;
 			SDL_Event event;
 			while (SDL_PollEvent(&event))
 			{
 				
-				if(event.type == SDL_QUIT){
-					quit = true;
+				switch(event.type){
+					case SDL_QUIT:
+						quit = true;
+						break;
 				}
+
 
 				for (Component *c : comps)
 				{
@@ -63,8 +68,11 @@ namespace cwing
 			for (Component *c : comps){
 				c->draw();
 			}
-
 			SDL_RenderPresent(sys.get_ren());
+			int delay = nextTick - SDL_GetTicks();
+			if(delay >0){
+				SDL_Delay(delay);
+			}
 
 		} //yttre while
 
