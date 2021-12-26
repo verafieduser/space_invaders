@@ -6,9 +6,10 @@
 namespace cwing
 {
 
-	Sprite::Sprite(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
+	Sprite::Sprite(int x, int y, int w, int h, std::string image_path, Session &s) : Component(x, y, w, h)
 	{
 		sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+		session = s;
 	}
 
 	Sprite::~Sprite()
@@ -17,55 +18,66 @@ namespace cwing
 		SDL_DestroyTexture(sprite);
 	}
 
-	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
+	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path, Session &s)
 	{
-		return new Sprite(x, y, w, h, image_path);
+		return new Sprite(x, y, w, h, image_path, s);
 	}
 
-	const bool Sprite::isOutOfBounds(){
+	const bool Sprite::isOutOfBounds()
+	{
 		bool outOfBounds = false;
-		if(getY() < 0 || getY() > SCREEN_HEIGHT-getH() || getX() < 0 || getX() > SCREEN_WIDTH-getW()){
+		if (getY() < 0 || getY() > SCREEN_HEIGHT - getH() || getX() < 0 || getX() > SCREEN_WIDTH - getW())
+		{
 			outOfBounds = true;
 		}
 		return outOfBounds;
 	}
 
-	const bool Sprite::isOutOfBoundsLeft(){
+	const bool Sprite::isOutOfBoundsLeft()
+	{
 		bool outOfBounds = false;
-		if(getX() < 0){
+		if (getX() < 0)
+		{
 			outOfBounds = true;
 		}
 		return outOfBounds;
 	}
 
-	const bool Sprite::isOutOfBoundsRight(){
+	const bool Sprite::isOutOfBoundsRight()
+	{
 		bool outOfBounds = false;
-		if(getX() > SCREEN_WIDTH-getW()){
+		if (getX() > SCREEN_WIDTH - getW())
+		{
 			outOfBounds = true;
 		}
 		return outOfBounds;
 	}
 
-	const bool Sprite::isMovementAllowed(Direction dir){
+	const bool Sprite::isMovementAllowed(Direction dir)
+	{
 		switch (dir)
 		{
 		case RIGHT:
-			if(getX() < SCREEN_WIDTH-getW()){
+			if (getX() < SCREEN_WIDTH - getW())
+			{
 				return true;
 			}
 			break;
 		case LEFT:
-			if(getX() > 0){
+			if (getX() > 0)
+			{
 				return true;
 			}
 			break;
 		case DOWN:
-			if(getY() < SCREEN_HEIGHT-getH()){
+			if (getY() < SCREEN_HEIGHT - getH())
+			{
 				return true;
 			}
 			break;
 		case UP:
-			if(getY() > 0){
+			if (getY() > 0)
+			{
 				return true;
 			}
 			break;
@@ -82,40 +94,40 @@ namespace cwing
 
 	void Sprite::moveUp()
 	{
-		if(isMovementAllowed(UP)){
+		if (isMovementAllowed(UP))
+		{
 			int value = -1 * SPEED;
 			setY(value);
-			
 		}
-
 	}
 
 	void Sprite::moveDown()
 	{
-		if(isMovementAllowed(DOWN)){
+		if (isMovementAllowed(DOWN))
+		{
 			setY(SPEED);
 		}
-
 	}
 
 	void Sprite::moveLeft()
 	{
-		if(isMovementAllowed(LEFT)){
+		if (isMovementAllowed(LEFT))
+		{
 			int value = -1 * SPEED;
-			setX(value);	
+			setX(value);
 		}
-		
 	}
 
 	void Sprite::moveRight()
 	{
-		if(isMovementAllowed(RIGHT)){
-			setX(SPEED);			
+		if (isMovementAllowed(RIGHT))
+		{
+			setX(SPEED);
 		}
-
 	}
 
-	void Sprite::kill(){
+	void Sprite::kill()
+	{
 		killed = true;
 	}
 

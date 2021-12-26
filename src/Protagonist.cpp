@@ -9,7 +9,7 @@
 namespace cwing
 {
 
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Session &session) : Sprite(x, y, w, h, image_path, session)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
     }
@@ -20,9 +20,9 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path)
+    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Session &session)
     {
-        return new Protagonist(x, y, w, h, image_path);
+        return new Protagonist(x, y, w, h, image_path, session);
     }
     // void Protagonist::moveUp()
     // {
@@ -45,11 +45,7 @@ namespace cwing
     // {
     //     setY(SPEED);
     // }
-    void Protagonist::spaceDown()
-    {
-        //Bullet *b = Bullet::getInstance(getX(), getY(), 10, 10, "laser.jpg", 10);
-        //ses.add(b);
-    }
+
 
     void Protagonist::updateMovement(Direction dir)
     {
@@ -100,6 +96,8 @@ namespace cwing
 
     void Protagonist::perform(SDL_Event event)
     {
+        // Bullet *bullet = Bullet::getInstance(getX(), getY(), 100, 100, "laser.jpg", session, 30);
+        // session.add(bullet);
         if (event.type == SDL_KEYDOWN)
         {
             Direction dir;
@@ -121,7 +119,11 @@ namespace cwing
             case SDLK_DOWN:
                 dir = DOWN;
                 keystates.down = true;
-                break;
+                break;              
+                    //case SDLK_SPACE:
+                //    Bullet *bullet = Bullet::getInstance(getX(), getY(), 100, 100, "laser.jpg", session, 30);
+                //    session.add(bullet);
+                //    break;
             }
             updateMovement(dir);
         }

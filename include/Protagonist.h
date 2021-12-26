@@ -1,4 +1,5 @@
 #include "Sprite.h"
+#include "Session.h"
 #include <SDL2/SDL.h>
 
 namespace cwing
@@ -7,14 +8,13 @@ namespace cwing
     class Protagonist : public Sprite
     {
     public:
-        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path);
+        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, Session &session);
         // void moveUp();
         // void moveDown();
         // void moveLeft();
         // void moveRight();
-        void spaceDown();
-        void updateMovement(Direction dir);
         void perform(SDL_Event event);
+        void updateMovement(Direction dir);
         ~Protagonist();
 
         //bool states[4] ={false,false,false,false};
@@ -29,11 +29,12 @@ namespace cwing
 		Keystates keystates;
 
     protected:
-        Protagonist(int x, int y, int w, int h, std::string images_path);
+        Protagonist(int x, int y, int w, int h, std::string images_path, Session &session);
 
     private:
         SDL_Texture *texture;
         SDL_Texture *sprite;
     };
 }
+
 extern std::string IMAGES_PATH;
