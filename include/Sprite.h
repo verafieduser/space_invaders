@@ -11,7 +11,7 @@ namespace cwing
 	{
 	public:
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
-		int SPEED = 1;
+		int SPEED = 5;
 		void moveUp();
 		void moveDown();
 		void moveLeft();

@@ -9,14 +9,13 @@
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
-std::string IMAGES_PATH = "./images/";
-std::string SOUNDS_PATH = "./sounds/";
 
 using namespace std;
 using namespace cwing;
 
 int value = 0;
 
+/*
 class OkaKnapp : public Button
 {
 public:
@@ -44,6 +43,7 @@ public:
 private:
 	Label *label;
 };
+*/
 
 int main(int argc, char **argv)
 {
