@@ -13,6 +13,7 @@ namespace cwing
 		static Button *getInstance(int x, int y, int w, int h, std::string txt);
 		void mouseDown(const SDL_Event &);
 		void mouseUp(const SDL_Event &);
+
 		void draw() const;
 		Component* perform(SDL_Event event);
 		virtual void perform(Button *source) {}

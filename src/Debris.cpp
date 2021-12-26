@@ -7,7 +7,7 @@
 namespace cwing
 {
 
-    Debris::Debris(int x, int y, int w, int h, std::string image_path, Session &session, int speed) : Sprite(x, y, w, h, image_path, session)
+    Debris::Debris(int x, int y, int w, int h, std::string image_path, int speed) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
@@ -19,9 +19,9 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Debris *Debris::getInstance(int x, int y, int w, int h, std::string image_path, Session &session, int speed)
+    Debris *Debris::getInstance(int x, int y, int w, int h, std::string image_path, int speed)
     {
-        return new Debris(x, y, w, h, image_path, session, speed);
+        return new Debris(x, y, w, h, image_path, speed);
     }
 
     void Debris::moveLeft()

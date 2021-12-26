@@ -18,7 +18,7 @@ namespace cwing
 			LEFT,
 			RIGHT
 		};
-		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path, Session &session);
+		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
 		int SPEED = 20;
 		const bool isOutOfBounds();
 		const bool isOutOfBoundsRight();
@@ -37,7 +37,7 @@ namespace cwing
 
 
 	protected:
-		Sprite(int x, int y, int w, int h, std::string images_path, Session &session);
+		Sprite(int x, int y, int w, int h, std::string images_path);
 		Session session;
 
 	private:

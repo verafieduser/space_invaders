@@ -8,7 +8,7 @@ namespace cwing
     class Protagonist : public Sprite
     {
     public:
-        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, Session &session);
+        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path);
         // void moveUp();
         // void moveDown();
         // void moveLeft();
@@ -18,19 +18,8 @@ namespace cwing
         void updateMovement(Direction dir);
         ~Protagonist();
 
-        //bool states[4] ={false,false,false,false};
-        struct Keystates
-		{
-			bool left = false;
-			bool right = false;
-			bool up = false;
-			bool down = false;
-		};
-
-		Keystates keystates;
-
     protected:
-        Protagonist(int x, int y, int w, int h, std::string images_path, Session &session);
+        Protagonist(int x, int y, int w, int h, std::string images_path);
 
     private:
         int shootingCooldown = 0;

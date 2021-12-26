@@ -11,20 +11,15 @@ namespace cwing
     class Bullet : public Sprite
     {
     public:
-        enum Direction
-        {
-            RIGHT
-        };
-        static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, Session &session, int speed);
+        static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed);
         int SPEED = 40;
-        const bool isOutOfBounds();
-        const bool isMovementAllowed(Direction dir);
+        void moveRight();
         Component* perform(SDL_Event event);
         // void draw() const;
         ~Bullet();
 
     protected:
-        Bullet(int x, int y, int w, int h, std::string images_path, Session &session, int speed);
+        Bullet(int x, int y, int w, int h, std::string images_path, int speed);
 
     private:
         SDL_Texture *texture;

@@ -6,10 +6,9 @@
 namespace cwing
 {
 
-	Sprite::Sprite(int x, int y, int w, int h, std::string image_path, Session &s) : Component(x, y, w, h)
+	Sprite::Sprite(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
 	{
 		sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-		session = s;
 	}
 
 	Sprite::~Sprite()
@@ -18,9 +17,9 @@ namespace cwing
 		SDL_DestroyTexture(sprite);
 	}
 
-	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path, Session &s)
+	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
 	{
-		return new Sprite(x, y, w, h, image_path, s);
+		return new Sprite(x, y, w, h, image_path);
 	}
 
 	const bool Sprite::isOutOfBounds()

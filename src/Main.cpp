@@ -53,16 +53,16 @@ int main(int argc, char **argv)
 	Background *bg = Background::getInstance(1600, 720);
 	ses.add(bg);
 
-	Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", ses, 30);
+	Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", 30);
 	ses.add(bullet);
 
-	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png", ses);
+	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	ses.add(protagonist);
 
-	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", ses, 5);
+	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", 5);
 	ses.add(debris1);
 
-	Debris *debris2 = Debris::getInstance(1800, 550, 50, 50, "asteroid2.png", ses, 5);
+	Debris *debris2 = Debris::getInstance(1800, 550, 50, 50, "asteroid2.png", 5);
 	ses.add(debris2);
 
 	ses.run();

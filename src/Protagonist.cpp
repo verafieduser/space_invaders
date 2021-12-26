@@ -9,7 +9,7 @@
 namespace cwing
 {
 
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Session &session) : Sprite(x, y, w, h, image_path, session)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
     }
@@ -20,9 +20,9 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Session &session)
+    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path)
     {
-        return new Protagonist(x, y, w, h, image_path, session);
+        return new Protagonist(x, y, w, h, image_path);
     }
     // void Protagonist::moveUp()
     // {
@@ -95,7 +95,7 @@ namespace cwing
     // }
 
     Component* Protagonist::shoot(){
-        return Bullet::getInstance(getX(), getY(), 100, 100, "laser.png", session, 30);
+        return Bullet::getInstance(getX(), getY(), 100, 20, "laser.png", 30);
 
     }
 

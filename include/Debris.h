@@ -8,7 +8,7 @@ namespace cwing
     class Debris : public Sprite
     {
     public:
-        static Debris *getInstance(int x, int y, int w, int h, std::string image_path, Session &session, int speed);
+        static Debris *getInstance(int x, int y, int w, int h, std::string image_path, int speed);
 
         // void moveUp();
         // void moveDown();
@@ -21,7 +21,7 @@ namespace cwing
         ~Debris();
 
     protected:
-        Debris(int x, int y, int w, int h, std::string images_path, Session &session, int speed);
+        Debris(int x, int y, int w, int h, std::string images_path, int speed);
 
     private:
         float angle = 0;

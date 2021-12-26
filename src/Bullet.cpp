@@ -8,7 +8,7 @@
 namespace cwing
 {
 
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, Session &session, int speed) : Sprite(x, y, w, h, image_path, session)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
@@ -20,9 +20,14 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Bullet *Bullet::getInstance(int x, int y, int w, int h, std::string image_path, Session &session, int speed)
+    Bullet *Bullet::getInstance(int x, int y, int w, int h, std::string image_path, int speed)
     {
-        return new Bullet(x, y, w, h, image_path, session, speed);
+        return new Bullet(x, y, w, h, image_path, speed);
+    }
+
+    void Bullet::moveRight()
+    {
+        setX(SPEED);
     }
 
     Component* Bullet::perform(SDL_Event event)
