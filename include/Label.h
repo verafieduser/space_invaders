@@ -11,7 +11,7 @@ namespace cwing
 	public:
 		static Label *getInstance(int x, int y, int w, int h, std::string txt);
 		void draw() const;
-		void perform(SDL_Event event);
+		Component* perform(SDL_Event event);
 		std::string getText() const;
 		void setText(std::string newText);
 		~Label();

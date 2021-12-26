@@ -30,7 +30,7 @@ namespace cwing
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		void perform(SDL_Event event);
+		Component* perform(SDL_Event event);
 		void draw() const;
 		~Sprite();
 

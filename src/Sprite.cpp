@@ -131,7 +131,7 @@ namespace cwing
 		killed = true;
 	}
 
-	void Sprite::perform(SDL_Event event)
+	Component* Sprite::perform(SDL_Event event)
 	{
 		//implement this
 		// switch (event.key.keysym.sym)
@@ -149,6 +149,7 @@ namespace cwing
 		// 	moveRight();
 		// 	break;
 		// }
+		return NULL;
 	}
 
 	void Sprite::draw() const

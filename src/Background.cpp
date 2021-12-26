@@ -22,8 +22,9 @@ namespace cwing
         return new Background(w, h);
     }
 
-    void Background::perform(SDL_Event event)
+    Component* Background::perform(SDL_Event event)
     {
+        return NULL;
     }
 
     void Background::draw() const

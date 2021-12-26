@@ -19,7 +19,7 @@ namespace cwing
         int SPEED = 40;
         const bool isOutOfBounds();
         const bool isMovementAllowed(Direction dir);
-        void perform(SDL_Event event);
+        Component* perform(SDL_Event event);
         // void draw() const;
         ~Bullet();
 

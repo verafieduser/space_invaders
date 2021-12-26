@@ -25,8 +25,9 @@ namespace cwing
 		SDL_FreeSurface(surf);
 	}
 
-	void Label::perform(SDL_Event event)
+	Component* Label::perform(SDL_Event event)
 	{
+		return NULL;
 	}
 
 	void Label::draw() const

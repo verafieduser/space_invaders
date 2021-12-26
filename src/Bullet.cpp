@@ -25,9 +25,10 @@ namespace cwing
         return new Bullet(x, y, w, h, image_path, session, speed);
     }
 
-    void Bullet::perform(SDL_Event event)
+    Component* Bullet::perform(SDL_Event event)
     {
         moveRight();
+        return NULL;
     }
 
     // void Bullet::draw() const

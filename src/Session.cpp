@@ -33,7 +33,10 @@ namespace cwing
 
 			for (Component *c : comps)
 			{
-				c->perform(event);
+				Component *newC = c->perform(event);
+				if(newC != NULL){
+					add(newC);
+				}
 				if (c->isKilled())
 				{
 					//TODO: remove from comps e.t.c., and then use its deconstructor.

@@ -41,7 +41,7 @@ namespace cwing
         angle = newAngle;
     }
 
-    void Debris::perform(SDL_Event event)
+    Component* Debris::perform(SDL_Event event)
     {
 
         moveLeft();
@@ -51,6 +51,8 @@ namespace cwing
         {
             kill();
         }
+        
+        return NULL;
     }
 
     void Debris::draw() const

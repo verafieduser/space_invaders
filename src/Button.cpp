@@ -41,8 +41,9 @@ namespace cwing
 		isDown = false;
 	}
 
-	void Button::perform(SDL_Event event)
+	Component* Button::perform(SDL_Event event)
 	{
+		return NULL;
 	}
 
 	void Button::draw() const

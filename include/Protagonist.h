@@ -13,7 +13,8 @@ namespace cwing
         // void moveDown();
         // void moveLeft();
         // void moveRight();
-        void perform(SDL_Event event);
+        Component* shoot();
+        Component* perform(SDL_Event event);
         void updateMovement(Direction dir);
         ~Protagonist();
 

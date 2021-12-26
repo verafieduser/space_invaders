@@ -12,7 +12,7 @@ namespace cwing
     public:
         static Background *getInstance(int w, int h);
         virtual ~Background();
-        void perform(SDL_Event event);
+        Component* perform(SDL_Event event);
         void draw() const;
         void tick() const;
 

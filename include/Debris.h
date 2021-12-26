@@ -17,7 +17,7 @@ namespace cwing
         void spinDebris(const int &speed);
         void setAngle(const int &angle);
         void draw() const;
-        void perform(SDL_Event event);
+        Component* perform(SDL_Event event);
         ~Debris();
 
     protected:
