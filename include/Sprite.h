@@ -18,7 +18,6 @@ namespace cwing
 		void moveRight();
 		void perform(SDL_Event event);
 		void draw() const;
-		virtual void perform(Sprite *source) {}
 		~Sprite();
 
 	protected:

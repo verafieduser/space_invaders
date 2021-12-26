@@ -45,21 +45,22 @@ namespace cwing
 
 	void Sprite::perform(SDL_Event event)
 	{
-		switch (event.key.keysym.sym)
-		{
-		case SDLK_RIGHT:
-			moveUp();
-			break;
-		case SDLK_LEFT:
-			moveDown();
-			break;
-		case SDLK_UP:
-			moveLeft();
-			break;
-		case SDLK_DOWN:
-			moveRight();
-			break;
-		}
+		//implement this
+		// switch (event.key.keysym.sym)
+		// {
+		// case SDLK_RIGHT:
+		// 	moveUp();
+		// 	break;
+		// case SDLK_LEFT:
+		// 	moveDown();
+		// 	break;
+		// case SDLK_UP:
+		// 	moveLeft();
+		// 	break;
+		// case SDLK_DOWN:
+		// 	moveRight();
+		// 	break;
+		// }
 	}
 
 	void Sprite::draw() const

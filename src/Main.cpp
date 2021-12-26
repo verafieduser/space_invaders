@@ -4,6 +4,7 @@
 #include "Session.h"
 #include "Button.h"
 #include "Sprite.h"
+#include "Protagonist.h"
 #include <string>
 #include <iostream>
 
@@ -53,8 +54,8 @@ int main(int argc, char **argv)
 	Background *bg = Background::getInstance(1600, 720);
 	ses.add(bg);
 
-	Sprite *sprite = Sprite::getInstance(200, 200, 100, 100, "protagonist.png");
-	ses.add(sprite);
+	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
+	ses.add(protagonist);
 	// Label *lbl = Label::getInstance(270, 100, 100, 70, "0");
 	// ses.add(lbl);
 
