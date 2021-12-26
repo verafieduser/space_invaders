@@ -3,8 +3,6 @@
 #include "System.h"
 #include <SDL2/SDL_image.h>
 
-int SPEED = 1;
-
 namespace cwing
 {
 
@@ -17,31 +15,51 @@ namespace cwing
 	{
 		SDL_DestroyTexture(texture);
 		SDL_DestroyTexture(sprite);
-
 	}
 
 	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
 	{
 		return new Sprite(x, y, w, h, image_path);
 	}
-    void Sprite::moveUp()
+	void Sprite::moveUp()
 	{
 		setX(SPEED);
 	}
 
-    void Sprite::moveDown()
+	void Sprite::moveDown()
 	{
-        //setX(SPEED * -1);
-	}
-	
-	void Sprite::moveLeft()
-	{
-		//setY(SPEED * -1);
+		int value = -1 * SPEED;
+		setX(value);
 	}
 
-    void Sprite::moveRight()
+	void Sprite::moveLeft()
 	{
-        setY(SPEED);
+		int value = -1 * SPEED;
+		setY(value);
+	}
+
+	void Sprite::moveRight()
+	{
+		setY(SPEED);
+	}
+
+	void Sprite::perform(SDL_Event event)
+	{
+		switch (event.key.keysym.sym)
+		{
+		case SDLK_RIGHT:
+			moveUp();
+			break;
+		case SDLK_LEFT:
+			moveDown();
+			break;
+		case SDLK_UP:
+			moveLeft();
+			break;
+		case SDLK_DOWN:
+			moveRight();
+			break;
+		}
 	}
 
 	void Sprite::draw() const

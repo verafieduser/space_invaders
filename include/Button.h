@@ -14,6 +14,7 @@ namespace cwing
 		void mouseDown(const SDL_Event &);
 		void mouseUp(const SDL_Event &);
 		void draw() const;
+		void perform(SDL_Event event);
 		virtual void perform(Button *source) {}
 		~Button();
 

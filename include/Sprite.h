@@ -11,11 +11,12 @@ namespace cwing
 	{
 	public:
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
-
-        void moveUp();
+		int SPEED = 1;
+		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
+		void perform(SDL_Event event);
 		void draw() const;
 		virtual void perform(Sprite *source) {}
 		~Sprite();

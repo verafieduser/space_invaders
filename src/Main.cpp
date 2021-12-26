@@ -54,15 +54,15 @@ int main(int argc, char **argv)
 	ses.add(bg);
 
 	Sprite *sprite = Sprite::getInstance(200, 200, 100, 100, "protagonist.png");
+	ses.add(sprite);
+	// Label *lbl = Label::getInstance(270, 100, 100, 70, "0");
+	// ses.add(lbl);
 
-	Label *lbl = Label::getInstance(270, 100, 100, 70, "0");
-	ses.add(lbl);
+	// Button *b = new OkaKnapp(lbl);
+	// ses.add(b);
 
-	Button *b = new OkaKnapp(lbl);
-	ses.add(b);
-
-	Button *b2 = new MinskaKnapp(lbl);
-	ses.add(b2);
+	// Button *b2 = new MinskaKnapp(lbl);
+	// ses.add(b2);
 	// std::cout << fontsPath << " : font path";
 	ses.run();
 

@@ -23,6 +23,10 @@ namespace cwing
         return new Background(w, h);
     }
 
+    void Background::perform(SDL_Event event)
+    {
+    }
+
     void Background::draw() const
     {
         SDL_RenderCopy(sys.get_ren(), bg_tex, NULL, &getRect());

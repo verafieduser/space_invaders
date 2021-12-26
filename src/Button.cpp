@@ -40,6 +40,11 @@ namespace cwing
 
 		isDown = false;
 	}
+
+	void Button::perform(SDL_Event event)
+	{
+	}
+
 	void Button::draw() const
 	{
 		if (isDown)

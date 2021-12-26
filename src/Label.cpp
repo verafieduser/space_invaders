@@ -25,6 +25,10 @@ namespace cwing
 		SDL_FreeSurface(surf);
 	}
 
+	void Label::perform(SDL_Event event)
+	{
+	}
+
 	void Label::draw() const
 	{
 		SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect());
