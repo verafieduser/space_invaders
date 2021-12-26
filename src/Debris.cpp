@@ -33,6 +33,9 @@ namespace cwing
     void Debris::spinDebris(const int &speed)
     {
         //TODO: randomize spin direction!
+        if(angle > 360){
+            angle = 0;
+        }
         setAngle(angle + speed);
     }
 

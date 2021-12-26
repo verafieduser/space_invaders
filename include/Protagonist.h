@@ -33,6 +33,7 @@ namespace cwing
         Protagonist(int x, int y, int w, int h, std::string images_path, Session &session);
 
     private:
+        int shootingCooldown = 0;
         SDL_Texture *texture;
         SDL_Texture *sprite;
     };

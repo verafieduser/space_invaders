@@ -101,13 +101,11 @@ namespace cwing
 
     Component* Protagonist::perform(SDL_Event event)
     {
-
+        shootingCooldown -= 1;
 
         const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-        if (state[SDL_SCANCODE_SPACE]){
-            return shoot();
-        }
+
 
         if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_RIGHT]){
             moveRight();
@@ -131,6 +129,10 @@ namespace cwing
             moveRight();
         } 
         
+        if (state[SDL_SCANCODE_SPACE] && shootingCooldown <= 0){
+            shootingCooldown = 10;
+            return shoot();
+        }
         return NULL;
 
 
