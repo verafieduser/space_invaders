@@ -78,6 +78,50 @@ namespace cwing
 	}
 
 
+	void Sprite::updateMovement(Direction dir){
+		switch(dir){
+			case UP:
+				if(keystates.left){
+					moveUp();
+					moveLeft();
+				} else if(keystates.right){
+					moveUp();
+					moveRight();
+				} else {
+					moveUp();
+				}
+			case DOWN:
+				if(keystates.left){
+					moveDown();
+					moveLeft();
+				} else if(keystates.right){
+					moveDown();
+					moveRight();
+				} else {
+					moveDown();
+				}
+			case LEFT:
+				if(keystates.up){
+					moveLeft();
+					moveUp();
+				} else if(keystates.down){
+					moveLeft();
+					moveDown();
+				} else {
+					moveLeft();
+				}
+			case RIGHT:
+				if(keystates.up){
+					moveRight();
+					moveUp();
+				} else if (keystates.down){
+					moveRight();
+					moveDown();
+				} else {
+					moveRight();
+				}
+		}
+	}
 
 	void Sprite::moveUp()
 	{

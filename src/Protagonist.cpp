@@ -47,25 +47,43 @@ namespace cwing
 
     void Protagonist::perform(SDL_Event event)
     {
-        //implement this
-
-        if(event.type != SDL_KEYDOWN){
-            return;
-        }
-        switch (event.key.keysym.sym)
+        if (event.type == SDL_KEYDOWN)
         {
-        case SDLK_RIGHT:
-            moveRight();
-            break;
-        case SDLK_LEFT:
-            moveLeft();
-            break;
-        case SDLK_UP:
-            moveUp();
-            break;
-        case SDLK_DOWN:
-            moveDown();
-            break;
+            switch (event.key.keysym.sym)
+            {
+            case SDLK_RIGHT:
+                keystates.right = true;
+                updateMovement(RIGHT);
+                break;
+            case SDLK_LEFT:
+                keystates.left = true;
+                updateMovement(LEFT);
+                break;
+            case SDLK_UP:
+                keystates.up = true;
+                updateMovement(UP);
+                break;
+            case SDLK_DOWN:
+                keystates.down = true;
+                updateMovement(DOWN);
+                break;
+            }
+        } else if(event.type == SDL_KEYUP){
+                        switch (event.key.keysym.sym)
+            {
+            case SDLK_RIGHT:
+                keystates.right = false;
+                break;
+            case SDLK_LEFT:
+                keystates.left = false;
+                break;
+            case SDLK_UP:
+                keystates.up = false;
+                break;
+            case SDLK_DOWN:
+                keystates.down = false;
+                break;
+            }
         }
     }
 
