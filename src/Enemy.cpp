@@ -14,7 +14,7 @@ namespace cwing
         health = 1;
         srand(time(NULL));
         movementPattern = rand() % 3;
-        SPEED = rand() %5+5;//could also be affected by difficulty setting
+        SPEED = rand() %3+2;//could also be affected by difficulty setting
         shootingSpeed = rand() %200+100; //could be affected in a difficuly setting thing available in system?
     }
 

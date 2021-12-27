@@ -3,7 +3,12 @@
 #include "System.h"
 #include <iostream>
 #include <vector>
+#include "Enemy.h"
+#include <sstream>
 
+int spawnCounter = 100;
+int enemyType = 1;
+int typesOfEnemies = 3;
 
 namespace cwing
 {
@@ -33,7 +38,6 @@ namespace cwing
 				}
 			}
 
-			int index = 0;
 			for (Component *c : comps)
 			{
 				Component *newC = c->perform(event);
@@ -50,9 +54,20 @@ namespace cwing
 						else
 							i++;
 					c->removal();
-					index--;
 				}
-				index++;
+			}
+			spawnCounter++;
+			if(spawnCounter > 100){
+				spawnCounter = 0;
+				std::ostringstream ostr; 
+				ostr << enemyType;
+				srand(time(NULL));
+				Enemy *enemy = Enemy::getInstance(1800, rand()%500+100, 100, 100, "enemy" + ostr.str() + ".png");
+				enemyType++;
+				if(enemyType>typesOfEnemies){
+					enemyType=1;
+				}
+				add(enemy);
 			}
 			// 	switch (event.type)
 			// 	{
