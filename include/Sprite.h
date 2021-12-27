@@ -27,6 +27,7 @@ namespace cwing
 		const bool isOutOfBoundsLeft();
 		const bool isMovementAllowed(Direction dir);
 		void kill();
+		void takeDamage(){health--;};
 
 		void removal() { this->~Sprite(); };
 

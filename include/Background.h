@@ -15,6 +15,7 @@ namespace cwing
         Component *perform(SDL_Event event);
         void removal() { this->~Background(); };
         void draw() const;
+        void takeDamage(){};
         void kill();
         void tick() const;
 

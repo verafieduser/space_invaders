@@ -45,8 +45,8 @@ namespace cwing
 				{
 					if (c != c2 && c->isCollidable() && c2->isCollidable() && Collision::AABB(c->getRect(), c2->getRect()))
 					{
-						c->kill();
-						c2->kill();
+						c->takeDamage();
+						c2->takeDamage();
 					}
 				}
 				Component *newC = c->perform(event);
