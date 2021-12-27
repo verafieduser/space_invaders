@@ -24,7 +24,7 @@ namespace cwing
     }
 
     Component* Protagonist::shoot(){
-        return Bullet::getInstance((getX() + 60), (getY() + 40), 100, 20, "laser.png", 30, true);
+        return Bullet::getInstance((getX() + 90), (getY() + 45), 45, 8, "laser.png", 30, true);
     }
 
     Component* Protagonist::perform(SDL_Event event)
