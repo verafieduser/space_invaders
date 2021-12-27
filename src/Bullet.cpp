@@ -12,6 +12,7 @@ namespace cwing
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
+        health = 1;
         if(isFromProtagonist){
             dir = RIGHT;
         } else {
@@ -44,12 +45,12 @@ namespace cwing
     {
         if(dir == RIGHT){
             moveRight();
-            if(isOutOfBoundsRight()) {
+            if(isOutOfBoundsRight() || health <= 0) {
                 kill();
             }
         } else {
             moveLeft();
-            if(isOutOfBoundsLeft()){
+            if(isOutOfBoundsLeft() || health <= 0){
                 kill();
             }
         }

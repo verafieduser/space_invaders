@@ -11,6 +11,7 @@ namespace cwing
     Enemy::Enemy(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+        health = 1;
         srand(time(NULL));
         movementPattern = rand() % 3;
         SPEED = rand() %5+5;//could also be affected by difficulty setting
@@ -39,6 +40,11 @@ namespace cwing
 
     Component* Enemy::perform(SDL_Event event)
     {
+        if (isOutOfBoundsLeft() || health <= 0)
+        {
+            kill();
+        }
+
         moveLeft();
         switch (movementPattern){
             case 0: 

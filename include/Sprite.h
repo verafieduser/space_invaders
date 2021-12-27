@@ -20,6 +20,7 @@ namespace cwing
 		};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
 		int SPEED = 20;
+		short int health;
 		std::string name;
 		const bool isOutOfBounds();
 		const bool isOutOfBoundsRight();

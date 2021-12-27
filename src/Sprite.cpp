@@ -37,7 +37,7 @@ namespace cwing
 	const bool Sprite::isOutOfBoundsLeft()
 	{
 		bool outOfBounds = false;
-		if (getX() < 0)
+		if (getX()+getW() < 0)
 		{
 			outOfBounds = true;
 		}
@@ -47,7 +47,7 @@ namespace cwing
 	const bool Sprite::isOutOfBoundsRight()
 	{
 		bool outOfBounds = false;
-		if (getX() > SCREEN_WIDTH - getW())
+		if (getX()-getW() > SCREEN_WIDTH - getW())
 		{
 			outOfBounds = true;
 		}

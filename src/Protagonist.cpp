@@ -11,6 +11,7 @@ namespace cwing
     Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+        health = 3;
     }
 
     Protagonist::~Protagonist()
@@ -29,6 +30,10 @@ namespace cwing
 
     Component* Protagonist::perform(SDL_Event event)
     {
+        if(health <= 0){
+            kill();
+        }
+
         shootingCooldown -= 1;
 
         const Uint8 *state = SDL_GetKeyboardState(NULL);

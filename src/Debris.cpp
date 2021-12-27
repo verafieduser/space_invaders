@@ -12,6 +12,7 @@ namespace cwing
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
+        health = 3;
     }
 
     Debris::~Debris()
@@ -50,7 +51,7 @@ namespace cwing
         moveLeft();
         spinDebris(SPEED);
 
-        if (isOutOfBoundsLeft())
+        if (isOutOfBoundsLeft() || health <= 0)
         {
             kill();
         }
