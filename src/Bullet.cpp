@@ -10,10 +10,19 @@
 namespace cwing
 {
 
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed) : Sprite(x, y, w, h, image_path)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
+        health = 1;
+        if (isFromProtagonist)
+        {
+            dir = RIGHT;
+        }
+        else
+        {
+            dir = LEFT;
+        }
     }
 
     Bullet::~Bullet()
@@ -21,9 +30,9 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Bullet *Bullet::getInstance(int x, int y, int w, int h, std::string image_path, int speed)
+    Bullet *Bullet::getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist)
     {
-        return new Bullet(x, y, w, h, image_path, speed);
+        return new Bullet(x, y, w, h, image_path, speed, isFromProtagonist);
     }
 
     void Bullet::moveRight()
@@ -31,13 +40,31 @@ namespace cwing
         setX(SPEED);
     }
 
+    void Bullet::moveLeft()
+    {
+        int value = -1 * SPEED;
+        setX(value);
+    }
+
     Component *Bullet::perform(SDL_Event event)
     {
-        moveRight();
-        if (isOutOfBoundsRight())
+        if (dir == RIGHT)
         {
-            kill();
+            moveRight();
+            if (isOutOfBoundsRight() || health <= 0)
+            {
+                kill();
+            }
         }
+        else
+        {
+            moveLeft();
+            if (isOutOfBoundsLeft() || health <= 0)
+            {
+                kill();
+            }
+        }
+
         return NULL;
     }
 

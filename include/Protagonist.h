@@ -9,13 +9,8 @@ namespace cwing
     {
     public:
         static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path);
-        // void moveUp();
-        // void moveDown();
-        // void moveLeft();
-        // void moveRight();
         Component* shoot();
         Component* perform(SDL_Event event);
-        void updateMovement(Direction dir);
         ~Protagonist();
 
     protected:

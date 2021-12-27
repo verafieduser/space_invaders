@@ -12,6 +12,7 @@ namespace cwing
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
+        health = 3;
     }
 
     Debris::~Debris()
@@ -51,7 +52,7 @@ namespace cwing
         moveLeft();
         spinDebris(SPEED);
 
-        if (isOutOfBoundsLeft())
+        if (isOutOfBoundsLeft() || health <= 0)
         {
             kill();
         }
@@ -68,10 +69,5 @@ namespace cwing
         {
             std::cout << SDL_GetError() << " in RenderCopyEx sprite in Debris \n";
         }
-
-        // success = SDL_RenderCopyEx(sys.get_ren(), texture, NULL, &getRect(), angle, NULL, flip) +1;
-        // if(!success){
-        //     std::cout << SDL_GetError() << " in RenderCopyEx texture in Debris \n" << "";
-        // }
     }
 }
