@@ -1,7 +1,6 @@
 #include "Protagonist.h"
 #include "Sprite.h"
 #include "Bullet.h"
-#include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include <SDL2/SDL_image.h>
 #include <iostream>
@@ -25,7 +24,7 @@ namespace cwing
     }
 
     Component* Protagonist::shoot(){
-        return Bullet::getInstance((getX() + 60), (getY() + 40), 100, 20, "laser.png", 30);
+        return Bullet::getInstance((getX() + 60), (getY() + 40), 100, 20, "laser.png", 30, true);
     }
 
     Component* Protagonist::perform(SDL_Event event)

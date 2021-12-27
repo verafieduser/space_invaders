@@ -9,6 +9,7 @@
 #include <string>
 #include <iostream>
 #include "Bullet.h"
+#include "Enemy.h"
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -58,6 +59,9 @@ int main(int argc, char **argv)
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	ses.add(protagonist);
+
+	Enemy *enemy = Enemy::getInstance(1800, 200, 100, 100, "enemy1.png");
+	ses.add(enemy);
 
 	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", 5);
 	ses.add(debris1);
