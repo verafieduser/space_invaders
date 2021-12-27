@@ -1,6 +1,8 @@
 #include "Session.h"
 #include <SDL2/SDL.h>
 #include "System.h"
+#include <iostream>
+#include <vector>
 
 
 namespace cwing
@@ -31,6 +33,7 @@ namespace cwing
 				}
 			}
 
+			int index = 0;
 			for (Component *c : comps)
 			{
 				Component *newC = c->perform(event);
@@ -39,8 +42,17 @@ namespace cwing
 				}
 				if (c->isKilled())
 				{
-					//TODO: remove from comps e.t.c., and then use its deconstructor.
+
+					for (std::vector<Component*>::iterator i = comps.begin(); i != comps.end();)
+						if (*i == c) {
+							i = comps.erase(i);
+						}
+						else
+							i++;
+					c->removal();
+					index--;
 				}
+				index++;
 			}
 			// 	switch (event.type)
 			// 	{
@@ -68,8 +80,16 @@ namespace cwing
 
 			// 	} // switch
 			//
-			SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
-			SDL_RenderClear(sys.get_ren());
+			int success = SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
+			if(success < 0){
+				std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
+			}
+
+			success = SDL_RenderClear(sys.get_ren());
+			if(success < 0){
+				std::cout << SDL_GetError() << " Error in RenderClear \n";
+			}
+			
 			for (Component *c : comps)
 			{
 				c->draw();

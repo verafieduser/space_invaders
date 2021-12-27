@@ -22,7 +22,6 @@ namespace cwing
         Bullet(int x, int y, int w, int h, std::string images_path, int speed);
 
     private:
-        SDL_Texture *texture;
         SDL_Texture *sprite;
     };
 }

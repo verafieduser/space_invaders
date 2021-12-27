@@ -13,6 +13,7 @@ namespace cwing
         static Background *getInstance(int w, int h);
         virtual ~Background();
         Component* perform(SDL_Event event);
+        void removal() {this->~Background();}; 
         void draw() const;
         void tick() const;
 

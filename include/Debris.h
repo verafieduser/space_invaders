@@ -25,7 +25,6 @@ namespace cwing
 
     private:
         float angle = 0;
-        SDL_Texture *texture;
         SDL_Texture *sprite;
     };
 }

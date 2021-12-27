@@ -3,6 +3,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include <SDL2/SDL_image.h>
+#include <iostream>
 
 namespace cwing
 {
@@ -15,7 +16,6 @@ namespace cwing
 
     Debris::~Debris()
     {
-        SDL_DestroyTexture(texture);
         SDL_DestroyTexture(sprite);
     }
 
@@ -33,7 +33,7 @@ namespace cwing
     void Debris::spinDebris(const int &speed)
     {
         //TODO: randomize spin direction!
-        if(angle > 360){
+        if(angle > 360 || angle < -360){
             angle = 0;
         }
         setAngle(angle + speed);
@@ -62,8 +62,14 @@ namespace cwing
     {
         SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 
-        SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip);
+        int success = SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip) +1;
+        if(!success){
+            std::cout << SDL_GetError() << " in RenderCopyEx sprite in Debris \n";
+        }
 
-        SDL_RenderCopyEx(sys.get_ren(), texture, NULL, &getRect(), angle, NULL, flip);
+        // success = SDL_RenderCopyEx(sys.get_ren(), texture, NULL, &getRect(), angle, NULL, flip) +1;
+        // if(!success){
+        //     std::cout << SDL_GetError() << " in RenderCopyEx texture in Debris \n" << "";
+        // }
     }
 }

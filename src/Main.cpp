@@ -53,8 +53,8 @@ int main(int argc, char **argv)
 	Background *bg = Background::getInstance(1600, 720);
 	ses.add(bg);
 
-	Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", 30);
-	ses.add(bullet);
+	// Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", 30);
+	// ses.add(bullet);
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	ses.add(protagonist);

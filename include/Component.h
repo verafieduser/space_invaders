@@ -15,6 +15,7 @@ namespace cwing
 		virtual void keyDown(const SDL_Event &) {}
 		virtual void keyUp(const SDL_Event &) {}
 		virtual void draw() const = 0;
+		virtual void removal() = 0;
 		virtual Component* perform(SDL_Event event) = 0;
 		//virtual void tick() = 0;
 		const bool isKilled() const { return killed; };

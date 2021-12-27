@@ -20,11 +20,14 @@ namespace cwing
 		};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
 		int SPEED = 20;
+		std::string name;
 		const bool isOutOfBounds();
 		const bool isOutOfBoundsRight();
 		const bool isOutOfBoundsLeft();
 		const bool isMovementAllowed(Direction dir);
 		void kill();
+
+		void removal() {this->~Sprite();};
 
 		void moveUp();
 		void moveDown();
@@ -41,7 +44,6 @@ namespace cwing
 		Session session;
 
 	private:
-		SDL_Texture *texture;
 		SDL_Texture *sprite;
 	};
 }

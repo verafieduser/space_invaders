@@ -16,7 +16,6 @@ namespace cwing
 
     Bullet::~Bullet()
     {
-        SDL_DestroyTexture(texture);
         SDL_DestroyTexture(sprite);
     }
 
@@ -33,17 +32,12 @@ namespace cwing
     Component* Bullet::perform(SDL_Event event)
     {
         moveRight();
+        if(isOutOfBoundsRight()) {
+            kill();
+        }
         return NULL;
     }
 
-    // void Bullet::draw() const
-    // {
-    //     // SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
-
-    //     // SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip);
-
-    //     SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect(), angle, NULL, flip);
-    // }
 }
 
 // namespace cwing

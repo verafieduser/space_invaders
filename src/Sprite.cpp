@@ -2,6 +2,7 @@
 #include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include <SDL2/SDL_image.h>
+#include <iostream>
 
 namespace cwing
 {
@@ -9,13 +10,14 @@ namespace cwing
 	Sprite::Sprite(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
 	{
 		sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+		name = image_path;
 	}
 
 	Sprite::~Sprite()
 	{
-		SDL_DestroyTexture(texture);
 		SDL_DestroyTexture(sprite);
 	}
+
 
 	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
 	{
@@ -132,30 +134,20 @@ namespace cwing
 
 	Component* Sprite::perform(SDL_Event event)
 	{
-		//implement this
-		// switch (event.key.keysym.sym)
-		// {
-		// case SDLK_RIGHT:
-		// 	moveUp();
-		// 	break;
-		// case SDLK_LEFT:
-		// 	moveDown();
-		// 	break;
-		// case SDLK_UP:
-		// 	moveLeft();
-		// 	break;
-		// case SDLK_DOWN:
-		// 	moveRight();
-		// 	break;
-		// }
+
 		return NULL;
 	}
 
 	void Sprite::draw() const
 	{
 
-		SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect());
-
-		SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect());
+		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) +1;
+        if(!success){
+            std::cout << SDL_GetError() << " in RenderCopy sprite in Sprite \n" << " file was " << name + "\n";
+        }
+		// success = SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()) +1;
+		// if(!success){
+        //     std::cout << SDL_GetError() << " in RenderCopy texture in Sprite \n" << " file was " << name + "\n";
+        // }
 	}
 }
