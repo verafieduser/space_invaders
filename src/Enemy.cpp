@@ -14,8 +14,8 @@ namespace cwing
         health = 1;
         srand(time(NULL));
         movementPattern = rand() % 3;
-        SPEED = rand() %3+2;//could also be affected by difficulty setting
-        shootingSpeed = rand() %200+100; //could be affected in a difficuly setting thing available in system?
+        SPEED = rand() % 3 + 2;             //could also be affected by difficulty setting
+        shootingSpeed = rand() % 200 + 100; //could be affected in a difficuly setting thing available in system?
     }
 
     Enemy::~Enemy()
@@ -28,17 +28,18 @@ namespace cwing
         return new Enemy(x, y, w, h, image_path);
     }
 
-    Component* Enemy::shoot(){
-        return Bullet::getInstance((getX() + 60), (getY() + 40), 100, 20, "laser2.png", 20, false);
+    Component *Enemy::shoot()
+    {
+        return Bullet::getInstance((getX() - getW() - SPEED - 1), (getY() + 40), 100, 20, "laser2.png", 20, false);
     }
 
-    void Enemy::moveLeft(){
+    void Enemy::moveLeft()
+    {
         int value = -1 * SPEED;
         setX(value);
-    
     }
 
-    Component* Enemy::perform(SDL_Event event)
+    Component *Enemy::perform(SDL_Event event)
     {
         if (isOutOfBoundsLeft() || health <= 0)
         {
@@ -46,49 +47,61 @@ namespace cwing
         }
 
         moveLeft();
-        switch (movementPattern){
-            case 0: 
+        switch (movementPattern)
+        {
+        case 0:
 
-                if(movementCounter > 100 && movementCounter <= 200){
-                    moveUp();
-                } else if (movementCounter <= 100 || (movementCounter > 200 && movementCounter < 300)){
-                    moveDown();
-                } else {
-                    movementCounter = 0;
-                }
-                movementCounter++;
-                break;
-            case 1:
-                if(movementCounter > 100 && movementCounter <= 200){
-                    moveDown();
-                } else if (movementCounter <= 100 || (movementCounter > 200 && movementCounter < 300)){
-                    moveUp();
-                } else {
-                    movementCounter = 0;
-                }
-                movementCounter++;
-                break;
-            case 2: 
-                moveLeft();
-                break;
-            case 3:
-                if(movementCounter < 100){
-                    moveUp();
-                    moveUp();
-                }
-                else if(movementCounter > 100 && movementCounter < 200){
-                    moveDown();
-                    moveDown();
-                }
-                movementCounter++;
-                break; 
+            if (movementCounter > 100 && movementCounter <= 200)
+            {
+                moveUp();
+            }
+            else if (movementCounter <= 100 || (movementCounter > 200 && movementCounter < 300))
+            {
+                moveDown();
+            }
+            else
+            {
+                movementCounter = 0;
+            }
+            movementCounter++;
+            break;
+        case 1:
+            if (movementCounter > 100 && movementCounter <= 200)
+            {
+                moveDown();
+            }
+            else if (movementCounter <= 100 || (movementCounter > 200 && movementCounter < 300))
+            {
+                moveUp();
+            }
+            else
+            {
+                movementCounter = 0;
+            }
+            movementCounter++;
+            break;
+        case 2:
+            moveLeft();
+            break;
+        case 3:
+            if (movementCounter < 100)
+            {
+                moveUp();
+                moveUp();
+            }
+            else if (movementCounter > 100 && movementCounter < 200)
+            {
+                moveDown();
+                moveDown();
+            }
+            movementCounter++;
+            break;
         }
 
         shootingCooldown -= 1;
 
-        
-        
-        if (shootingCooldown <= 0){
+        if (shootingCooldown <= 0)
+        {
             shootingCooldown = shootingSpeed;
             return shoot();
         }

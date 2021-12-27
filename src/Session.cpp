@@ -81,32 +81,7 @@ namespace cwing
 				}
 				add(enemy);
 			}
-			// 	switch (event.type)
-			// 	{
-			// 	case SDL_QUIT:
-			// 		quit = true;
-			// 		break;
-			// 	case SDL_MOUSEBUTTONDOWN:
-			// 		for (Component *c : comps)
-			// 			c->mouseDown(event);
-			// 		break;
-			// 	case SDL_MOUSEBUTTONUP:
-			// 		for (Component *c : comps)
-			// 			c->mouseUp(event);
-			// 		break;
-			// 	case SDL_KEYDOWN:
-			// 		for (Component *c : comps)
-			// 		{
-			// 			c->perform(event);
-			// 		}
-			// 		break;
-			// 	case SDL_KEYUP:
-			// 		for (Component *c : comps)
-			// 			c->keyUp(event);
-			// 		break;
 
-			// 	} // switch
-			//
 			int success = SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
 			if (success < 0)
 			{
