@@ -33,7 +33,8 @@ namespace cwing
     void Debris::spinDebris(const int &speed)
     {
         //TODO: randomize spin direction!
-        if(angle > 360 || angle < -360){
+        if (angle > 360 || angle < -360)
+        {
             angle = 0;
         }
         setAngle(angle + speed);
@@ -44,7 +45,7 @@ namespace cwing
         angle = newAngle;
     }
 
-    Component* Debris::perform(SDL_Event event)
+    Component *Debris::perform(SDL_Event event)
     {
 
         moveLeft();
@@ -54,7 +55,7 @@ namespace cwing
         {
             kill();
         }
-        
+
         return NULL;
     }
 
@@ -62,8 +63,9 @@ namespace cwing
     {
         SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 
-        int success = SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip) +1;
-        if(!success){
+        int success = SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip) + 1;
+        if (!success)
+        {
             std::cout << SDL_GetError() << " in RenderCopyEx sprite in Debris \n";
         }
 

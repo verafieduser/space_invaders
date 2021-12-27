@@ -9,6 +9,7 @@ namespace cwing
     {
         //SDL_Surface *bg_sur = IMG_Load((imagesPath + "bg.png").c_str());
         bg_tex = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + "bg.png").c_str());
+        collidable = false;
         //bg_tex = IMG_LoadTexture(sys.get_ren(), (imagesPath + "bg.png").c_str());
     }
 
@@ -22,10 +23,12 @@ namespace cwing
         return new Background(w, h);
     }
 
-    Component* Background::perform(SDL_Event event)
+    Component *Background::perform(SDL_Event event)
     {
         return NULL;
     }
+
+    void Background::kill() {}
 
     void Background::draw() const
     {

@@ -16,9 +16,12 @@ namespace cwing
 		virtual void keyUp(const SDL_Event &) {}
 		virtual void draw() const = 0;
 		virtual void removal() = 0;
-		virtual Component* perform(SDL_Event event) = 0;
+		virtual void kill() = 0;
+		virtual Component *perform(SDL_Event event) = 0;
+
 		//virtual void tick() = 0;
 		const bool isKilled() const { return killed; };
+		const bool isCollidable() const { return collidable; };
 		const SDL_Rect &getRect() const { return rect; }
 		void setY(int &value) { rect.y += value; };
 		void setX(int &value) { rect.x += value; };
@@ -32,6 +35,7 @@ namespace cwing
 	protected:
 		Component(int x, int y, int w, int h);
 		bool killed = false;
+		bool collidable;
 
 	private:
 		SDL_Rect rect;

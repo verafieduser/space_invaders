@@ -12,6 +12,7 @@ namespace cwing
     Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+        SPEED = 10;
     }
 
     Protagonist::~Protagonist()
@@ -24,39 +25,56 @@ namespace cwing
         return new Protagonist(x, y, w, h, image_path);
     }
 
-    Component* Protagonist::shoot(){
-        return Bullet::getInstance((getX() + 60), (getY() + 40), 100, 20, "laser.png", 30);
+    Component *Protagonist::shoot()
+    {
+        return Bullet::getInstance((getX() + getW() + SPEED + 1), (getY() + 45), 30, 10, "laser.png", 30);
     }
 
-    Component* Protagonist::perform(SDL_Event event)
+    Component *Protagonist::perform(SDL_Event event)
     {
         shootingCooldown -= 1;
 
         const Uint8 *state = SDL_GetKeyboardState(NULL);
 
-        if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_RIGHT]){
+        if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_RIGHT])
+        {
             moveRight();
             moveDown();
-        } else if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_LEFT]){
+        }
+        else if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_LEFT])
+        {
             moveDown();
             moveLeft();
-        } else if (state[SDL_SCANCODE_UP] && state[SDL_SCANCODE_LEFT]){
+        }
+        else if (state[SDL_SCANCODE_UP] && state[SDL_SCANCODE_LEFT])
+        {
             moveUp();
             moveLeft();
-        } else if (state[SDL_SCANCODE_UP] && state[SDL_SCANCODE_RIGHT]){
+        }
+        else if (state[SDL_SCANCODE_UP] && state[SDL_SCANCODE_RIGHT])
+        {
             moveUp();
             moveRight();
-        } else if(state[SDL_SCANCODE_DOWN]){
-           moveDown();
-        } else if (state[SDL_SCANCODE_UP]){
+        }
+        else if (state[SDL_SCANCODE_DOWN])
+        {
+            moveDown();
+        }
+        else if (state[SDL_SCANCODE_UP])
+        {
             moveUp();
-        } else if (state[SDL_SCANCODE_LEFT]){
+        }
+        else if (state[SDL_SCANCODE_LEFT])
+        {
             moveLeft();
-        } else if (state[SDL_SCANCODE_RIGHT]){
+        }
+        else if (state[SDL_SCANCODE_RIGHT])
+        {
             moveRight();
-        } 
-        
-        if (state[SDL_SCANCODE_SPACE] && shootingCooldown <= 0){
+        }
+
+        if (state[SDL_SCANCODE_SPACE] && shootingCooldown <= 0)
+        {
             shootingCooldown = 10;
             return shoot();
         }

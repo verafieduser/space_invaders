@@ -3,7 +3,7 @@
 #include "System.h"
 #include <iostream>
 #include <vector>
-
+#include "Collision.h"
 
 namespace cwing
 {
@@ -36,15 +36,24 @@ namespace cwing
 			int index = 0;
 			for (Component *c : comps)
 			{
+				for (Component *c2 : comps)
+				{
+					if (c != c2 && c->isCollidable() && c2->isCollidable() && Collision::AABB(c->getRect(), c2->getRect()))
+					{
+						c->kill();
+						c2->kill();
+					}
+				}
 				Component *newC = c->perform(event);
-				if(newC != NULL){
+				if (newC != NULL)
+				{
 					add(newC);
 				}
 				if (c->isKilled())
 				{
-
-					for (std::vector<Component*>::iterator i = comps.begin(); i != comps.end();)
-						if (*i == c) {
+					for (std::vector<Component *>::iterator i = comps.begin(); i != comps.end();)
+						if (*i == c)
+						{
 							i = comps.erase(i);
 						}
 						else
@@ -81,15 +90,17 @@ namespace cwing
 			// 	} // switch
 			//
 			int success = SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
-			if(success < 0){
+			if (success < 0)
+			{
 				std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
 			}
 
 			success = SDL_RenderClear(sys.get_ren());
-			if(success < 0){
+			if (success < 0)
+			{
 				std::cout << SDL_GetError() << " Error in RenderClear \n";
 			}
-			
+
 			for (Component *c : comps)
 			{
 				c->draw();

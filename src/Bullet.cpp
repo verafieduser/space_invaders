@@ -3,7 +3,9 @@
 #include <SDL2/SDL_image.h>
 #include "Bullet.h"
 #include "Sprite.h"
+#include "Session.h"
 #include "System.h"
+#include "Collision.h"
 
 namespace cwing
 {
@@ -29,10 +31,11 @@ namespace cwing
         setX(SPEED);
     }
 
-    Component* Bullet::perform(SDL_Event event)
+    Component *Bullet::perform(SDL_Event event)
     {
         moveRight();
-        if(isOutOfBoundsRight()) {
+        if (isOutOfBoundsRight())
+        {
             kill();
         }
         return NULL;

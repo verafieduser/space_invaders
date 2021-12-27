@@ -11,13 +11,13 @@ namespace cwing
 	{
 		sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
 		name = image_path;
+		collidable = true;
 	}
 
 	Sprite::~Sprite()
 	{
 		SDL_DestroyTexture(sprite);
 	}
-
 
 	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
 	{
@@ -90,9 +90,6 @@ namespace cwing
 		return false;
 	}
 
-
-
-
 	void Sprite::moveUp()
 	{
 		if (isMovementAllowed(UP))
@@ -132,7 +129,7 @@ namespace cwing
 		killed = true;
 	}
 
-	Component* Sprite::perform(SDL_Event event)
+	Component *Sprite::perform(SDL_Event event)
 	{
 
 		return NULL;
@@ -141,13 +138,15 @@ namespace cwing
 	void Sprite::draw() const
 	{
 
-		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) +1;
-        if(!success){
-            std::cout << SDL_GetError() << " in RenderCopy sprite in Sprite \n" << " file was " << name + "\n";
-        }
+		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) + 1;
+		if (!success)
+		{
+			std::cout << SDL_GetError() << " in RenderCopy sprite in Sprite \n"
+					  << " file was " << name + "\n";
+		}
 		// success = SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()) +1;
 		// if(!success){
-        //     std::cout << SDL_GetError() << " in RenderCopy texture in Sprite \n" << " file was " << name + "\n";
-        // }
+		//     std::cout << SDL_GetError() << " in RenderCopy texture in Sprite \n" << " file was " << name + "\n";
+		// }
 	}
 }

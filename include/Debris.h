@@ -17,7 +17,7 @@ namespace cwing
         void spinDebris(const int &speed);
         void setAngle(const int &angle);
         void draw() const;
-        Component* perform(SDL_Event event);
+        Component *perform(SDL_Event event);
         ~Debris();
 
     protected:
@@ -28,4 +28,5 @@ namespace cwing
         SDL_Texture *sprite;
     };
 }
+
 extern std::string IMAGES_PATH;

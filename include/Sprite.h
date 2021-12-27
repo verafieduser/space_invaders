@@ -27,17 +27,15 @@ namespace cwing
 		const bool isMovementAllowed(Direction dir);
 		void kill();
 
-		void removal() {this->~Sprite();};
+		void removal() { this->~Sprite(); };
 
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		Component* perform(SDL_Event event);
+		Component *perform(SDL_Event event);
 		void draw() const;
 		~Sprite();
-
-
 
 	protected:
 		Sprite(int x, int y, int w, int h, std::string images_path);
