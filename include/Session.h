@@ -12,11 +12,12 @@ namespace cwing
 	{
 	public:
 		void add(Component *c);
+		void remove(Component *c);
 		void run();
 		~Session();
 
 	private:
-		std::vector<Component *> comps;
+		std::vector<Component *> comps, toBeRemoved, toBeAdded;
 	};
 
 }

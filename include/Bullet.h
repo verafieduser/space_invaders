@@ -11,13 +11,13 @@ namespace cwing
     class Bullet : public Sprite
     {
     public:
-        static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isProtagonist);
+        static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist);
         int SPEED = 40;
         Direction dir;
         void moveRight();
         void moveLeft();
+        bool isFromProtagonist() const { return isProtagonistBullet; };
         Component* perform(SDL_Event event);
-        // void draw() const;
         ~Bullet();
 
     protected:
@@ -25,6 +25,7 @@ namespace cwing
 
     private:
         SDL_Texture *sprite;
+        bool isProtagonistBullet;
     };
 }
 

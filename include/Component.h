@@ -2,6 +2,7 @@
 #define COMPONENT_H
 
 #include <SDL2/SDL.h>
+#include <string>
 
 namespace cwing
 {
@@ -30,13 +31,14 @@ namespace cwing
 		const int getX() { return rect.x; };
 		const int getW() { return rect.w; };
 		const int getH() { return rect.h; };
-		// const int getY() const {return rect.y;};
+		const std::string getName() const {return name;};		// const int getY() const {return rect.y;};
 		// const int getX() const {return rect.x;};
 
 	protected:
 		Component(int x, int y, int w, int h);
 		bool killed = false;
 		bool collidable;
+		std::string name;
 
 	private:
 		SDL_Rect rect;

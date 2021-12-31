@@ -10,7 +10,6 @@ namespace cwing
 	Sprite::Sprite(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
 	{
 		sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-		name = image_path;
 		collidable = true;
 	}
 

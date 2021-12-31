@@ -13,6 +13,7 @@ namespace cwing
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = 10;
         health = 3;
+        name = "Protagonist";
     }
 
     Protagonist::~Protagonist()

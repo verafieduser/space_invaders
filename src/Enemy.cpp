@@ -10,6 +10,7 @@ namespace cwing
 
     Enemy::Enemy(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
     {
+        name = "Enemy";
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         health = 1;
         srand(time(NULL));

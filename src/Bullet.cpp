@@ -10,11 +10,14 @@
 namespace cwing
 {
 
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)//, SPEED(speed), isProtagonistBullet(isFromProtagonist)
     {
+        name = "Bullet";
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-        SPEED = speed;
         health = 1;
+        isProtagonistBullet = isFromProtagonist;
+        SPEED = speed;
+        
         if (isFromProtagonist)
         {
             dir = RIGHT;

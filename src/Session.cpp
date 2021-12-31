@@ -5,6 +5,9 @@
 #include <vector>
 #include "Collision.h"
 #include "Enemy.h"
+#include "Bullet.h"
+#include "Debris.h"
+#include "Protagonist.h"
 #include <sstream>
 
 int spawnCounter = 100;
@@ -17,8 +20,14 @@ namespace cwing
 
 	void Session::add(Component *c)
 	{
-		comps.push_back(c);
+		toBeAdded.push_back(c);
 	}
+
+	void Session::remove(Component *c)
+	{
+		toBeRemoved.push_back(c);
+	}
+
 
 	void Session::run()
 	{
@@ -41,31 +50,50 @@ namespace cwing
 
 			for (Component *c : comps)
 			{
-				for (Component *c2 : comps)
-				{
-					if (c != c2 && c->isCollidable() && c2->isCollidable() && Collision::AABB(c->getRect(), c2->getRect()))
-					{
-						c->takeDamage();
-						c2->takeDamage();
-					}
-				}
 				Component *newC = c->perform(event);
 				if (newC != NULL)
 				{
 					add(newC);
 				}
+				
+				for (Component *c2 : comps)
+				{
+					if (c != c2 && Collision::canCollide(c, c2))
+					{
+						c->takeDamage();
+						c2->takeDamage();
+					}
+				}
+
 				if (c->isKilled())
 				{
-					for (std::vector<Component *>::iterator i = comps.begin(); i != comps.end();)
-						if (*i == c)
-						{
-							i = comps.erase(i);
-						}
-						else
-							i++;
-					c->removal();
+					remove(c);
 				}
 			}
+
+			for (Component *c : toBeAdded)
+			{
+				comps.push_back(c);
+			}
+			toBeAdded.clear();
+
+			for (Component *c : toBeRemoved)
+			{
+				for (std::vector<Component *>::iterator i = comps.begin(); i != comps.end();)
+				{
+					if (*i == c)
+					{
+						delete c;
+						i = comps.erase(i);
+					}
+					else
+					{
+						i++;
+					}
+				}
+			}
+			toBeRemoved.clear();
+			
 			spawnCounter++;
 			if (spawnCounter > 100)
 			{
