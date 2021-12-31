@@ -1,8 +1,13 @@
-
 #include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include "Collision.h"
 #include <SDL2/SDL_image.h>
+#include "Bullet.h"
+#include "Protagonist.h"
+#include "Enemy.h"
+#include "Debris.h"
+#include <iostream>
+#include <string>
 
 namespace cwing
 {
@@ -17,5 +22,66 @@ namespace cwing
         }
         return false;
     }
+
+    bool Collision::canCollide(Component *c, Component *c2)
+    {
+        std::string name1 = c->getName();
+        std::string name2 = c2->getName();
+
+        if (name1 == "Protagonist" && name2 == "Bullet")
+        {
+            // std::cout << "Non-prot bullet collided with prot" << std::endl;
+            Bullet *b = dynamic_cast<Bullet *>(c2);
+            if (!b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
+            {
+                return true;
+            }
+        }
+
+        if (name1 == "Bullet" && name2 == "Enemy")
+        {
+            // std::cout << "Prot-bullet collided with enemy!" << std::endl;
+            Bullet *b = dynamic_cast<Bullet *>(c);
+            if (b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
+            {
+                
+                return true;
+            }
+        }
+
+        if (name1 == "Bullet" && name2 == "Debris")
+        {
+            // std::cout << "Prot-bullet collided with debris" << std::endl;
+            Bullet *b = dynamic_cast<Bullet *>(c);
+            if (b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
+            {
+
+                return true;
+            }
+        }
+
+        if (name1 == "Protagonist" && name2 == "Debris")
+        {
+            // std::cout << "Protagonist collides with Debris!" << std::endl;
+            if (Collision::AABB(c->getRect(), c2->getRect()))
+            {
+                
+                return true;
+            }
+        }
+
+        if (name1 == "Protagonist" && name2 == "Enemy")
+        { 
+            // std::cout << "Protagonist collides with Enemy!" << std::endl;
+            if (Collision::AABB(c->getRect(), c2->getRect()))
+            {
+               
+                return true;
+            }
+        }
+
+        return false;
+    }
+
 
 }
