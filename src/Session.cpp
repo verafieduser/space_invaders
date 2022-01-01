@@ -46,6 +46,7 @@ namespace cwing
 					break;
 				}
 			}
+
 			gameActions(event);
 			// for (Component *c : comps)
 			// {
@@ -68,26 +69,11 @@ namespace cwing
 			// 	{
 			// 		remove(c);
 			// 	}
-			// }
+			// 	}
 
 			loadPendingComponents();
 			removeComponents();
-
-			spawnCounter++;
-			if (spawnCounter > 100)
-			{
-				spawnCounter = 0;
-				std::ostringstream ostr;
-				ostr << enemyType;
-				srand(time(NULL));
-				Enemy *enemy = Enemy::getInstance(1800, rand() % 500 + 100, 100, 100, "enemy" + ostr.str() + ".png");
-				enemyType++;
-				if (enemyType > typesOfEnemies)
-				{
-					enemyType = 1;
-				}
-				add(enemy);
-			}
+			enemySpawner();
 
 			int success = SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
 			if (success < 0)
@@ -189,4 +175,23 @@ namespace cwing
 			}
 		}
 	}
+
+	void Session::enemySpawner()
+	{
+		spawnCounter++;
+		if (spawnCounter > 100)
+		{
+			spawnCounter = 0;
+			std::ostringstream ostr;
+			ostr << enemyType;
+			srand(time(NULL));
+			Enemy *enemy = Enemy::getInstance(1800, rand() % 500 + 100, 100, 100, "enemy" + ostr.str() + ".png");
+			enemyType++;
+			if (enemyType > typesOfEnemies)
+			{
+				enemyType = 1;
+			}
+			add(enemy);
+		}
+	}	
 }

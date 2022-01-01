@@ -19,6 +19,7 @@ namespace cwing
 		void gameActions(SDL_Event &event);
 		void loadPendingComponents();
 		void removeComponents();
+		void enemySpawner();
 		~Session();
 
 	private:

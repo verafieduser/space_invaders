@@ -17,7 +17,13 @@ namespace cwing
         Component* shoot();
         Component* perform(SDL_Event event);
         void setHealthbar(Healthbar *h);
-        void takeDamage(){healthbar->updateHealth(-1); health--;};
+        void takeDamage(){
+            if(damageCooldown==0)
+            {
+                healthbar->updateHealth(-1); 
+                health--;
+            } 
+            damageCooldown = 60;};
         ~Protagonist();
 
     protected:
@@ -25,6 +31,7 @@ namespace cwing
 
     private:
         int shootingCooldown = 0;
+        int damageCooldown = 0;
         SDL_Texture *sprite;
         Healthbar *healthbar;
     };

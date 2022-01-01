@@ -44,6 +44,10 @@ namespace cwing
             kill();
         }
 
+        if(damageCooldown > 0){
+            damageCooldown--;
+        }
+
         shootingCooldown -= 1;
 
         const Uint8 *state = SDL_GetKeyboardState(NULL);
