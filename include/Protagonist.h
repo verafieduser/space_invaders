@@ -1,6 +1,11 @@
+#ifndef PROTAGONIST_H
+#define PROTAGONIST_H
+
 #include "Sprite.h"
 #include "Session.h"
+#include "Healthbar.h"
 #include <SDL2/SDL.h>
+#include <string>
 
 namespace cwing
 {
@@ -11,6 +16,8 @@ namespace cwing
         static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path);
         Component* shoot();
         Component* perform(SDL_Event event);
+        void setHealthbar(Healthbar *h);
+        void takeDamage(){healthbar->updateHealth(-1); health--;};
         ~Protagonist();
 
     protected:
@@ -19,7 +26,10 @@ namespace cwing
     private:
         int shootingCooldown = 0;
         SDL_Texture *sprite;
+        Healthbar *healthbar;
     };
 }
 
 extern std::string IMAGES_PATH;
+
+#endif

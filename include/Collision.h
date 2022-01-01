@@ -1,3 +1,6 @@
+#ifndef COLLISION_H
+#define COLLISION_H
+
 #include <string>
 #include <SDL2/SDL.h>
 #include "Component.h"
@@ -11,3 +14,5 @@ namespace cwing
         static bool canCollide(Component *c, Component *c2);
     };
 }
+
+#endif

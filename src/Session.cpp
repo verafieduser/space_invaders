@@ -39,7 +39,6 @@ namespace cwing
 			SDL_Event event;
 			while (SDL_PollEvent(&event))
 			{
-
 				switch (event.type)
 				{
 				case SDL_QUIT:
@@ -126,6 +125,7 @@ namespace cwing
 			{
 				c->draw();
 			}
+
 			SDL_RenderPresent(sys.get_ren());
 			int delay = nextTick - SDL_GetTicks();
 			if (delay > 0)

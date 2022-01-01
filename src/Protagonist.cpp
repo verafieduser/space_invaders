@@ -4,6 +4,7 @@
 #include "System.h"
 #include <SDL2/SDL_image.h>
 #include <iostream>
+#include <string>
 
 namespace cwing
 {
@@ -14,6 +15,7 @@ namespace cwing
         SPEED = 10;
         health = 3;
         name = "Protagonist";
+        
     }
 
     Protagonist::~Protagonist()
@@ -24,6 +26,10 @@ namespace cwing
     Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path)
     {
         return new Protagonist(x, y, w, h, image_path);
+    }
+
+    void Protagonist::setHealthbar(Healthbar *h) {
+        healthbar = h;
     }
 
     Component *Protagonist::shoot()

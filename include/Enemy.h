@@ -1,3 +1,6 @@
+#ifndef ENEMY_H
+#define ENEMY_H
+
 #include "Sprite.h"
 #include <SDL2/SDL.h>
 
@@ -26,3 +29,5 @@ namespace cwing
 }
 
 extern std::string IMAGES_PATH;
+
+#endif

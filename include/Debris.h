@@ -1,3 +1,6 @@
+#ifndef DEBRIS_H
+#define DEBRIS_H
+
 #include "Sprite.h"
 #include "Session.h"
 #include <SDL2/SDL.h>
@@ -30,3 +33,5 @@ namespace cwing
 }
 
 extern std::string IMAGES_PATH;
+
+#endif

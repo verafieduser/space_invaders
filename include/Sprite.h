@@ -40,7 +40,6 @@ namespace cwing
 
 	protected:
 		Sprite(int x, int y, int w, int h, std::string images_path);
-		Session session;
 
 	private:
 		SDL_Texture *sprite;

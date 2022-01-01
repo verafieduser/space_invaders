@@ -10,6 +10,7 @@
 #include <iostream>
 #include "Bullet.h"
 #include "Enemy.h"
+#include "Healthbar.h"
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -58,7 +59,12 @@ int main(int argc, char **argv)
 	// ses.add(bullet);
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
+	Healthbar *healthbar = Healthbar::getInstance(20, 20, 200, 80, "full_health.png", "half_health.png", "low_health.png");
+
+	protagonist->setHealthbar(healthbar);
+
 	ses.add(protagonist);
+	ses.add(healthbar);
 
 
 	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", 5);
