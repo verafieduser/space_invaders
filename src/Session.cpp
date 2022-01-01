@@ -2,14 +2,16 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <sstream>
 #include "Background.h"
 #include "Collision.h"
 #include "Session.h"
 #include "System.h"
+#include "Label.h"
 
-int spawnCounter = 100;
-int howOftenSpawn = 30;
+int spawnFrequency = 60;
 int currentEnemy = 0;
+int enemiesDefeated = 0;
 
 namespace cwing
 {
@@ -24,6 +26,10 @@ namespace cwing
 		enemies.push_back(c);
 	}
 
+	void Session::addGameOverComps(Component *c){
+		gameOverComps.push_back(c);
+	}
+
 	void Session::remove(Component *c)
 	{
 		toBeRemoved.push_back(c);
@@ -32,6 +38,9 @@ namespace cwing
 	void Session::run()
 	{
 		std::random_shuffle(enemies.begin(), enemies.end());
+
+		add(scoreLabel);
+		add(levelLabel);
 		bool quit = false;
 		const int tickInterval = 1000 / FPS;
 		while (!quit)
@@ -49,34 +58,11 @@ namespace cwing
 			}
 
 			gameActions(event);
-			// for (Component *c : comps)
-			// {
-			// 	Component *newC = c->perform(event);
-			// 	if (newC != NULL)
-			// 	{
-			// 		add(newC);
-			// 	}
-
-			// 	for (Component *c2 : comps)
-			// 	{
-			// 		if (c != c2 && Collision::canCollide(c, c2))
-			// 		{
-			// 			c->takeDamage();
-			// 			c2->takeDamage();
-			// 		}
-			// 	}
-
-			// 	if (c->isKilled())
-			// 	{
-			// 		remove(c);
-			// 	}
-			// 	}
-
 			loadPendingComponents();
 			removeComponents();
 			enemySpawner();
 
-			int success = SDL_SetRenderDrawColor(sys.get_ren(), 255, 255, 255, 255);
+			int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
 			if (success < 0)
 			{
 				std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
@@ -134,8 +120,19 @@ namespace cwing
 			remove(c);
 		}
 		removeComponents();
-		Background *bg = Background::getInstance(1600, 720, "game_over.jpg");
-		add(bg);
+		for (Component *c : gameOverComps){
+			add(c);
+		}
+		std::ostringstream ostr;
+		ostr << enemiesDefeated;
+		scoreLabel->setText("FINAL SCORE: " + ostr.str());
+		int middleX = (SCREEN_WIDTH-scoreLabel->getW())/2+150;
+		int middleY = SCREEN_HEIGHT/2;
+		scoreLabel->setX(middleX);
+		scoreLabel->setY(middleY);
+		if(!spawningToContinueAfterDeath){
+			enemies.clear();
+		}
 	}
 
 	void Session::loadPendingComponents()
@@ -169,7 +166,12 @@ namespace cwing
 			if (c->isKilled())
 			{
 				remove(c);
-				if(c->getName() == "Protagonist"){
+				if(c->getName() == "Defeated enemy"){
+					std::ostringstream ostr;
+					enemiesDefeated++;
+					ostr << enemiesDefeated;
+					scoreLabel->setText("SCORE: " + ostr.str());
+				} else if(c->getName() == "Protagonist"){
 					gameOver();
 					break;
 				}
@@ -181,20 +183,26 @@ namespace cwing
 	{
 	
 		spawnCounter++;
-		if (spawnCounter > howOftenSpawn)
+		if (spawnCounter > spawnFrequency)
 		{
 			spawnCounter = 0;
 			int amountOfEnemies = enemies.size();
 
 			currentEnemy++;
 
+			//level2 when a third of enemies are defeated
 			if (currentEnemy == amountOfEnemies/3){
-				howOftenSpawn = (howOftenSpawn/3)*2;
+				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
+				levelLabel->setText("Level 2");
+				spawnCounter = betweenLevels * 1;
+			} 
+			// level3 when two thirds of enemies are defeated
+			else if (currentEnemy == (amountOfEnemies/3)*2){
+				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
+				levelLabel->setText("Level 3");
+				spawnCounter = betweenLevels * 1;
 			}
-			if (currentEnemy == (amountOfEnemies/3)*2){
-				howOftenSpawn = (howOftenSpawn/3)*2;
-			}
-			
+
 			if (amountOfEnemies == currentEnemy)
 			{
 				//currentEnemy = 0; win state?

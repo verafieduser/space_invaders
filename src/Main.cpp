@@ -29,6 +29,11 @@ int debrisTypes = 2;
 
 int main(int argc, char **argv)
 {
+	ses.setInitialWait(200);
+	ses.setLevelDifficultyIncrease(1.8);
+	ses.setSpawnFrequency(50);
+	ses.setWaitBetweenLevels(300);
+	ses.addGameOverComps(Label::getInstance(650, 200, 400, 70, "Game Over"));
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
 
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
@@ -36,7 +41,7 @@ int main(int argc, char **argv)
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	Healthbar *healthbar = Healthbar::getInstance(20, 20, 200, 80, "full_health.png", "half_health.png", "low_health.png");
-
+	
 	protagonist->setHealthbar(healthbar);
 
 	ses.add(protagonist);

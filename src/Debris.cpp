@@ -12,6 +12,12 @@ namespace cwing
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
+        srand(SPEED+x+y+w+h);
+        spinDir = rand() % 2-1;
+        if (spinDir == 0){
+            spinDir = spinDir+1;
+        }
+
         health = 5;
         name = "Debris";
     }
@@ -34,12 +40,11 @@ namespace cwing
 
     void Debris::spinDebris(const int &speed)
     {
-        //TODO: randomize spin direction!
         if (angle > 360 || angle < -360)
         {
             angle = 0;
         }
-        setAngle(angle + speed);
+        setAngle(angle + (speed * spinDir));
     }
 
     void Debris::setAngle(const int &newAngle)

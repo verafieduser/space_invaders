@@ -42,8 +42,11 @@ namespace cwing
 
     Component *Enemy::perform(SDL_Event event)
     {
-        if (isOutOfBoundsLeft() || health <= 0)
+        if (health <= 0)
         {
+            name = "Defeated enemy";
+            kill();
+        } else if (isOutOfBoundsLeft()){
             kill();
         }
 

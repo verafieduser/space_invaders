@@ -31,6 +31,7 @@ namespace cwing
 			std::cout << SDL_GetError();
 		}
 
+
 		int success = TTF_Init() +1;
 		if(!success){
 			std::cout << SDL_GetError() << " TTF_INIT Error\n";

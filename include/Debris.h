@@ -28,6 +28,7 @@ namespace cwing
 
     private:
         float angle = 0;
+        int spinDir;
         SDL_Texture *sprite;
     };
 }

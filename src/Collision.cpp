@@ -44,7 +44,6 @@ namespace cwing
             Bullet *b = dynamic_cast<Bullet *>(c);
             if (b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
             {
-                
                 return true;
             }
         }
