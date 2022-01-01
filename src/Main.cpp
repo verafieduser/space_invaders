@@ -11,6 +11,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Healthbar.h"
+#include "System.h"
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -52,9 +53,10 @@ private:
 
 int main(int argc, char **argv)
 {
+	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");	
+
 	Background *bg = Background::getInstance(1600, 720);
 	ses.add(bg);
-
 	// Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", 30);
 	// ses.add(bullet);
 

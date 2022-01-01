@@ -4,6 +4,7 @@
 #include <iostream>
 #include "Session.h"
 
+
 std::string IMAGES_PATH = "./images/";
 std::string SOUNDS_PATH = "./sounds/";
 std::string FONTS_PATH = "./fonts/";
@@ -46,6 +47,13 @@ namespace cwing
 		SDL_DestroyRenderer(ren);
 		SDL_Quit();
 	}
+	
+	void System::addBackgroundMusic(std::string music_path)
+	{
+		Mix_OpenAudio(20050, AUDIO_S16SYS, 2, 4096);
+		music_player = Mix_LoadWAV(music_path.c_str());
+		Mix_PlayChannel(-1, music_player, -1);
+	}
 
 	SDL_Renderer *System::get_ren() const
 	{
@@ -57,4 +65,5 @@ namespace cwing
 		return font;
 	}
 	System sys;
+
 }
