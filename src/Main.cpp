@@ -55,7 +55,7 @@ int main(int argc, char **argv)
 {
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");	
 
-	Background *bg = Background::getInstance(1600, 720);
+	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
 	// Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", 30);
 	// ses.add(bullet);

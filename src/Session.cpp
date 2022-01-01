@@ -28,7 +28,6 @@ namespace cwing
 		toBeRemoved.push_back(c);
 	}
 
-
 	void Session::run()
 	{
 		bool quit = false;
@@ -46,53 +45,33 @@ namespace cwing
 					break;
 				}
 			}
+			gameActions(event);
+			// for (Component *c : comps)
+			// {
+			// 	Component *newC = c->perform(event);
+			// 	if (newC != NULL)
+			// 	{
+			// 		add(newC);
+			// 	}
 
-			for (Component *c : comps)
-			{
-				Component *newC = c->perform(event);
-				if (newC != NULL)
-				{
-					add(newC);
-				}
-				
-				for (Component *c2 : comps)
-				{
-					if (c != c2 && Collision::canCollide(c, c2))
-					{
-						c->takeDamage();
-						c2->takeDamage();
-					}
-				}
+			// 	for (Component *c2 : comps)
+			// 	{
+			// 		if (c != c2 && Collision::canCollide(c, c2))
+			// 		{
+			// 			c->takeDamage();
+			// 			c2->takeDamage();
+			// 		}
+			// 	}
 
-				if (c->isKilled())
-				{
-					remove(c);
-				}
-			}
+			// 	if (c->isKilled())
+			// 	{
+			// 		remove(c);
+			// 	}
+			// }
 
-			for (Component *c : toBeAdded)
-			{
-				comps.push_back(c);
-			}
-			toBeAdded.clear();
+			loadPendingComponents();
+			removeComponent();
 
-			for (Component *c : toBeRemoved)
-			{
-				for (std::vector<Component *>::iterator i = comps.begin(); i != comps.end();)
-				{
-					if (*i == c)
-					{
-						delete c;
-						i = comps.erase(i);
-					}
-					else
-					{
-						i++;
-					}
-				}
-			}
-			toBeRemoved.clear();
-			
 			spawnCounter++;
 			if (spawnCounter > 100)
 			{
@@ -138,5 +117,71 @@ namespace cwing
 
 	Session::~Session()
 	{
+	}
+
+	void Session::removeComponent()
+	{
+		for (Component *c : toBeRemoved)
+		{
+			for (std::vector<Component *>::iterator i = comps.begin(); i != comps.end();)
+			{
+				if (*i == c)
+				{
+					delete c;
+					i = comps.erase(i);
+				}
+				else
+				{
+					i++;
+				}
+			}
+		}
+		toBeRemoved.clear();
+	}
+
+	void Session::gameOver()
+	{
+		loadPendingComponents();
+		for (Component * c : comps) {
+			c.remove();
+		}
+		removeComponent();
+		Background *bg = Background::getInstance(1600, 720, );
+		ses.add(bg);
+	}
+
+	void Session::loadPendingComponents()
+	{
+		for (Component *c : toBeAdded)
+		{
+			comps.push_back(c);
+		}
+		toBeAdded.clear();
+	}
+
+	void Session::gameActions(SDL_Event &event)
+	{
+		for (Component *c : comps)
+		{
+			Component *newC = c->perform(event);
+			if (newC != NULL)
+			{
+				add(newC);
+			}
+
+			for (Component *c2 : comps)
+			{
+				if (c != c2 && Collision::canCollide(c, c2))
+				{
+					c->takeDamage();
+					c2->takeDamage();
+				}
+			}
+
+			if (c->isKilled())
+			{
+				remove(c);
+			}
+		}
 	}
 }
