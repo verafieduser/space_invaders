@@ -31,7 +31,7 @@ namespace cwing
 
     Component *Enemy::shoot()
     {
-        return Bullet::getInstance((getX() - getW() - SPEED - 1), (getY() + 40), 100, 20, "laser2.png", 20, false);
+        return Bullet::getInstance((getX() - getW() - SPEED - 1), (getY() + 40), 100, 20, "laser2.png", 13, false);
     }
 
     void Enemy::moveLeft()

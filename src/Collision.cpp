@@ -79,6 +79,16 @@ namespace cwing
             }
         }
 
+        if (name1 == "Bullet" && name2 == "Bullet")
+        { 
+            // std::cout << "Bullet collides with Enemy!" << std::endl;
+            if (Collision::AABB(c->getRect(), c2->getRect()))
+            {
+               
+                return true;
+            }
+        }
+
         return false;
     }
 
