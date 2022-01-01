@@ -42,16 +42,6 @@ int main(int argc, char **argv)
 	ses.add(protagonist);
 	ses.add(healthbar);
 
-	enemyLoader();
-	debrisLoader();
-
-	ses.run();
-
-	return 0;
-}
-
-void enemyLoader()
-{
 	int enemyType = 1;
 	for (int i = 1; i <= amountOfEnemiesToSpawn; i++)
 	{
@@ -66,10 +56,7 @@ void enemyLoader()
 			enemyType = 1;
 		}
 	}
-}
 
-void debrisLoader()
-{
 	int debrisType = 1;
 	for (int i = 1; i <= amountOfDebrisToSpawn; i++)
 	{
@@ -83,7 +70,13 @@ void debrisLoader()
 			debrisType = 1;
 		}
 	}
+
+	ses.run();
+
+	return 0;
 }
+
+
 
 // #include <iostream>
 // #include <string>
