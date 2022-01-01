@@ -1,15 +1,12 @@
-#include "Session.h"
 #include <SDL2/SDL.h>
-#include "System.h"
+#include <sstream>
 #include <iostream>
 #include <vector>
+#include "Background.h"
 #include "Collision.h"
 #include "Enemy.h"
-#include "Bullet.h"
-#include "Debris.h"
-#include "Protagonist.h"
-#include <sstream>
-#include "Background.h"
+#include "Session.h"
+#include "System.h"
 
 int spawnCounter = 100;
 int enemyType = 1;
