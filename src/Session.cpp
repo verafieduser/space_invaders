@@ -9,6 +9,7 @@
 #include "Debris.h"
 #include "Protagonist.h"
 #include <sstream>
+#include "Background.h"
 
 int spawnCounter = 100;
 int enemyType = 1;
@@ -70,7 +71,7 @@ namespace cwing
 			// }
 
 			loadPendingComponents();
-			removeComponent();
+			removeComponents();
 
 			spawnCounter++;
 			if (spawnCounter > 100)
@@ -119,7 +120,7 @@ namespace cwing
 	{
 	}
 
-	void Session::removeComponent()
+	void Session::removeComponents()
 	{
 		for (Component *c : toBeRemoved)
 		{
@@ -142,12 +143,12 @@ namespace cwing
 	void Session::gameOver()
 	{
 		loadPendingComponents();
-		for (Component * c : comps) {
-			c.remove();
+		for (Component *c : comps) {
+			remove(c);
 		}
-		removeComponent();
-		Background *bg = Background::getInstance(1600, 720, );
-		ses.add(bg);
+		removeComponents();
+		Background *bg = Background::getInstance(1600, 720, "game_over.jpg");
+		add(bg);
 	}
 
 	void Session::loadPendingComponents()
@@ -181,6 +182,10 @@ namespace cwing
 			if (c->isKilled())
 			{
 				remove(c);
+				if(c->getName() == "Protagonist"){
+					gameOver();
+					break;
+				}
 			}
 		}
 	}
