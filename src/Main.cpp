@@ -29,12 +29,10 @@ int debrisTypes = 2;
 
 int main(int argc, char **argv)
 {
-	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");	
+	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
 
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
-	// Bullet *bullet = Bullet::getInstance(200, 200, 60, 20, "laser.png", 30);
-	// ses.add(bullet);
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	Healthbar *healthbar = Healthbar::getInstance(20, 20, 200, 80, "full_health.png", "half_health.png", "low_health.png");
@@ -44,43 +42,47 @@ int main(int argc, char **argv)
 	ses.add(protagonist);
 	ses.add(healthbar);
 
+	enemyLoader();
+	debrisLoader();
 
-	//random seed initialization
+	ses.run();
 
+	return 0;
+}
 
-
-
-	//Enemy types:
+void enemyLoader()
+{
 	int enemyType = 1;
-	for(int i = 1; i <= amountOfEnemiesToSpawn; i++){
+	for (int i = 1; i <= amountOfEnemiesToSpawn; i++)
+	{
 		srand(i);
 		std::ostringstream ostr;
 		//convertion of i into string for usage in enemy creation.
 		ostr << enemyType;
 		ses.addEnemyTypes(Enemy::getInstance(1800, rand() % 600 + 100, 100, 100, "enemy" + ostr.str() + ".png", rand()));
 		enemyType++;
-		if(enemyType>enemyTypes){
+		if (enemyType > enemyTypes)
+		{
 			enemyType = 1;
 		}
 	}
+}
 
-
-	//Debris types:
+void debrisLoader()
+{
 	int debrisType = 1;
-	for(int i = 1; i <= amountOfDebrisToSpawn; i++){
+	for (int i = 1; i <= amountOfDebrisToSpawn; i++)
+	{
 		srand(i);
 		std::ostringstream ostr;
 		ostr << debrisType;
-		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 600 + 100, (rand() % 80) +30, (rand() % 80) +30, "asteroid" + ostr.str() + ".png", rand() % 15));
+		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 600 + 100, (rand() % 80) + 30, (rand() % 80) + 30, "asteroid" + ostr.str() + ".png", rand() % 15));
 		debrisType++;
-		if(debrisType>debrisTypes){
+		if (debrisType > debrisTypes)
+		{
 			debrisType = 1;
 		}
 	}
-	
-	ses.run();
-
-	return 0;
 }
 
 // #include <iostream>
