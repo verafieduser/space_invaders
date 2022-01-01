@@ -1,16 +1,15 @@
 #include <SDL2/SDL.h>
-#include <sstream>
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "Background.h"
 #include "Collision.h"
-#include "Enemy.h"
 #include "Session.h"
 #include "System.h"
 
 int spawnCounter = 100;
-int enemyType = 1;
-int typesOfEnemies = 3;
+int howOftenSpawn = 30;
+int currentEnemy = 0;
 
 namespace cwing
 {
@@ -21,6 +20,10 @@ namespace cwing
 		toBeAdded.push_back(c);
 	}
 
+	void Session::addEnemyTypes(Component *c){
+		enemies.push_back(c);
+	}
+
 	void Session::remove(Component *c)
 	{
 		toBeRemoved.push_back(c);
@@ -28,6 +31,7 @@ namespace cwing
 
 	void Session::run()
 	{
+		std::random_shuffle(enemies.begin(), enemies.end());
 		bool quit = false;
 		const int tickInterval = 1000 / FPS;
 		while (!quit)
@@ -175,20 +179,28 @@ namespace cwing
 
 	void Session::enemySpawner()
 	{
+	
 		spawnCounter++;
-		if (spawnCounter > 100)
+		if (spawnCounter > howOftenSpawn)
 		{
 			spawnCounter = 0;
-			std::ostringstream ostr;
-			ostr << enemyType;
-			srand(time(NULL));
-			Enemy *enemy = Enemy::getInstance(1800, rand() % 500 + 100, 100, 100, "enemy" + ostr.str() + ".png");
-			enemyType++;
-			if (enemyType > typesOfEnemies)
-			{
-				enemyType = 1;
+			int amountOfEnemies = enemies.size();
+
+			currentEnemy++;
+
+			if (currentEnemy == amountOfEnemies/3){
+				howOftenSpawn = (howOftenSpawn/3)*2;
 			}
-			add(enemy);
+			if (currentEnemy == (amountOfEnemies/3)*2){
+				howOftenSpawn = (howOftenSpawn/3)*2;
+			}
+			
+			if (amountOfEnemies == currentEnemy)
+			{
+				//currentEnemy = 0; win state?
+			}
+
+			add(enemies.at(currentEnemy));
 		}
 	}	
 }

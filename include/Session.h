@@ -13,6 +13,7 @@ namespace cwing
 	{
 	public:
 		void add(Component *c);
+		void addEnemyTypes(Component *c);
 		void remove(Component *c);
 		void run();
 		void gameOver();
@@ -23,7 +24,7 @@ namespace cwing
 		~Session();
 
 	private:
-		std::vector<Component *> comps, toBeRemoved, toBeAdded;
+		std::vector<Component *> comps, toBeRemoved, toBeAdded, enemies;
 	};
 
 }

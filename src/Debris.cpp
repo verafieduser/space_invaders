@@ -12,7 +12,7 @@ namespace cwing
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
-        health = 3;
+        health = 5;
         name = "Debris";
     }
 

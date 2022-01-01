@@ -52,8 +52,7 @@ namespace cwing
         if (name1 == "Bullet" && name2 == "Debris")
         {
             // std::cout << "Prot-bullet collided with debris" << std::endl;
-            Bullet *b = dynamic_cast<Bullet *>(c);
-            if (b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
+            if (Collision::AABB(c->getRect(), c2->getRect()))
             {
 
                 return true;

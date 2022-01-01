@@ -12,6 +12,8 @@
 #include "Enemy.h"
 #include "Healthbar.h"
 #include "System.h"
+#include <sstream>
+#include <time.h>
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -19,37 +21,11 @@
 using namespace std;
 using namespace cwing;
 
-int value = 0;
 Session ses;
-/*
-class OkaKnapp : public Button
-{
-public:
-	OkaKnapp(Label *lbl) : Button(100, 100, 150, 70, "Oka"), label(lbl) {}
-	void perform(Button *source)
-	{
-		value++;
-		label->setText(to_string(value));
-	}
-
-private:
-	Label *label;
-};
-
-class MinskaKnapp : public Button
-{
-public:
-	MinskaKnapp(Label *lbl) : Button(400, 100, 150, 70, "Minska"), label(lbl) {}
-	void perform(Button *source)
-	{
-		value--;
-		label->setText(to_string(value));
-	}
-
-private:
-	Label *label;
-};
-*/
+int amountOfEnemiesToSpawn = 100;
+int amountOfDebrisToSpawn = 200;
+int enemyTypes = 3;
+int debrisTypes = 2;
 
 int main(int argc, char **argv)
 {
@@ -69,12 +45,39 @@ int main(int argc, char **argv)
 	ses.add(healthbar);
 
 
-	Debris *debris1 = Debris::getInstance(1800, 350, 50, 50, "asteroid1.png", 5);
-	ses.add(debris1);
+	//random seed initialization
 
-	Debris *debris2 = Debris::getInstance(1800, 550, 50, 50, "asteroid2.png", 5);
-	ses.add(debris2);
 
+
+
+	//Enemy types:
+	int enemyType = 1;
+	for(int i = 1; i <= amountOfEnemiesToSpawn; i++){
+		srand(i);
+		std::ostringstream ostr;
+		//convertion of i into string for usage in enemy creation.
+		ostr << enemyType;
+		ses.addEnemyTypes(Enemy::getInstance(1800, rand() % 600 + 100, 100, 100, "enemy" + ostr.str() + ".png", rand()));
+		enemyType++;
+		if(enemyType>enemyTypes){
+			enemyType = 1;
+		}
+	}
+
+
+	//Debris types:
+	int debrisType = 1;
+	for(int i = 1; i <= amountOfDebrisToSpawn; i++){
+		srand(i);
+		std::ostringstream ostr;
+		ostr << debrisType;
+		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 600 + 100, (rand() % 80) +30, (rand() % 80) +30, "asteroid" + ostr.str() + ".png", rand() % 15));
+		debrisType++;
+		if(debrisType>debrisTypes){
+			debrisType = 1;
+		}
+	}
+	
 	ses.run();
 
 	return 0;

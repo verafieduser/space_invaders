@@ -10,7 +10,7 @@ namespace cwing
     class Enemy : public Sprite
     {
     public:
-        static Enemy *getInstance(int x, int y, int w, int h, std::string image_path);
+        static Enemy *getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed);
         Component* shoot();
         Component* perform(SDL_Event event);
         int movementPattern;
@@ -20,7 +20,7 @@ namespace cwing
         ~Enemy();
 
     protected:
-        Enemy(int x, int y, int w, int h, std::string images_path);
+        Enemy(int x, int y, int w, int h, std::string images_path, int randomSeed);
 
     private:
         int shootingCooldown = 0;

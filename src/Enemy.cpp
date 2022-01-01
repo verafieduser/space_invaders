@@ -8,12 +8,12 @@
 namespace cwing
 {
 
-    Enemy::Enemy(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
+    Enemy::Enemy(int x, int y, int w, int h, std::string image_path, int randomSeed) : Sprite(x, y, w, h, image_path)
     {
         name = "Enemy";
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         health = 1;
-        srand(time(NULL));
+        srand(randomSeed);
         movementPattern = rand() % 3;
         SPEED = (rand() % 3) + 2;             //could also be affected by difficulty setting
         shootingSpeed = rand() % 200 + 100; //could be affected in a difficuly setting thing available in system?
@@ -24,9 +24,9 @@ namespace cwing
         SDL_DestroyTexture(sprite);
     }
 
-    Enemy *Enemy::getInstance(int x, int y, int w, int h, std::string image_path)
+    Enemy *Enemy::getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed)
     {
-        return new Enemy(x, y, w, h, image_path);
+        return new Enemy(x, y, w, h, image_path, randomSeed);
     }
 
     Component *Enemy::shoot()
