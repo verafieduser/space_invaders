@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include "Component.h"
+#include <SDL2/SDL.h>
 
 namespace cwing
 {
@@ -14,6 +15,10 @@ namespace cwing
 		void add(Component *c);
 		void remove(Component *c);
 		void run();
+		void gameOver();
+		void gameActions(SDL_Event &event);
+		void loadPendingComponents();
+		void removeComponent();
 		~Session();
 
 	private:

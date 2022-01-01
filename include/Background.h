@@ -10,7 +10,7 @@ namespace cwing
     class Background : public Component
     {
     public:
-        static Background *getInstance(int w, int h);
+        static Background *getInstance(int w, int h, std::string background_image_path);
         virtual ~Background();
         Component *perform(SDL_Event event);
         void removal() { this->~Background(); };
@@ -20,7 +20,7 @@ namespace cwing
         void tick() const;
 
     protected:
-        Background(int w, int h);
+        Background(int w, int h, std::string background_image_path);
 
     private:
         SDL_Texture *bg_tex;
