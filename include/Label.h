@@ -4,6 +4,7 @@
 #include <string>
 #include <SDL2/SDL.h>
 #include "System.h"
+#include "Session.h"
 namespace cwing
 {
 
@@ -18,6 +19,9 @@ namespace cwing
         void takeDamage(){};
         void removal() { this->~Label(); };
         void draw() const {SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect());}
+        void setColor(SDL_Color col) {color = col;}
+        const SDL_Color& getColor() const {return color;};
+        const SDL_Color& getOriginalColor() const {return originalColor;};
         std::string getText() const {return text;};
         ~Label();
 
@@ -27,8 +31,9 @@ namespace cwing
     private:
         std::string text;
         SDL_Texture *texture;
+        SDL_Color color;
+        SDL_Color originalColor;
     };
-
 }
 
 #endif

@@ -11,6 +11,7 @@
 #include "Bullet.h"
 #include "Enemy.h"
 #include "Healthbar.h"
+#include "Score.h"
 #include "System.h"
 #include <sstream>
 #include <time.h>
@@ -23,8 +24,8 @@ using namespace std;
 using namespace cwing;
 
 Session ses;
-int amountOfEnemiesToSpawn = 100;
-int amountOfDebrisToSpawn = 200;
+int amountOfEnemiesToSpawn = 10;
+int amountOfDebrisToSpawn = 20;
 int amountOfDynamicBackgroundsToSpawn = 30;
 int enemyTypes = 5;
 int debrisTypes = 7;
@@ -37,7 +38,10 @@ int main(int argc, char **argv)
 	ses.setLevelDifficultyIncrease(1.8);
 	ses.setSpawnFrequency(50);
 	ses.setWaitBetweenLevels(300);
-	ses.addGameOverComps(Label::getInstance(650, 200, 400, 70, "Game Over"));
+	ses.setSpawningToContinueAfterDeath(false);
+	ses.addGameOverComps(Label::getInstance(530, 200, 500, 70, "Game Over"));
+	ses.addGameOverComps(Score::getInstance(620, 500, 300, 35, "FINAL SCORE", ses));
+	ses.addGameOverComps(Score::getInstance(530, 600, 500, 30, "INNOCENT DEBRIS DESTROYED", ses));
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
 
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
@@ -76,7 +80,8 @@ int main(int argc, char **argv)
 		std::ostringstream ostr;
 		//convertion of i into string for usage in enemy creation.
 		ostr << enemyType;
-		ses.addEnemyTypes(Enemy::getInstance(1800, rand() % 600 + 100, 100, 100, "enemy" + ostr.str() + ".png", rand()));
+		int size = 100;
+		ses.addEnemyTypes(Enemy::getInstance(1800, rand() % 620, size, size, "enemy" + ostr.str() + ".png", rand()));
 		enemyType++;
 		if (enemyType > enemyTypes)
 		{
@@ -92,13 +97,21 @@ int main(int argc, char **argv)
 		int size = (rand() % 200) + 30;
 		std::ostringstream ostr;
 		ostr << debrisType;
-		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 600 + 100, size, size, "asteroid" + ostr.str() + ".png", rand() % 15));
+		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 690-70, size, size, "asteroid" + ostr.str() + ".png", rand() % 15));
 		debrisType++;
 		if (debrisType > debrisTypes)
 		{
 			debrisType = 1;
 		}
 	}
+
+
+	Score *score = Score::getInstance(250, 20, 200, 30, "SCORE", ses);
+	ses.add(score);
+
+	Score *level = Score::getInstance(500, 20, 200, 30, "LEVEL", ses);
+	ses.add(level);
+
 
 	ses.run();
 

@@ -58,8 +58,12 @@ namespace cwing
         moveLeft();
         spinDebris(SPEED);
 
-        if (isOutOfBoundsLeft() || health <= 0)
+        if (health <= 0)
         {
+            name = "Destroyed debris";
+            kill();
+            
+        } else if(isOutOfBoundsLeft()){
             kill();
         }
 

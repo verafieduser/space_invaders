@@ -37,7 +37,7 @@ namespace cwing
 			std::cout << SDL_GetError() << " TTF_INIT Error\n";
 		}
 		// std::cout << " " << fontsPath << " : font path";
-		font = TTF_OpenFont((FONTS_PATH + "origintech.ttf").c_str(), 36);
+		font = TTF_OpenFont((FONTS_PATH + "origintech.ttf").c_str(), 38);
 	}
 
 	System::~System()

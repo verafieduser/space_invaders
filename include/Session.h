@@ -5,7 +5,6 @@
 #include <vector>
 #include "Component.h"
 #include <SDL2/SDL.h>
-#include "Label.h"
 
 namespace cwing
 {
@@ -21,22 +20,28 @@ namespace cwing
 		void gameOver();
 		void gameActions(SDL_Event &event);
 		void loadPendingComponents();
-		void removeComponents();
+		void removeComponents(std::vector<Component *>& components);
+		void removeComponents(std::vector<Component *>& components, int offset);
 		void enemySpawner();
-		void setInitialWait(int initialWait) {spawnCounter = initialWait;};
-		void setWaitBetweenLevels(int waitBetweenLevels) {betweenLevels = waitBetweenLevels;};
+		void setInitialWait(int initialWait) {spawnCounter = initialWait *-1;};
+		void setWaitBetweenLevels(int waitBetweenLevels) {betweenLevels = waitBetweenLevels *-1;};
 		void setSpawnFrequency(int spawnFreq) {spawnFrequency = spawnFreq;};
 		void setLevelDifficultyIncrease(float levelDifficultyInc) {levelDifficultyIncrease = levelDifficultyInc;};
 		void setSpawningToContinueAfterDeath(bool toContinue) {spawningToContinueAfterDeath = toContinue;};
+		const int getEnemiesDefeated() const{return enemiesDefeated;};
+		const int getDebrisDestroyed() const{return debrisDestroyed;};
+		const int getLevel() const{return level;};
 		~Session();
 
 	private:
 		std::vector<Component *> comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
-		Label *scoreLabel = Label::getInstance(250, 20, 200, 30, "SCORE: 0");
-		Label *levelLabel = Label::getInstance(500, 20, 200, 30, "Level 1");
 		int betweenLevels = 100;
 		int spawnCounter = -100;
 		int spawnFrequency = 60;
+		int currentEnemy = 0;
+		int enemiesDefeated = 0;
+		int debrisDestroyed = 0;
+		int level = 1;
 		float levelDifficultyIncrease = 1.5;
 		bool spawningToContinueAfterDeath = true;
 

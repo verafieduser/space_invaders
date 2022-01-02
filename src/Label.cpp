@@ -18,12 +18,15 @@ namespace cwing
 	Label::Label(int x, int y, int w, int h,
 				 std::string txt) : Component(x, y, w, h), text(txt)
 	{
+		color = {200, 0, 255};
+		originalColor = {200, 0, 255};
         name = "Label";
         collidable = false;
-		SDL_Surface *surf = TTF_RenderText_Solid(sys.get_font(), text.c_str(), {200, 0, 255});
+		SDL_Surface *surf = TTF_RenderText_Solid(sys.get_font(), text.c_str(), color);
 
 		texture = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
 		SDL_FreeSurface(surf);
+
 	}
 
 
@@ -37,7 +40,7 @@ namespace cwing
 		text = newText;
 		SDL_DestroyTexture(texture);
 		SDL_Surface *surf = TTF_RenderText_Solid(sys.get_font(),
-												 text.c_str(), {200, 0, 255});
+												 text.c_str(), color);
 		texture = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
 		SDL_FreeSurface(surf);
 	}

@@ -7,11 +7,6 @@
 #include "Collision.h"
 #include "Session.h"
 #include "System.h"
-#include "Label.h"
-
-int spawnFrequency = 60;
-int currentEnemy = 0;
-int enemiesDefeated = 0;
 
 namespace cwing
 {
@@ -41,9 +36,6 @@ namespace cwing
 	{
 		std::random_shuffle(enemies.begin(), enemies.end());
 
-		add(scoreLabel);
-		add(levelLabel);
-
 		bool quit = false;
 		const int tickInterval = 1000 / FPS;
 		while (!quit)
@@ -62,7 +54,7 @@ namespace cwing
 
 			gameActions(event);
 			loadPendingComponents();
-			removeComponents();
+			removeComponents(comps);
 			enemySpawner();
 
 			int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
@@ -96,16 +88,26 @@ namespace cwing
 	{
 	}
 
-	void Session::removeComponents()
+	void Session::removeComponents(std::vector<Component *> &components){
+		removeComponents(components, 0);
+	}
+
+	void Session::removeComponents(std::vector<Component *> &components, int offset)
 	{
+		int counter = 0;
 		for (Component *c : toBeRemoved)
 		{
-			for (std::vector<Component *>::iterator i = comps.begin(); i != comps.end();)
+			if(counter < offset){
+				counter ++;
+				continue;
+			}
+			for (std::vector<Component *>::iterator i = components.begin(); i != components.end();)
 			{
+
 				if (*i == c)
 				{
+					i = components.erase(i);
 					delete c;
-					i = comps.erase(i);
 				}
 				else
 				{
@@ -122,32 +124,28 @@ namespace cwing
 		for (Component *c : comps)
 		{
 			std::string name = c->getName();
-			if(name != "Label"){
+			if (name != "DynamicBackground" && name != "Background" && name != "Label")
+			{
 				remove(c);
 			}
 		}
-		std::cout << "1";
-		//sometimes crashes inside this next method:
-		removeComponents();
+
+		removeComponents(comps);
+
+		// if (!spawningToContinueAfterDeath)
+		// {
+		// 	for (Component *c : enemies)
+		// 	{
+		// 		remove(c);
+		// 	}
+		// 	std::cout << "1";
+		// 	removeComponents(enemies, currentEnemy+1);
+		// 	std::cout << "2";
+		// }
 
 		for (Component *c : gameOverComps)
 		{
 			add(c);
-		}
-
-
-		//TODO: see if possible to move score into a component / into main, e.t.c.
-		std::ostringstream ostr;
-		ostr << enemiesDefeated;
-		scoreLabel->setText("FINAL SCORE: " + ostr.str());
-		int middleX = (SCREEN_WIDTH - scoreLabel->getW()) / 2;
-		int middleY = SCREEN_HEIGHT / 2;
-		scoreLabel->setX(middleX);
-		scoreLabel->setY(middleY);
-
-		if (!spawningToContinueAfterDeath)
-		{
-			enemies.clear();
 		}
 	}
 
@@ -182,14 +180,16 @@ namespace cwing
 			if (c->isKilled())
 			{
 				remove(c);
-				if (c->getName() == "Defeated enemy")
+				std::string name = c->getName();
+				if (name == "Defeated enemy")
 				{
-					std::ostringstream ostr;
 					enemiesDefeated++;
-					ostr << enemiesDefeated;
-					scoreLabel->setText("SCORE: " + ostr.str());
 				}
-				else if (c->getName() == "Protagonist")
+				else if (name == "Destroyed debris")
+				{
+					debrisDestroyed++;
+				}
+				else if (name == "Protagonist")
 				{
 					gameOver();
 					break;
@@ -200,27 +200,33 @@ namespace cwing
 
 	void Session::enemySpawner()
 	{
-
+		int amountOfEnemies = enemies.size();
 		spawnCounter++;
-		if (spawnCounter > spawnFrequency)
+
+		if (spawnCounter > spawnFrequency && amountOfEnemies > 0 && currentEnemy+1 < amountOfEnemies)
 		{
 			spawnCounter = 0;
-			int amountOfEnemies = enemies.size();
 
 			currentEnemy++;
+
+			//TODO: make level based on modulo or something so it can be dynamically changed
+			//i.e., u can decide in main how many enemies will have to be killed for 
+			//it to advance to the next level.
 
 			//level2 when a third of enemies are defeated
 			if (currentEnemy == amountOfEnemies / 3)
 			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
-				levelLabel->setText("Level 2");
+				level++;
+
 				spawnCounter = betweenLevels * 1;
 			}
 			// level3 when two thirds of enemies are defeated
 			else if (currentEnemy == (amountOfEnemies / 3) * 2)
 			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
-				levelLabel->setText("Level 3");
+				level++;
+
 				spawnCounter = betweenLevels * 1;
 			}
 
@@ -228,7 +234,7 @@ namespace cwing
 			{
 				//currentEnemy = 0; win state?
 			}
-
+			
 			add(enemies.at(currentEnemy));
 		}
 	}

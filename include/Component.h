@@ -22,6 +22,8 @@ namespace cwing
 		const SDL_Rect &getRect() const { return rect; }
 		void setY(int &value) { rect.y += value; };
 		void setX(int &value) { rect.x += value; };
+		void setW(int &value) { rect.w += value; };
+		void setH(int &value) { rect.h += value; };
 		const int getY() { return rect.y; };
 		const int getX() { return rect.x; };
 		const int getW() { return rect.w; };

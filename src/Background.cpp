@@ -11,6 +11,7 @@ namespace cwing
         //SDL_Surface *bg_sur = IMG_Load((imagesPath + "bg.png").c_str());
         bg_tex = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + background_image_path).c_str());
         collidable = false;
+        name = "Background";
         //bg_tex = IMG_LoadTexture(sys.get_ren(), (imagesPath + "bg.png").c_str());
     }
 
