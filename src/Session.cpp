@@ -133,16 +133,15 @@ namespace cwing
 
 		removeComponents(comps);
 
-		// if (!spawningToContinueAfterDeath)
-		// {
-		// 	for (Component *c : enemies)
-		// 	{
-		// 		remove(c);
-		// 	}
-		// 	std::cout << "1";
-		// 	removeComponents(enemies, currentEnemy+1);
-		// 	std::cout << "2";
-		// }
+		//Makes sure spawning stops if you lose, if that setting is added.
+		if (!spawningToContinueAfterDeath)
+		{
+			for (Component *c : enemies)
+			{
+				remove(c);
+			}
+			removeComponents(enemies, currentEnemy+1);
+		}
 
 		for (Component *c : gameOverComps)
 		{
@@ -175,13 +174,14 @@ namespace cwing
 				{
 					c->takeDamage();
 					c2->takeDamage();
-					//TODO: create damage sprite?
+					//TODO: create damage sprite? takeDamage maybe should return a component?
 				}
 			}
 
 			if (c->isKilled())
 			{
 				remove(c);
+				//TODO: consider ways to make which names lead to what behaviour added from main instead of
 				std::string name = c->getName();
 				if (name == "Defeated enemy")
 				{
@@ -211,11 +211,7 @@ namespace cwing
 
 			currentEnemy++;
 
-			//TODO: make level based on modulo or something so it can be dynamically changed
-			//i.e., u can decide in main how many enemies will have to be killed for 
-			//it to advance to the next level.
-
-			//level2 when a third of enemies are defeated
+			//LEVEL ADVANCEMENT:
 			if (currentEnemy % newLevelEveryXSpawn == 0)
 			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
@@ -223,18 +219,11 @@ namespace cwing
 
 				spawnCounter = betweenLevels * 1;
 			}
-			// level3 when two thirds of enemies are defeated
-			else if (currentEnemy == newLevelEveryXSpawn)
-			{
-				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
-				level++;
 
-				spawnCounter = betweenLevels * 1;
-			}
-
+			//WIN STATE:
 			if (amountOfEnemies == currentEnemy)
 			{
-				//currentEnemy = 0; win state?
+
 			}
 			
 			add(enemies.at(currentEnemy));
