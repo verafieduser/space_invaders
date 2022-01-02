@@ -13,7 +13,7 @@ namespace cwing
         static DynamicBackground *getInstance(int x, int y, int w, int h, std::string image_path);
         Component* perform(SDL_Event event);
         void moveLeft();
-        void draw() const;
+        // void draw() const;
         void setAngle(const int &angle);
         void spinImage(int SPEED);
         ~DynamicBackground();

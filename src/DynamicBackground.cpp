@@ -1,5 +1,7 @@
 #include "DynamicBackground.h"
 #include <iostream>
+#include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 namespace cwing
 {
@@ -14,32 +16,31 @@ namespace cwing
         if (speedCounter == moveEveryXFrame)
         {
             moveLeft();
-            spinImage(SPEED);
+            // spinImage(SPEED);
             speedCounter = -1;
         }
 
         speedCounter++;
         if (isOutOfBoundsLeft())
         {
-            int newLocation = SCREEN_WIDTH + 5000;
-            setX(newLocation);
+            kill();
         }
         return NULL;
     }
 
-    void DynamicBackground::spinImage(int speed)
-    {
-        if (angle > 360 || angle < -360)
-        {
-            angle = 0;
-        }
-        setAngle(angle + (speed * spinDir));
-    }
+    // void DynamicBackground::spinImage(int speed)
+    // {
+    //     if (angle > 360 || angle < -360)
+    //     {
+    //         angle = 0;
+    //     }
+    //     setAngle(angle + (speed * spinDir));
+    // }
 
-    void DynamicBackground::setAngle(const int &newAngle)
-    {
-        angle = newAngle;
-    }
+    // void DynamicBackground::setAngle(const int &newAngle)
+    // {
+    //     angle = newAngle;
+    // }
 
     void DynamicBackground::moveLeft()
     {
@@ -58,16 +59,22 @@ namespace cwing
         collidable = false;
         SPEED = 1;
         moveEveryXFrame = 2;
+        // angle=0;
+        // srand(SPEED+x+y+w+h);
+        // spinDir = rand() % 2-1;
+        // if (spinDir == 0){
+        //     spinDir = spinDir+1;
+        // }
     }
 
-    void DynamicBackground::draw() const
-    {
-        SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
+    // void DynamicBackground::draw() const
+    // {
+    //     SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 
-        int success = SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip) + 1;
-        if (!success)
-        {
-            std::cout << SDL_GetError() << " in RenderCopyEx sprite in dynamicBackground \n";
-        }
-    }
+    //     int success = SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip) + 1;
+    //     if (!success)
+    //     {
+    //         std::cout << SDL_GetError() << " in RenderCopyEx sprite in dynamicBackground \n";
+    //     }
+    // }
 }

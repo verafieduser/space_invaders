@@ -22,6 +22,8 @@ namespace cwing
             {
                 healthbar->updateHealth(-1); 
                 health--;
+                //shootingCooldown = 10;
+                //TODO: some other result from being shot ? also - currently the keyframe refreshes when it shouldnt
             } 
             damageCooldown = 60;};
         ~Protagonist();

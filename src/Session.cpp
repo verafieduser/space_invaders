@@ -126,11 +126,15 @@ namespace cwing
 				remove(c);
 			}
 		}
+		std::cout << "1";
+		//sometimes crashes inside this next method:
 		removeComponents();
+
 		for (Component *c : gameOverComps)
 		{
 			add(c);
 		}
+
 
 		//TODO: see if possible to move score into a component / into main, e.t.c.
 		std::ostringstream ostr;

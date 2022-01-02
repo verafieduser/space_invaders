@@ -66,6 +66,8 @@ int main(int argc, char **argv)
 
 	ses.add(protagonist);
 	ses.add(healthbar);
+ 
+ //TODO: better spawn location randomizing in enemies, debris, and dynamic backgrounds!
 
 	int enemyType = 1;
 	for (int i = 1; i <= amountOfEnemiesToSpawn; i++)
