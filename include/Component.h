@@ -24,10 +24,10 @@ namespace cwing
 		void setX(int &value) { rect.x += value; };
 		void setW(int &value) { rect.w += value; };
 		void setH(int &value) { rect.h += value; };
-		const int getY() { return rect.y; };
-		const int getX() { return rect.x; };
-		const int getW() { return rect.w; };
-		const int getH() { return rect.h; };
+		const int getY() const { return rect.y; };
+		const int getX() const { return rect.x; };
+		const int getW() const { return rect.w; };
+		const int getH() const { return rect.h; };
 		const std::string getName() const {return name;};		// const int getY() const {return rect.y;};
 		// const int getX() const {return rect.x;};
 

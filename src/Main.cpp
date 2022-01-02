@@ -24,9 +24,10 @@ using namespace std;
 using namespace cwing;
 
 Session ses;
-int amountOfEnemiesToSpawn = 10;
-int amountOfDebrisToSpawn = 20;
+int amountOfEnemiesToSpawn = 30;
+int amountOfDebrisToSpawn = 70;
 int amountOfDynamicBackgroundsToSpawn = 30;
+int amountOfLevels = 3;
 int enemyTypes = 5;
 int debrisTypes = 7;
 int dynamicBackgroundTypes = 8;
@@ -36,6 +37,7 @@ int main(int argc, char **argv)
 {
 	ses.setInitialWait(200);
 	ses.setLevelDifficultyIncrease(1.8);
+	ses.setNewLevelEveryXSpawn((amountOfEnemiesToSpawn+amountOfDebrisToSpawn)/amountOfLevels+1);
 	ses.setSpawnFrequency(50);
 	ses.setWaitBetweenLevels(300);
 	ses.setSpawningToContinueAfterDeath(false);
@@ -55,7 +57,7 @@ int main(int argc, char **argv)
 		std::ostringstream ostr; 
 
 		ostr << backgroundType;
-		ses.add(DynamicBackground::getInstance(distance, 0, size, size, "db" + ostr.str() + ".png"));
+		ses.add(DynamicBackground::getInstance(distance, rand() % 300, size, size, "db" + ostr.str() + ".png"));
 		backgroundType++;
 		if(backgroundType > dynamicBackgroundTypes){
 			backgroundType = 1;
@@ -89,15 +91,31 @@ int main(int argc, char **argv)
 		}
 	}
 
-//TODO: make bigger debris stronger and more hp, smaller faster and less hp
 	int debrisType = 1;
 	for (int i = 1; i <= amountOfDebrisToSpawn; i++)
 	{
 		srand(i);
 		int size = (rand() % 200) + 30;
+		int speed;
+		if(size >= 200){
+			speed = 1;
+		} else if (size >= 170){
+			speed = 3;
+		} else if(size >= 150){
+			speed = 4;
+		} else if(size >= 100){
+			speed = 5;
+		} else if(size >= 80){
+			speed = 9;
+		} else if (size >= 50){ 
+			speed = 12;
+		}else if(size >= 30){
+			speed = 15;
+		}
+
 		std::ostringstream ostr;
 		ostr << debrisType;
-		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 690-70, size, size, "asteroid" + ostr.str() + ".png", rand() % 15));
+		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 650-30, size, size, "asteroid" + ostr.str() + ".png", speed));
 		debrisType++;
 		if (debrisType > debrisTypes)
 		{

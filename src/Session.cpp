@@ -124,6 +124,7 @@ namespace cwing
 		for (Component *c : comps)
 		{
 			std::string name = c->getName();
+			//TODO: could be a vector of names added from main, for objects that should be exempt?
 			if (name != "DynamicBackground" && name != "Background" && name != "Label")
 			{
 				remove(c);
@@ -174,6 +175,7 @@ namespace cwing
 				{
 					c->takeDamage();
 					c2->takeDamage();
+					//TODO: create damage sprite?
 				}
 			}
 
@@ -214,7 +216,7 @@ namespace cwing
 			//it to advance to the next level.
 
 			//level2 when a third of enemies are defeated
-			if (currentEnemy == amountOfEnemies / 3)
+			if (currentEnemy % newLevelEveryXSpawn == 0)
 			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
 				level++;
@@ -222,7 +224,7 @@ namespace cwing
 				spawnCounter = betweenLevels * 1;
 			}
 			// level3 when two thirds of enemies are defeated
-			else if (currentEnemy == (amountOfEnemies / 3) * 2)
+			else if (currentEnemy == newLevelEveryXSpawn)
 			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
 				level++;

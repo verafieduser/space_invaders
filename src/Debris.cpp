@@ -13,6 +13,7 @@ namespace cwing
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
         srand(SPEED+x+y+w+h);
+        spinEveryXFrame = rand() % 3 + 3;
         spinDir = rand() % 2-1;
         if (spinDir == 0){
             spinDir = spinDir+1;
@@ -56,7 +57,12 @@ namespace cwing
     {
 
         moveLeft();
-        spinDebris(SPEED);
+        spinCounter++;
+        if(spinCounter == spinEveryXFrame){
+            spinDebris(SPEED);    
+            spinCounter = 0;        
+        }
+
 
         if (health <= 0)
         {

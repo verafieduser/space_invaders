@@ -38,6 +38,7 @@ namespace cwing
             }
         }
 
+
         if (name1 == "Bullet" && name2 == "Enemy")
         {
             // std::cout << "Prot-bullet collided with enemy!" << std::endl;

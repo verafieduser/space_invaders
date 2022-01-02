@@ -28,6 +28,7 @@ namespace cwing
 		void setSpawnFrequency(int spawnFreq) {spawnFrequency = spawnFreq;};
 		void setLevelDifficultyIncrease(float levelDifficultyInc) {levelDifficultyIncrease = levelDifficultyInc;};
 		void setSpawningToContinueAfterDeath(bool toContinue) {spawningToContinueAfterDeath = toContinue;};
+		void setNewLevelEveryXSpawn(int x) {newLevelEveryXSpawn = x;};
 		const int getEnemiesDefeated() const{return enemiesDefeated;};
 		const int getDebrisDestroyed() const{return debrisDestroyed;};
 		const int getLevel() const{return level;};
@@ -35,14 +36,15 @@ namespace cwing
 
 	private:
 		std::vector<Component *> comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
-		int betweenLevels = 100;
-		int spawnCounter = -100;
+		int betweenLevels = 0;
+		int spawnCounter = 0;
 		int spawnFrequency = 60;
 		int currentEnemy = 0;
 		int enemiesDefeated = 0;
 		int debrisDestroyed = 0;
 		int level = 1;
-		float levelDifficultyIncrease = 1.5;
+		int newLevelEveryXSpawn = 0;
+		float levelDifficultyIncrease = 1;
 		bool spawningToContinueAfterDeath = true;
 
 	};

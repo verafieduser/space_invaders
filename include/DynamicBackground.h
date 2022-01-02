@@ -13,9 +13,10 @@ namespace cwing
         static DynamicBackground *getInstance(int x, int y, int w, int h, std::string image_path);
         Component* perform(SDL_Event event);
         void moveLeft();
-        // void draw() const;
+        void removal() {this->~DynamicBackground();};
+        void draw() const;
         void setAngle(const int &angle);
-        void spinImage(int SPEED);
+        void spinImage(int &SPEED);
         ~DynamicBackground();
 
     protected:
@@ -23,7 +24,10 @@ namespace cwing
 
     private:
         SDL_Texture *sprite;
-        int speedCounter, moveEveryXFrame, spinDir, angle;
+        int speedCounter = 0;
+        int moveEveryXFrame, spinDir;
+        float angle = 0;
+        std::string imagepath;
     };
 }
 

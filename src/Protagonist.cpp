@@ -42,6 +42,7 @@ namespace cwing
         if (health <= 0)
         {
             kill();
+            //TODO: return explosion here?
         }
 
         if(damageCooldown > 0){

@@ -2,7 +2,6 @@
 #define DEBRIS_H
 
 #include "Sprite.h"
-#include "Session.h"
 #include <SDL2/SDL.h>
 
 namespace cwing
@@ -28,7 +27,7 @@ namespace cwing
 
     private:
         float angle = 0;
-        int spinDir;
+        int spinDir, spinEveryXFrame, spinCounter;
         SDL_Texture *sprite;
     };
 }

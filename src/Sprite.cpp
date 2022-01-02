@@ -23,37 +23,34 @@ namespace cwing
 		return new Sprite(x, y, w, h, image_path);
 	}
 
-	const bool Sprite::isOutOfBounds()
+	const bool Sprite::isOutOfBounds() const
 	{
-		bool outOfBounds = false;
 		if (getY() < 0 || getY() > SCREEN_HEIGHT - getH() || getX() < 0 || getX() > SCREEN_WIDTH - getW())
 		{
-			outOfBounds = true;
+			return true;
 		}
-		return outOfBounds;
+		return false;
 	}
 
-	const bool Sprite::isOutOfBoundsLeft()
+	const bool Sprite::isOutOfBoundsLeft() const
 	{
-		bool outOfBounds = false;
 		if (getX()+getW() < 0)
 		{
-			outOfBounds = true;
+			return true;
 		}
-		return outOfBounds;
+		return false;
 	}
 
-	const bool Sprite::isOutOfBoundsRight()
+	const bool Sprite::isOutOfBoundsRight() const
 	{
-		bool outOfBounds = false;
 		if (getX()-getW() > SCREEN_WIDTH - getW())
 		{
-			outOfBounds = true;
+			return true;
 		}
-		return outOfBounds;
+		return false;
 	}
 
-	const bool Sprite::isMovementAllowed(Direction dir)
+	const bool Sprite::isMovementAllowed(Direction dir) const
 	{
 		switch (dir)
 		{
