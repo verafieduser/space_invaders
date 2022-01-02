@@ -14,6 +14,7 @@
 #include "System.h"
 #include <sstream>
 #include <time.h>
+#include "DynamicBackground.h"
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -24,8 +25,11 @@ using namespace cwing;
 Session ses;
 int amountOfEnemiesToSpawn = 100;
 int amountOfDebrisToSpawn = 200;
-int enemyTypes = 3;
-int debrisTypes = 2;
+int amountOfDynamicBackgroundsToSpawn = 30;
+int enemyTypes = 5;
+int debrisTypes = 7;
+int dynamicBackgroundTypes = 8;
+int distanceBetweenDynamicBackgrounds = 1800;
 
 int main(int argc, char **argv)
 {
@@ -38,6 +42,22 @@ int main(int argc, char **argv)
 
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
+
+	int backgroundType = 1;
+	int distance = 800;
+	for(int i = 0; i < amountOfDynamicBackgroundsToSpawn; i++){
+		srand(i);
+		int size = (rand() % 1000) + 400;
+		std::ostringstream ostr; 
+
+		ostr << backgroundType;
+		ses.add(DynamicBackground::getInstance(distance, 0, size, size, "db" + ostr.str() + ".png"));
+		backgroundType++;
+		if(backgroundType > dynamicBackgroundTypes){
+			backgroundType = 1;
+		}
+		distance += distanceBetweenDynamicBackgrounds;
+	}
 
 	Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png");
 	Healthbar *healthbar = Healthbar::getInstance(20, 20, 200, 80, "full_health.png", "half_health.png", "low_health.png");
@@ -62,13 +82,15 @@ int main(int argc, char **argv)
 		}
 	}
 
+//TODO: make bigger debris stronger and more hp, smaller faster and less hp
 	int debrisType = 1;
 	for (int i = 1; i <= amountOfDebrisToSpawn; i++)
 	{
 		srand(i);
+		int size = (rand() % 200) + 30;
 		std::ostringstream ostr;
 		ostr << debrisType;
-		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 600 + 100, (rand() % 80) + 30, (rand() % 80) + 30, "asteroid" + ostr.str() + ".png", rand() % 15));
+		ses.addEnemyTypes(Debris::getInstance(1800, rand() % 600 + 100, size, size, "asteroid" + ostr.str() + ".png", rand() % 15));
 		debrisType++;
 		if (debrisType > debrisTypes)
 		{

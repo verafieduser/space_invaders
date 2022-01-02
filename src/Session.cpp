@@ -22,11 +22,13 @@ namespace cwing
 		toBeAdded.push_back(c);
 	}
 
-	void Session::addEnemyTypes(Component *c){
+	void Session::addEnemyTypes(Component *c)
+	{
 		enemies.push_back(c);
 	}
 
-	void Session::addGameOverComps(Component *c){
+	void Session::addGameOverComps(Component *c)
+	{
 		gameOverComps.push_back(c);
 	}
 
@@ -41,6 +43,7 @@ namespace cwing
 
 		add(scoreLabel);
 		add(levelLabel);
+
 		bool quit = false;
 		const int tickInterval = 1000 / FPS;
 		while (!quit)
@@ -116,21 +119,30 @@ namespace cwing
 	void Session::gameOver()
 	{
 		loadPendingComponents();
-		for (Component *c : comps) {
-			remove(c);
+		for (Component *c : comps)
+		{
+			std::string name = c->getName();
+			if(name != "Label"){
+				remove(c);
+			}
 		}
 		removeComponents();
-		for (Component *c : gameOverComps){
+		for (Component *c : gameOverComps)
+		{
 			add(c);
 		}
+
+		//TODO: see if possible to move score into a component / into main, e.t.c.
 		std::ostringstream ostr;
 		ostr << enemiesDefeated;
 		scoreLabel->setText("FINAL SCORE: " + ostr.str());
-		int middleX = (SCREEN_WIDTH-scoreLabel->getW())/2+150;
-		int middleY = SCREEN_HEIGHT/2;
+		int middleX = (SCREEN_WIDTH - scoreLabel->getW()) / 2;
+		int middleY = SCREEN_HEIGHT / 2;
 		scoreLabel->setX(middleX);
 		scoreLabel->setY(middleY);
-		if(!spawningToContinueAfterDeath){
+
+		if (!spawningToContinueAfterDeath)
+		{
 			enemies.clear();
 		}
 	}
@@ -166,12 +178,15 @@ namespace cwing
 			if (c->isKilled())
 			{
 				remove(c);
-				if(c->getName() == "Defeated enemy"){
+				if (c->getName() == "Defeated enemy")
+				{
 					std::ostringstream ostr;
 					enemiesDefeated++;
 					ostr << enemiesDefeated;
 					scoreLabel->setText("SCORE: " + ostr.str());
-				} else if(c->getName() == "Protagonist"){
+				}
+				else if (c->getName() == "Protagonist")
+				{
 					gameOver();
 					break;
 				}
@@ -181,7 +196,7 @@ namespace cwing
 
 	void Session::enemySpawner()
 	{
-	
+
 		spawnCounter++;
 		if (spawnCounter > spawnFrequency)
 		{
@@ -191,13 +206,15 @@ namespace cwing
 			currentEnemy++;
 
 			//level2 when a third of enemies are defeated
-			if (currentEnemy == amountOfEnemies/3){
+			if (currentEnemy == amountOfEnemies / 3)
+			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
 				levelLabel->setText("Level 2");
 				spawnCounter = betweenLevels * 1;
-			} 
+			}
 			// level3 when two thirds of enemies are defeated
-			else if (currentEnemy == (amountOfEnemies/3)*2){
+			else if (currentEnemy == (amountOfEnemies / 3) * 2)
+			{
 				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
 				levelLabel->setText("Level 3");
 				spawnCounter = betweenLevels * 1;
@@ -210,5 +227,5 @@ namespace cwing
 
 			add(enemies.at(currentEnemy));
 		}
-	}	
+	}
 }
