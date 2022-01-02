@@ -24,10 +24,10 @@ using namespace std;
 using namespace cwing;
 
 Session ses;
-int amountOfEnemiesToSpawn = 30;
-int amountOfDebrisToSpawn = 70;
+int amountOfEnemiesToSpawn = 300;
+int amountOfDebrisToSpawn = 600;
 int amountOfDynamicBackgroundsToSpawn = 30;
-int amountOfLevels = 3;
+int amountOfLevels = 10;
 int enemyTypes = 5;
 int debrisTypes = 7;
 int dynamicBackgroundTypes = 8;
