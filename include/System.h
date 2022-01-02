@@ -5,6 +5,7 @@
 #include <SDL2/SDL_ttf.h>
 #include <string>
 #include <SDL2/SDL_mixer.h>
+#include "Controller.h"
 
 namespace cwing
 {
@@ -16,6 +17,7 @@ namespace cwing
 		~System();
 		SDL_Renderer *get_ren() const;
 		TTF_Font *get_font() const;
+		Controller *get_controller() const {return controller;};
 		void addBackgroundMusic(std::string music_path);
 
 	private:
@@ -23,6 +25,7 @@ namespace cwing
 		SDL_Renderer *ren;
 		TTF_Font *font;
 		Mix_Chunk *music_player;
+		Controller *controller;
 	};
 
 	extern System sys;

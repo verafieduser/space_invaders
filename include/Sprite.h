@@ -5,6 +5,7 @@
 #include "Session.h"
 #include <SDL2/SDL.h>
 #include <string>
+#include "Controller.h"
 
 namespace cwing
 {

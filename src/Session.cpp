@@ -35,8 +35,10 @@ namespace cwing
 	void Session::run()
 	{
 		std::random_shuffle(enemies.begin(), enemies.end());
+		controller = sys.get_controller();
 
 		bool quit = false;
+		bool pause = false;
 		const int tickInterval = 1000 / FPS;
 		while (!quit)
 		{
@@ -52,34 +54,35 @@ namespace cwing
 				}
 			}
 
+			// // something like this if we want a pause function:
+			// const Uint8* state = controller->getKeyboardState();
+			// if (state[SDL_SCANCODE_ESCAPE]){
+			// 	pause = true;
+			// 	while (pause){
+			
+			// 		loadPendingComponents();
+			// 		removeComponents(comps); // clears current game stuff
+			// 		for(Component *c : pauseComps){
+			// 			add(c);
+			// 		}
+			// 		render(pauseComps);	// only renders what is paused, rest is still. 
+			// 		state = controller->getState();	//not sure which state it should be yet
+			// 		if(state[x]){
+			// 			pause = false;
+			// 			for(Component *c : pauseComps){	
+			// 				remove(c);
+			// 			}	//removes pause comps from the game loop, but makes sure to not delete them.
+			// 			removeComponents(pauseComps, 0, true);
+			// 		}
+			// 	}
+			// }
+
 			gameActions(event);
 			loadPendingComponents();
 			removeComponents(comps);
 			enemySpawner();
-
-			int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
-			if (success < 0)
-			{
-				std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
-			}
-
-			success = SDL_RenderClear(sys.get_ren());
-			if (success < 0)
-			{
-				std::cout << SDL_GetError() << " Error in RenderClear \n";
-			}
-
-			for (Component *c : comps)
-			{
-				c->draw();
-			}
-
-			SDL_RenderPresent(sys.get_ren());
-			int delay = nextTick - SDL_GetTicks();
-			if (delay > 0)
-			{
-				SDL_Delay(delay);
-			}
+			render(comps);
+			delayToNextTick(nextTick);
 
 		} //yttre while
 	}
@@ -88,17 +91,49 @@ namespace cwing
 	{
 	}
 
-	void Session::removeComponents(std::vector<Component *> &components){
-		removeComponents(components, 0);
+	void Session::delayToNextTick(Uint32 nextTick)
+	{
+		int delay = nextTick - SDL_GetTicks();
+		if (delay > 0)
+		{
+			SDL_Delay(delay);
+		}
 	}
 
-	void Session::removeComponents(std::vector<Component *> &components, int offset)
+	void Session::render(std::vector<Component *> &components)
+	{
+		int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
+		if (success < 0)
+		{
+			std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
+		}
+
+		success = SDL_RenderClear(sys.get_ren());
+		if (success < 0)
+		{
+			std::cout << SDL_GetError() << " Error in RenderClear \n";
+		}
+
+		for (Component *c : components)
+		{
+			c->draw();
+		}
+
+		SDL_RenderPresent(sys.get_ren());
+	}
+	void Session::removeComponents(std::vector<Component *> &components)
+	{
+		removeComponents(components, 0, false);
+	}
+
+	void Session::removeComponents(std::vector<Component *> &components, int offset, bool dontDelete)
 	{
 		int counter = 0;
 		for (Component *c : toBeRemoved)
 		{
-			if(counter < offset){
-				counter ++;
+			if (counter < offset)
+			{
+				counter++;
 				continue;
 			}
 			for (std::vector<Component *>::iterator i = components.begin(); i != components.end();)
@@ -107,7 +142,10 @@ namespace cwing
 				if (*i == c)
 				{
 					i = components.erase(i);
-					delete c;
+					if(!dontDelete){
+						delete c;
+					}
+
 				}
 				else
 				{
@@ -140,7 +178,7 @@ namespace cwing
 			{
 				remove(c);
 			}
-			removeComponents(enemies, currentEnemy+1);
+			removeComponents(enemies, currentEnemy + 1, false);
 		}
 
 		for (Component *c : gameOverComps)
@@ -205,7 +243,7 @@ namespace cwing
 		int amountOfEnemies = enemies.size();
 		spawnCounter++;
 
-		if (spawnCounter > spawnFrequency && amountOfEnemies > 0 && currentEnemy+1 < amountOfEnemies)
+		if (spawnCounter > spawnFrequency && amountOfEnemies > 0 && currentEnemy + 1 < amountOfEnemies)
 		{
 			spawnCounter = 0;
 
@@ -223,9 +261,8 @@ namespace cwing
 			//WIN STATE:
 			if (amountOfEnemies == currentEnemy)
 			{
-
 			}
-			
+
 			add(enemies.at(currentEnemy));
 		}
 	}

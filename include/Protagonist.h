@@ -2,10 +2,10 @@
 #define PROTAGONIST_H
 
 #include "Sprite.h"
-#include "Session.h"
 #include "Healthbar.h"
 #include <SDL2/SDL.h>
 #include <string>
+#include "Controller.h"
 
 namespace cwing
 {
@@ -17,6 +17,7 @@ namespace cwing
         Component* shoot();
         Component* perform(SDL_Event event);
         void setHealthbar(Healthbar *h);
+        void setController(Controller *c);
         void takeDamage(){
             if(damageCooldown==0)
             {
@@ -36,6 +37,7 @@ namespace cwing
         int damageCooldown = 0;
         SDL_Texture *sprite;
         Healthbar *healthbar;
+        Controller *controller;
     };
 }
 

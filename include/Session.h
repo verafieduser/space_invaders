@@ -5,6 +5,8 @@
 #include <vector>
 #include "Component.h"
 #include <SDL2/SDL.h>
+#include "Controller.h"
+#include "System.h"
 
 namespace cwing
 {
@@ -17,11 +19,13 @@ namespace cwing
 		void addGameOverComps(Component *c);
 		void remove(Component *c);
 		void run();
+		void render(std::vector<Component *> &components);
+		void delayToNextTick(Uint32 nextTick);
 		void gameOver();
 		void gameActions(SDL_Event &event);
 		void loadPendingComponents();
 		void removeComponents(std::vector<Component *>& components);
-		void removeComponents(std::vector<Component *>& components, int offset);
+		void removeComponents(std::vector<Component *>& components, int offset, bool dontDelete);
 		void enemySpawner();
 		void setInitialWait(int initialWait) {spawnCounter = initialWait *-1;};
 		void setWaitBetweenLevels(int waitBetweenLevels) {betweenLevels = waitBetweenLevels *-1;};
@@ -46,6 +50,7 @@ namespace cwing
 		int newLevelEveryXSpawn = 0;
 		float levelDifficultyIncrease = 1;
 		bool spawningToContinueAfterDeath = true;
+		Controller *controller;
 
 	};
 

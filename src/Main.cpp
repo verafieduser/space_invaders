@@ -16,6 +16,7 @@
 #include <sstream>
 #include <time.h>
 #include "DynamicBackground.h"
+#include "Controller.h"
 
 // Paths to resource folders. Change to your own path!
 //std::string resPath = "./resources/";
@@ -45,6 +46,7 @@ int main(int argc, char **argv)
 	ses.addGameOverComps(Score::getInstance(620, 500, 300, 35, "FINAL SCORE", ses));
 	ses.addGameOverComps(Score::getInstance(530, 600, 500, 30, "INNOCENT DEBRIS DESTROYED", ses));
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
+	Controller *controller = sys.get_controller();
 
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
@@ -69,6 +71,7 @@ int main(int argc, char **argv)
 	Healthbar *healthbar = Healthbar::getInstance(20, 20, 200, 80, "full_health.png", "half_health.png", "low_health.png");
 	
 	protagonist->setHealthbar(healthbar);
+	protagonist->setController(controller);
 
 	ses.add(protagonist);
 	ses.add(healthbar);
