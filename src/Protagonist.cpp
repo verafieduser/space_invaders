@@ -24,7 +24,7 @@ namespace cwing
 
     Protagonist::~Protagonist()
     {
-        healthbar->~Healthbar();
+       healthbar->kill();
         SDL_DestroyTexture(sprite);
     }
 

@@ -16,6 +16,21 @@ namespace cwing
 	{
 		//TODO: should we have something here perhaps?
 		//remove vectors one by one 
+		//comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
+		loadPendingComponents();
+		for (Component * c : comps){
+			remove(c);
+		}
+		for (Component * c : enemies){
+			remove(c);
+		}
+		for (Component * c : gameOverComps){
+			remove(c);
+		}
+		
+		removeComponents(toBeAdded);
+		removeComponents(enemies);
+		removeComponents(gameOverComps);
 	}
 	
 	void Session::run()
