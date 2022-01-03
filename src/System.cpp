@@ -8,8 +8,8 @@
 std::string IMAGES_PATH = "./images/";
 std::string SOUNDS_PATH = "./sounds/";
 std::string FONTS_PATH = "./fonts/";
-int SCREEN_WIDTH = 1600;
-int SCREEN_HEIGHT = 720;
+int SCREEN_WIDTH = 1600; 
+int SCREEN_HEIGHT = 720; 
 
 namespace cwing
 {
