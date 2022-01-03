@@ -9,7 +9,7 @@
 
 namespace cwing
 {
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller) : Sprite(x, y, w, h, image_path), controller(controller)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar& healthbar) : Sprite(x, y, w, h, image_path), controller(controller), healthbar(healthbar)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = 10;
@@ -17,26 +17,17 @@ namespace cwing
         name = "Protagonist";
     }
 
-    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller)
+    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar& healthbar)
     {
-        return new Protagonist(x, y, w, h, image_path, controller);
+        return new Protagonist(x, y, w, h, image_path, controller, healthbar);
     }
 
     Protagonist::~Protagonist()
     {
-       healthbar->kill();
+       healthbar.kill();
         SDL_DestroyTexture(sprite);
     }
 
-    void Protagonist::setHealthbar(Healthbar *h)
-    {
-        healthbar = h;
-    }
-
-    // void Protagonist::setController(Controller &c)
-    // {
-    //     controller = c;
-    // }
 
     Component *Protagonist::shoot()
     {
