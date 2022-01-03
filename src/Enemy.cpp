@@ -15,18 +15,18 @@ namespace cwing
         health = 1;
         srand(randomSeed);
         movementPattern = rand() % 3;
-        SPEED = (rand() % 3) + 2;             //could also be affected by difficulty setting
+        SPEED = (rand() % 3) + 2;           //could also be affected by difficulty setting
         shootingSpeed = rand() % 200 + 100; //could be affected in a difficuly setting thing available in system?
+    }   
+
+    Enemy *Enemy::getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed)
+    {
+        return new Enemy(x, y, w, h, image_path, randomSeed);
     }
 
     Enemy::~Enemy()
     {
         SDL_DestroyTexture(sprite);
-    }
-
-    Enemy *Enemy::getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed)
-    {
-        return new Enemy(x, y, w, h, image_path, randomSeed);
     }
 
     Component *Enemy::shoot()
@@ -46,7 +46,9 @@ namespace cwing
         {
             name = "Defeated enemy";
             kill();
-        } else if (isOutOfBoundsLeft()){
+        }
+        else if (isOutOfBoundsLeft())
+        {
             kill();
         }
 

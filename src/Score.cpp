@@ -11,12 +11,14 @@ namespace cwing
         collidable = false;
         message = txt;
     }
+
     Score *Score::getInstance(int x, int y, int w, int h, std::string txt, Session &session)
     {
         return new Score(x, y, w, h, txt, session);
     }
 
-    Score::~Score(){
+    Score::~Score()
+    {
         SDL_DestroyTexture(texture);
     }
 }

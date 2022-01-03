@@ -49,11 +49,12 @@ int main(int argc, char **argv)
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
 	//TODO: get_controller should maybe be &?
 
+
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
 
 	//Spawning of sprites:
-	Spawner *spawner = Spawner::getInstance(sys, ses);
+	Spawner *spawner = Spawner::getInstance(sys.get_controller(), ses);
 	spawner->createDynamicBackgrounds(amountOfDynamicBackgroundsToSpawn, dynamicBackgroundTypes, distanceBetweenDynamicBackgrounds);
 	spawner->createProtagonist();
 	spawner->createEnemies(amountOfEnemiesToSpawn, enemyTypes);

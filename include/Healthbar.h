@@ -5,37 +5,31 @@
 #include <SDL2/SDL.h>
 #include <string>
 
+namespace cwing
+{
+    class Healthbar : public Component
+    {
+    public:
+        static Healthbar *getInstance(int x, int y, int w, int h, std::string full_health_image_path, std::string half_health_image_path, std::string low_health_image_path);
+        void updateHealth(int i);
+        Component *perform(SDL_Event event) { return NULL; };
+        void updateTexture();
+        void kill(){};
+        void takeDamage(){};
+        void removal() { this->~Healthbar(); };
+        void draw() const;
+        ~Healthbar();
 
-namespace cwing {
-    class Healthbar : public Component {
-        public:
-		    static Healthbar *getInstance(int x, int y, int w, int h, std::string full_health_image_path,  std::string half_health_image_path, std::string low_health_image_path);
-            void updateHealth(int i);
-            Component *perform(SDL_Event event){return NULL;};
-            void updateTexture();
-            void kill(){};
-            void takeDamage(){};
-            void removal() { this->~Healthbar(); };
-		    void draw() const;
-            ~Healthbar();
-        protected:
-		    Healthbar(int x, int y, int w, int h, std::string full_health_image_path,  std::string half_health_image_path,  std::string low_health_image_path);
-        private:
-            void setTexture(std::string image_path);
-            short int health;
-            std::string full_health_image_path, half_health_image_path, low_health_image_path;
-            SDL_Texture *texture;
+    protected:
+        Healthbar(int x, int y, int w, int h, std::string full_health_image_path, std::string half_health_image_path, std::string low_health_image_path);
+
+    private:
+        void setTexture(std::string image_path);
+        short int health;
+        std::string full_health_image_path, half_health_image_path, low_health_image_path;
+        SDL_Texture *texture;
     };
 }
 extern std::string IMAGES_PATH;
 
-
 #endif
-
-
-
-
-
-        
-
-        

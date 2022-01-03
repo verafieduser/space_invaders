@@ -28,8 +28,8 @@ namespace cwing
 		const int getX() const { return rect.x; };
 		const int getW() const { return rect.w; };
 		const int getH() const { return rect.h; };
-		const std::string getName() const {return name;};		// const int getY() const {return rect.y;};
-		// const int getX() const {return rect.x;};
+		const std::string getName() const { return name; }; // const int getY() const {return rect.y;};
+															// const int getX() const {return rect.x;};
 
 	protected:
 		Component(int x, int y, int w, int h);

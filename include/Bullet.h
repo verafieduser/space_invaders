@@ -17,14 +17,13 @@ namespace cwing
         void moveRight();
         void moveLeft();
         bool isFromProtagonist() const { return isProtagonistBullet; };
-        Component* perform(SDL_Event event);
+        Component *perform(SDL_Event event);
         ~Bullet();
 
     protected:
         Bullet(int x, int y, int w, int h, std::string images_path, int speed, bool isProtagonist);
 
     private:
-        SDL_Texture *sprite;
         bool isProtagonistBullet;
     };
 }

@@ -30,7 +30,7 @@ namespace cwing
         return NULL;
     }
 
-    void DynamicBackground::spinImage(int& speed)
+    void DynamicBackground::spinImage(int &speed)
     {
         if (angle > 360 || angle < -360)
         {
@@ -72,12 +72,12 @@ namespace cwing
     void DynamicBackground::draw() const
     {
 
-        if(isOutOfBoundsRight()){
+        if (isOutOfBoundsRight())
+        {
             return;
         }
         Sprite::draw();
 
-        
         // SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 
         // int success = SDL_RenderCopyEx(sys.get_ren(), sprite, NULL, &getRect(), angle, NULL, flip) + 1;

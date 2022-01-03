@@ -9,7 +9,6 @@
 
 namespace cwing
 {
-
     Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)//, SPEED(speed), isProtagonistBullet(isFromProtagonist)
     {
         name = "Bullet";
@@ -28,14 +27,14 @@ namespace cwing
         }
     }
 
-    Bullet::~Bullet()
-    {
-        SDL_DestroyTexture(sprite);
-    }
-
     Bullet *Bullet::getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist)
     {
         return new Bullet(x, y, w, h, image_path, speed, isFromProtagonist);
+    }
+
+    Bullet::~Bullet()
+    {
+        SDL_DestroyTexture(sprite);
     }
 
     void Bullet::moveRight()
@@ -72,34 +71,3 @@ namespace cwing
     }
 
 }
-
-// namespace cwing
-// {
-//     Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed) : Sprite(x, y, w, h, image_path)
-//     {
-//         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-//         SPEED = speed;
-//     }
-
-//     Bullet *Bullet::getInstance(int x, int y, int w, int h, std::string images_path, int speed)
-//     {
-//         return new Bullet(x);
-//     }
-
-//     Bullet::~Bullet()
-//     {
-//         SDL_DestroyTexture(texture);
-//     }
-
-//     void Bullet::draw() const
-//     {
-//         const SDL_Rect &rect = getRect();
-//         //SDL_RenderCopy(sys.ren, texture, NULL, &getRect());
-//         SDL_RenderCopy(sys.get_ren(), texture, NULL, &rect);
-//     }
-
-//     void Bullet::perform(SDL_Event event)
-//     {
-//         moveRight();
-//     }
-// }

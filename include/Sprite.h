@@ -27,7 +27,7 @@ namespace cwing
 		const bool isOutOfBoundsLeft() const;
 		const bool isMovementAllowed(Direction dir) const;
 		void kill();
-		void takeDamage(){health--;};
+		void takeDamage() { health--; };
 
 		void removal() { this->~Sprite(); };
 
@@ -41,9 +41,8 @@ namespace cwing
 
 	protected:
 		Sprite(int x, int y, int w, int h, std::string images_path);
-
-	private:
 		SDL_Texture *sprite;
+	// private:
 	};
 }
 

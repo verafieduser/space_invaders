@@ -4,12 +4,11 @@
 #include <iostream>
 #include "Session.h"
 
-
 std::string IMAGES_PATH = "./images/";
 std::string SOUNDS_PATH = "./sounds/";
 std::string FONTS_PATH = "./fonts/";
-int SCREEN_WIDTH = 1600; 
-int SCREEN_HEIGHT = 720; 
+int SCREEN_WIDTH = 1600;
+int SCREEN_HEIGHT = 720;
 
 namespace cwing
 {
@@ -31,24 +30,27 @@ namespace cwing
 			std::cout << SDL_GetError();
 		}
 
-
-		int success = TTF_Init() +1;
-		if(!success){
+		int success = TTF_Init() + 1;
+		if (!success)
+		{
 			std::cout << SDL_GetError() << " TTF_INIT Error\n";
 		}
-		// std::cout << " " << fontsPath << " : font path";
 		font = TTF_OpenFont((FONTS_PATH + "origintech.ttf").c_str(), 38);
 	}
 
 	System::~System()
 	{
+		controller.~Controller();
+		if(music_player != NULL){
+			Mix_Quit();
+		}
 		TTF_CloseFont(font);
 		TTF_Quit();
 		SDL_DestroyWindow(win);
 		SDL_DestroyRenderer(ren);
 		SDL_Quit();
 	}
-	
+
 	void System::addBackgroundMusic(std::string music_path)
 	{
 		Mix_OpenAudio(20050, AUDIO_S16SYS, 2, 4096);

@@ -30,7 +30,6 @@ namespace cwing
 
         if (name1 == "Protagonist" && name2 == "Bullet")
         {
-            // std::cout << "Non-prot bullet collided with prot" << std::endl;
             Bullet *b = dynamic_cast<Bullet *>(c2);
             if (!b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
             {
@@ -38,10 +37,8 @@ namespace cwing
             }
         }
 
-
         if (name1 == "Bullet" && name2 == "Enemy")
         {
-            // std::cout << "Prot-bullet collided with enemy!" << std::endl;
             Bullet *b = dynamic_cast<Bullet *>(c);
             if (b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
             {
@@ -51,7 +48,6 @@ namespace cwing
 
         if (name1 == "Bullet" && name2 == "Debris")
         {
-            // std::cout << "Prot-bullet collided with debris" << std::endl;
             if (Collision::AABB(c->getRect(), c2->getRect()))
             {
 
@@ -61,36 +57,32 @@ namespace cwing
 
         if (name1 == "Protagonist" && name2 == "Debris")
         {
-            // std::cout << "Protagonist collides with Debris!" << std::endl;
             if (Collision::AABB(c->getRect(), c2->getRect()))
             {
-                
+
                 return true;
             }
         }
 
         if (name1 == "Protagonist" && name2 == "Enemy")
-        { 
-            // std::cout << "Protagonist collides with Enemy!" << std::endl;
+        {
             if (Collision::AABB(c->getRect(), c2->getRect()))
             {
-               
+
                 return true;
             }
         }
 
         if (name1 == "Bullet" && name2 == "Bullet")
-        { 
-            // std::cout << "Bullet collides with Enemy!" << std::endl;
+        {
             if (Collision::AABB(c->getRect(), c2->getRect()))
             {
-               
+
                 return true;
             }
         }
 
         return false;
     }
-
 
 }

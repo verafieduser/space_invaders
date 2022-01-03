@@ -6,7 +6,6 @@
 
 namespace cwing
 {
-
     class Debris : public Sprite
     {
     public:
@@ -28,7 +27,6 @@ namespace cwing
     private:
         float angle = 0;
         int spinDir, spinEveryXFrame, spinCounter;
-        SDL_Texture *sprite;
     };
 }
 

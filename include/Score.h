@@ -67,7 +67,7 @@ namespace cwing
                 {
                     newLevel = false;
                     counter = 0;
-                    int restorePosition = showcaseLocation*-1;
+                    int restorePosition = showcaseLocation * -1;
                     int restoreW = showcaseW * -1;
                     int restoreH = showcaseH * -1;
                     setX(restorePosition);
@@ -99,7 +99,6 @@ namespace cwing
         int showcaseW = 200;
         int showcaseH = 50;
         int originalW, originalH;
-
     };
 
     extern int SCREEN_WIDTH;

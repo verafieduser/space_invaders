@@ -18,11 +18,11 @@ namespace cwing
         void kill(){};
         void takeDamage(){};
         void removal() { this->~Label(); };
-        void draw() const {SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect());}
-        void setColor(SDL_Color col) {color = col;}
-        const SDL_Color& getColor() const {return color;};
-        const SDL_Color& getOriginalColor() const {return originalColor;};
-        std::string getText() const {return text;};
+        void draw() const { SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()); }
+        void setColor(SDL_Color col) { color = col; }
+        const SDL_Color &getColor() const { return color; };
+        const SDL_Color &getOriginalColor() const { return originalColor; };
+        std::string getText() const { return text; };
         ~Label();
 
     protected:

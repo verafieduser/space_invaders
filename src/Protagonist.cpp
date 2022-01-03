@@ -9,33 +9,34 @@
 
 namespace cwing
 {
-
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller) : Sprite(x, y, w, h, image_path), controller(controller)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = 10;
         health = 3;
         name = "Protagonist";
-        
+    }
+
+    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller)
+    {
+        return new Protagonist(x, y, w, h, image_path, controller);
     }
 
     Protagonist::~Protagonist()
     {
+        healthbar->~Healthbar();
         SDL_DestroyTexture(sprite);
     }
 
-    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path)
+    void Protagonist::setHealthbar(Healthbar *h)
     {
-        return new Protagonist(x, y, w, h, image_path);
-    }
-
-    void Protagonist::setHealthbar(Healthbar *h) {
         healthbar = h;
     }
 
-    void Protagonist::setController(Controller *c) {
-        controller = c;
-    }
+    // void Protagonist::setController(Controller &c)
+    // {
+    //     controller = c;
+    // }
 
     Component *Protagonist::shoot()
     {
@@ -50,13 +51,14 @@ namespace cwing
             //TODO: return explosion here?
         }
 
-        if(damageCooldown > 0){
+        if (damageCooldown > 0)
+        {
             damageCooldown--;
         }
 
         shootingCooldown -= 1;
 
-        const Uint8 *state = controller->getKeyboardState();
+        const Uint8 *state = controller.getKeyboardState();
 
         if (state[SDL_SCANCODE_DOWN] && state[SDL_SCANCODE_RIGHT])
         {

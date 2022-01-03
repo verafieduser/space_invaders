@@ -12,32 +12,18 @@ namespace cwing
 {
 #define FPS 60;
 
-	void Session::add(Component *c)
+	Session::~Session()
 	{
-		toBeAdded.push_back(c);
+		//TODO: should we have something here perhaps?
+		//remove vectors one by one 
 	}
-
-	void Session::addEnemyTypes(Component *c)
-	{
-		enemies.push_back(c);
-	}
-
-	void Session::addGameOverComps(Component *c)
-	{
-		gameOverComps.push_back(c);
-	}
-
-	void Session::remove(Component *c)
-	{
-		toBeRemoved.push_back(c);
-	}
-
+	
 	void Session::run()
 	{
 		//TODO: this should maybe be in main? or a function that can be called from main atleast?
 		std::random_shuffle(enemies.begin(), enemies.end());
 
-		controller = sys.get_controller();
+		//controller = sys.get_controller();
 
 		bool quit = false;
 		//bool pause = false;
@@ -88,42 +74,27 @@ namespace cwing
 			delayToNextTick(nextTick);
 
 		} //yttre while
+		cleanUp();
 	}
 
-	Session::~Session()
+	void Session::add(Component *c)
 	{
-		//TODO: should we have something here perhaps?
+		toBeAdded.push_back(c);
 	}
 
-	void Session::delayToNextTick(Uint32 nextTick)
+	void Session::addEnemyTypes(Component *c)
 	{
-		int delay = nextTick - SDL_GetTicks();
-		if (delay > 0)
-		{
-			SDL_Delay(delay);
-		}
+		enemies.push_back(c);
 	}
 
-	void Session::render(std::vector<Component *> &components)
+	void Session::addGameOverComps(Component *c)
 	{
-		int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
-		if (success < 0)
-		{
-			std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
-		}
+		gameOverComps.push_back(c);
+	}
 
-		success = SDL_RenderClear(sys.get_ren());
-		if (success < 0)
-		{
-			std::cout << SDL_GetError() << " Error in RenderClear \n";
-		}
-
-		for (Component *c : components)
-		{
-			c->draw();
-		}
-
-		SDL_RenderPresent(sys.get_ren());
+	void Session::remove(Component *c)
+	{
+		toBeRemoved.push_back(c);
 	}
 	
 	void Session::removeComponents(std::vector<Component *> &components)
@@ -161,35 +132,41 @@ namespace cwing
 		toBeRemoved.clear();
 	}
 
-	void Session::gameOver()
+	void Session::cleanUp()
 	{
-		loadPendingComponents();
-		for (Component *c : comps)
+		sys.~System();
+		this->~Session();
+	}
+
+	void Session::delayToNextTick(Uint32 nextTick)
+	{
+		int delay = nextTick - SDL_GetTicks();
+		if (delay > 0)
 		{
-			std::string name = c->getName();
-			//TODO: could be a vector of names added from main, for objects that should be exempt?
-			if (name != "DynamicBackground" && name != "Background" && name != "Label")
-			{
-				remove(c);
-			}
+			SDL_Delay(delay);
+		}
+	}
+
+	void Session::render(std::vector<Component *> &components)
+	{
+		int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
+		if (success < 0)
+		{
+			std::cout << SDL_GetError() << " Error in SetRenderDrawColor \n";
 		}
 
-		removeComponents(comps);
-
-		//Makes sure spawning stops if you lose, if that setting is added.
-		if (!spawningToContinueAfterDeath)
+		success = SDL_RenderClear(sys.get_ren());
+		if (success < 0)
 		{
-			for (Component *c : enemies)
-			{
-				remove(c);
-			}
-			removeComponents(enemies, currentEnemy + 1, false);
+			std::cout << SDL_GetError() << " Error in RenderClear \n";
 		}
 
-		for (Component *c : gameOverComps)
+		for (Component *c : components)
 		{
-			add(c);
+			c->draw();
 		}
+
+		SDL_RenderPresent(sys.get_ren());
 	}
 
 	void Session::loadPendingComponents()
@@ -279,6 +256,37 @@ namespace cwing
 			}
 
 			add(enemies.at(currentEnemy));
+		}
+	}	
+	
+	void Session::gameOver()
+	{
+		loadPendingComponents();
+		for (Component *c : comps)
+		{
+			std::string name = c->getName();
+			//TODO: could be a vector of names added from main, for objects that should be exempt?
+			if (name != "DynamicBackground" && name != "Background" && name != "Label")
+			{
+				remove(c);
+			}
+		}
+
+		removeComponents(comps);
+
+		//Makes sure spawning stops if you lose, if that setting is added.
+		if (!spawningToContinueAfterDeath)
+		{
+			for (Component *c : enemies)
+			{
+				remove(c);
+			}
+			removeComponents(enemies, currentEnemy + 1, false);
+		}
+
+		for (Component *c : gameOverComps)
+		{
+			add(c);
 		}
 	}
 }

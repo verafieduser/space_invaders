@@ -11,8 +11,8 @@ namespace cwing
     {
     public:
         static Enemy *getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed);
-        Component* shoot();
-        Component* perform(SDL_Event event);
+        Component *shoot();
+        Component *perform(SDL_Event event);
         int movementPattern;
         int movementCounter = 0;
         int shootingSpeed;
@@ -24,7 +24,6 @@ namespace cwing
 
     private:
         int shootingCooldown = 0;
-        SDL_Texture *sprite;
     };
 }
 

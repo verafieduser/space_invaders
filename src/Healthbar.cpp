@@ -6,7 +6,8 @@
 
 namespace cwing
 {
-    Healthbar::Healthbar(int x, int y, int w, int h, std::string full_health_path, std::string half_health_path, std::string low_health_path) : Component(x, y, w, h) {
+    Healthbar::Healthbar(int x, int y, int w, int h, std::string full_health_path, std::string half_health_path, std::string low_health_path) : Component(x, y, w, h)
+    {
         full_health_image_path = full_health_path;
         half_health_image_path = half_health_path;
         low_health_image_path = low_health_path;
@@ -15,18 +16,19 @@ namespace cwing
         updateTexture();
         collidable = false;
     }
-    
-    Healthbar *Healthbar::getInstance(int x, int y, int w, int h, std::string full_health_path,  std::string half_health_path, std::string low_health_path)
-	{
-		return new Healthbar(x, y, w, h, full_health_path, half_health_path, low_health_path);
-	}
+
+    Healthbar *Healthbar::getInstance(int x, int y, int w, int h, std::string full_health_path, std::string half_health_path, std::string low_health_path)
+    {
+        return new Healthbar(x, y, w, h, full_health_path, half_health_path, low_health_path);
+    }
 
     Healthbar::~Healthbar()
-	{
-		SDL_DestroyTexture(texture);
-	}
+    {
+        SDL_DestroyTexture(texture);
+    }
 
-    void Healthbar::updateTexture() {
+    void Healthbar::updateTexture()
+    {
         switch (health)
         {
         case 3:
@@ -43,23 +45,20 @@ namespace cwing
         }
     }
 
-    void Healthbar::setTexture(std::string image_path) 
+    void Healthbar::setTexture(std::string image_path)
     {
-        // std:: cout << "set texture reached, before if" << std::endl;
         //TODO: should we destroy old texture here?
         //SDL_DestroyTexture(texture);
-        // std:: cout << "set texture reached, after if" << std::endl;
         texture = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-        // std:: cout << "set texture reached, after loading" << std::endl;
     }
 
-    void Healthbar::updateHealth(int i) 
+    void Healthbar::updateHealth(int i)
     {
         health += i;
         updateTexture();
     }
 
-    void Healthbar::draw() const 
+    void Healthbar::draw() const
     {
         int success = SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()) + 1;
         if (!success)

@@ -13,14 +13,14 @@ namespace cwing
 		collidable = true;
 	}
 
-	Sprite::~Sprite()
-	{
-		SDL_DestroyTexture(sprite);
-	}
-
 	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
 	{
 		return new Sprite(x, y, w, h, image_path);
+	}
+
+	Sprite::~Sprite()
+	{
+		SDL_DestroyTexture(sprite);
 	}
 
 	const bool Sprite::isOutOfBounds() const
@@ -133,16 +133,11 @@ namespace cwing
 
 	void Sprite::draw() const
 	{
-
 		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) + 1;
 		if (!success)
 		{
 			std::cout << SDL_GetError() << " in RenderCopy sprite in Sprite \n"
 					  << " file was " << name + "\n";
 		}
-		// success = SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()) +1;
-		// if(!success){
-		//     std::cout << SDL_GetError() << " in RenderCopy texture in Sprite \n" << " file was " << name + "\n";
-		// }
 	}
 }

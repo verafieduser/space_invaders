@@ -13,31 +13,32 @@ namespace cwing
     class Protagonist : public Sprite
     {
     public:
-        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path);
-        Component* shoot();
-        Component* perform(SDL_Event event);
+        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, Controller& controller);
+        Component *shoot();
+        Component *perform(SDL_Event event);
         void setHealthbar(Healthbar *h);
-        void setController(Controller *c);
-        void takeDamage(){
-            if(damageCooldown==0)
+        // void setController(Controller &c);
+        void takeDamage()
+        {
+            if (damageCooldown == 0)
             {
-                healthbar->updateHealth(-1); 
+                healthbar->updateHealth(-1);
                 health--;
                 //shootingCooldown = 10;
                 //TODO: some other result from being shot ? also - currently the keyframe refreshes when it shouldnt
-            } 
-            damageCooldown = 60;};
+            }
+            damageCooldown = 60;
+        };
         ~Protagonist();
 
     protected:
-        Protagonist(int x, int y, int w, int h, std::string images_path);
+        Protagonist(int x, int y, int w, int h, std::string images_path, Controller& controller);
 
     private:
         int shootingCooldown = 0;
         int damageCooldown = 0;
-        SDL_Texture *sprite;
         Healthbar *healthbar;
-        Controller *controller;
+        Controller &controller;
     };
 }
 
