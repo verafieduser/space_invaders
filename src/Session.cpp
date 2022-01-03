@@ -34,11 +34,13 @@ namespace cwing
 
 	void Session::run()
 	{
+		//TODO: this should maybe be in main? or a function that can be called from main atleast?
 		std::random_shuffle(enemies.begin(), enemies.end());
+
 		controller = sys.get_controller();
 
 		bool quit = false;
-		bool pause = false;
+		//bool pause = false;
 		const int tickInterval = 1000 / FPS;
 		while (!quit)
 		{
@@ -54,22 +56,22 @@ namespace cwing
 				}
 			}
 
-			// // something like this if we want a pause function:
+			// // something like this if we want a pause function. we could use the same method to implement other system functions, like a settings meny.
 			// const Uint8* state = controller->getKeyboardState();
 			// if (state[SDL_SCANCODE_ESCAPE]){
 			// 	pause = true;
 			// 	while (pause){
-			
+
 			// 		loadPendingComponents();
 			// 		removeComponents(comps); // clears current game stuff
 			// 		for(Component *c : pauseComps){
 			// 			add(c);
 			// 		}
-			// 		render(pauseComps);	// only renders what is paused, rest is still. 
+			// 		render(pauseComps);	// only renders what is paused, rest is still.
 			// 		state = controller->getState();	//not sure which state it should be yet
 			// 		if(state[x]){
 			// 			pause = false;
-			// 			for(Component *c : pauseComps){	
+			// 			for(Component *c : pauseComps){
 			// 				remove(c);
 			// 			}	//removes pause comps from the game loop, but makes sure to not delete them.
 			// 			removeComponents(pauseComps, 0, true);
@@ -77,6 +79,7 @@ namespace cwing
 			// 	}
 			// }
 
+			//TODO: we technically do not use the event parameter - it is sent into the perform of every comps, but no comps currently use it:
 			gameActions(event);
 			loadPendingComponents();
 			removeComponents(comps);
@@ -89,6 +92,7 @@ namespace cwing
 
 	Session::~Session()
 	{
+		//TODO: should we have something here perhaps?
 	}
 
 	void Session::delayToNextTick(Uint32 nextTick)
@@ -121,6 +125,7 @@ namespace cwing
 
 		SDL_RenderPresent(sys.get_ren());
 	}
+	
 	void Session::removeComponents(std::vector<Component *> &components)
 	{
 		removeComponents(components, 0, false);
@@ -142,10 +147,10 @@ namespace cwing
 				if (*i == c)
 				{
 					i = components.erase(i);
-					if(!dontDelete){
+					if (!dontDelete)
+					{
 						delete c;
 					}
-
 				}
 				else
 				{
@@ -206,35 +211,45 @@ namespace cwing
 				add(newC);
 			}
 
-			for (Component *c2 : comps)
-			{
-				if (c != c2 && Collision::canCollide(c, c2))
-				{
-					c->takeDamage();
-					c2->takeDamage();
-					//TODO: create damage sprite? takeDamage maybe should return a component?
-				}
-			}
+			damageCalculation(c);
 
 			if (c->isKilled())
 			{
-				remove(c);
-				//TODO: consider ways to make which names lead to what behaviour added from main instead of
-				std::string name = c->getName();
-				if (name == "Defeated enemy")
-				{
-					enemiesDefeated++;
-				}
-				else if (name == "Destroyed debris")
-				{
-					debrisDestroyed++;
-				}
-				else if (name == "Protagonist")
+				deathCalculation(c);
+				if (c->getName() == "Protagonist")
 				{
 					gameOver();
 					break;
 				}
 			}
+		}
+	}
+
+	void Session::damageCalculation(Component *c)
+	{
+		for (Component *c2 : comps)
+		{
+			if (c != c2 && Collision::canCollide(c, c2))
+			{
+				c->takeDamage();
+				c2->takeDamage();
+				//TODO: create damage sprite? takeDamage maybe should return a component?
+			}
+		}
+	}
+
+	void Session::deathCalculation(Component *c)
+	{
+		remove(c);
+		//TODO: consider ways to make which names lead to what behaviour added from main instead of
+		std::string name = c->getName();
+		if (name == "Defeated enemy")
+		{
+			enemiesDefeated++;
+		}
+		else if (name == "Destroyed debris")
+		{
+			debrisDestroyed++;
 		}
 	}
 

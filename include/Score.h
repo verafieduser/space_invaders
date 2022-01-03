@@ -1,3 +1,6 @@
+#ifndef SCORE_H
+#define SCORE_H
+
 #include "Label.h"
 #include "Component.h"
 #include <string>
@@ -102,3 +105,5 @@ namespace cwing
     extern int SCREEN_WIDTH;
     extern int SCREEN_HEIGHT;
 }
+
+#endif

@@ -39,6 +39,8 @@ namespace cwing
 		~Session();
 
 	private:
+		void damageCalculation(Component *c);
+		void deathCalculation(Component *c);
 		std::vector<Component *> comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
 		int betweenLevels = 0;
 		int spawnCounter = 0;
