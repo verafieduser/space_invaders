@@ -48,16 +48,18 @@ int main(int argc, char **argv)
 	ses.addGameOverComps(Score::getInstance(530, 600, 500, 30, "INNOCENT DEBRIS DESTROYED", ses));
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
 									 //TODO: get_controller should maybe be &?
-	
+
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
 
+//Spawning of sprites:
 	Spawner* spawner = Spawner::getInstance(sys, ses);
 	spawner->createDynamicBackgrounds(amountOfDynamicBackgroundsToSpawn, dynamicBackgroundTypes, distanceBetweenDynamicBackgrounds);
 	spawner->createProtagonist();
 	spawner->createEnemies(amountOfEnemiesToSpawn, enemyTypes);
 	spawner->createDebris(amountOfDebrisToSpawn, debrisTypes);
 
+//Creating score and level labels 
 	Score *score = Score::getInstance(250, 20, 200, 30, "SCORE", ses);
 	ses.add(score);
 
