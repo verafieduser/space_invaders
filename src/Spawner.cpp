@@ -8,13 +8,13 @@
 
 namespace cwing
 {
-	Spawner::Spawner(Controller &controller, Session &session) : controller(controller), session(session)
+	Spawner::Spawner(Session &session) : session(session)
 	{
 	}
 
-	Spawner *Spawner::getInstance(Controller &controller, Session &session)
+	Spawner *Spawner::getInstance(Session &session)
 	{
-		return new Spawner(controller, session);
+		return new Spawner(session);
 	}
 
 	Spawner::~Spawner() {}

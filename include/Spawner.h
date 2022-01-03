@@ -12,18 +12,20 @@ namespace cwing
     {
     public:
         ~Spawner();
-        static Spawner *getInstance(Controller &controller, Session &session);
+        static Spawner *getInstance(Session &session);
         void createProtagonist();
         void createEnemies(int amountOfEnemies, int enemyTypes);
         void createDebris(int amountOfDebris, int debrisTypes);
         void createDynamicBackgrounds(int amountOfDynamicBackgrounds, int dynamicBackgroundTypes, int distanceBetweenDynamicBackgrounds);
 
     protected:
-        Spawner(Controller &controller, Session &session);
+        Spawner(Session &session);
 
     private:
         Session &session;
-        Controller& controller;
+        Controller& controller = sys.get_controller();
     };
+
+extern System sys;
 }
 #endif

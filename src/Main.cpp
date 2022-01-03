@@ -54,7 +54,7 @@ int main(int argc, char **argv)
 	ses.add(bg);
 
 	//Spawning of sprites:
-	Spawner *spawner = Spawner::getInstance(sys.get_controller(), ses);
+	Spawner *spawner = Spawner::getInstance(ses);
 	spawner->createDynamicBackgrounds(amountOfDynamicBackgroundsToSpawn, dynamicBackgroundTypes, distanceBetweenDynamicBackgrounds);
 	spawner->createProtagonist();
 	spawner->createEnemies(amountOfEnemiesToSpawn, enemyTypes);

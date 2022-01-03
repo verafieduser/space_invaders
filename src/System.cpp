@@ -14,6 +14,7 @@ namespace cwing
 {
 	System::System()
 	{
+
 		SDL_Init(SDL_INIT_EVERYTHING);
 		win = SDL_CreateWindow("Space Invaders", SDL_WINDOWPOS_CENTERED,
 							   SDL_WINDOWPOS_CENTERED, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
