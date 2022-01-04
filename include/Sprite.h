@@ -40,9 +40,11 @@ namespace cwing
 		~Sprite();
 
 	protected:
-		short int health;
 		Sprite(int x, int y, int w, int h, std::string images_path);
+		Sprite(const Sprite &sprite) = delete;
+        const Sprite &operator=(const Sprite&) = delete;
 		SDL_Texture *sprite;
+		short int health;
 	// private:
 	};
 }

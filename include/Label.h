@@ -29,6 +29,8 @@ namespace cwing
         Label(int x, int y, int w, int h, std::string txt);
 
     private:
+        Label(const Label& background) = delete;
+        const Label &operator=(const Label&) = delete;
         std::string text;
         SDL_Texture *texture;
         SDL_Color color;

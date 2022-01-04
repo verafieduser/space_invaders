@@ -33,6 +33,8 @@ namespace cwing
         Protagonist(int x, int y, int w, int h, std::string images_path, Controller& controller, Healthbar& healthbar);
 
     private:
+        Protagonist(const Protagonist &protagonist) = delete;
+        const Protagonist &operator=(const Protagonist&) = delete;
         int shootingCooldown = 0;
         int damageCooldown = 0;
         Healthbar &healthbar;

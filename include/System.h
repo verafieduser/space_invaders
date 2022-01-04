@@ -21,6 +21,8 @@ namespace cwing
 		void addBackgroundMusic(std::string music_path);
 
 	private:
+		System(const System &system) = delete;
+        const System &operator=(const System&) = delete;
 		SDL_Window *win;
 		SDL_Renderer *ren;
 		TTF_Font *font;

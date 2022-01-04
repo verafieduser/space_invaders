@@ -24,6 +24,8 @@ namespace cwing
 
     private:
         SDL_Texture *bg_tex;
+        Background(const Background& background) = delete;
+        const Background &operator=(const Background &) = delete;
     };
 }
 

@@ -24,6 +24,7 @@ namespace cwing
         Healthbar(int x, int y, int w, int h, std::string full_health_image_path, std::string half_health_image_path, std::string low_health_image_path);
 
     private:
+        Healthbar(const Healthbar &healthbar) = delete;
         void setTexture(std::string image_path);
         short int health;
         std::string full_health_image_path, half_health_image_path, low_health_image_path;

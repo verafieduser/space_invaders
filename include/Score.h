@@ -87,6 +87,8 @@ namespace cwing
         Score(int x, int y, int w, int h, std::string txt, Session &session);
 
     private:
+        Score(const Score& background) = delete;
+        const Score &operator=(const Score&) = delete;
         std::string text;
         std::string message;
         SDL_Texture *texture;

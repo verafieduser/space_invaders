@@ -12,6 +12,7 @@ namespace cwing
     {
     public:
         static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist);
+
         int SPEED = 40;
         Direction dir;
         void moveRight();
@@ -22,7 +23,8 @@ namespace cwing
 
     protected:
         Bullet(int x, int y, int w, int h, std::string images_path, int speed, bool isProtagonist);
-
+        Bullet(const Bullet &bullet) = delete;
+        const Bullet &operator=(const Bullet &) = delete;
     private:
         bool isProtagonistBullet;
     };

@@ -23,6 +23,8 @@ namespace cwing
         Enemy(int x, int y, int w, int h, std::string images_path, int randomSeed);
 
     private:
+        Enemy(const Enemy &enemy) = delete;
+        const Enemy &operator=(const Enemy &) = delete;
         int shootingCooldown = 0;
     };
 }
