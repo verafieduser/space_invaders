@@ -124,7 +124,6 @@ namespace space_invaders
 
 	Component *Sprite::perform(SDL_Event event)
 	{
-
 		return NULL;
 	}
 

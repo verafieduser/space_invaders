@@ -49,6 +49,7 @@ namespace space_invaders
         {
             value = ses.getDebrisDestroyed();
         }
+        
 
         std::ostringstream ostr;
         ostr << value;
