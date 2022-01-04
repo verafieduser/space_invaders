@@ -21,7 +21,7 @@ namespace cwing
 		};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
 		int SPEED = 20;
-		short int health;
+
 		const bool isOutOfBounds() const;
 		const bool isOutOfBoundsRight() const;
 		const bool isOutOfBoundsLeft() const;
@@ -40,6 +40,7 @@ namespace cwing
 		~Sprite();
 
 	protected:
+		short int health;
 		Sprite(int x, int y, int w, int h, std::string images_path);
 		SDL_Texture *sprite;
 	// private:

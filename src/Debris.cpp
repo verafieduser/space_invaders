@@ -8,7 +8,7 @@
 namespace cwing
 {
 
-    Debris::Debris(int x, int y, int w, int h, std::string image_path, int speed) : Sprite(x, y, w, h, image_path)
+    Debris::Debris(int x, int y, int w, int h, std::string image_path, int speed, short int hp) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         SPEED = speed;
@@ -19,14 +19,13 @@ namespace cwing
         {
             spinDir = spinDir + 1;
         }
-
-        health = 5;
+        health = hp;
         name = "Debris";
     }
 
-    Debris *Debris::getInstance(int x, int y, int w, int h, std::string image_path, int speed)
+    Debris *Debris::getInstance(int x, int y, int w, int h, std::string image_path, int speed, short int health)
     {
-        return new Debris(x, y, w, h, image_path, speed);
+        return new Debris(x, y, w, h, image_path, speed, health);
     }
 
     Debris::~Debris()

@@ -57,38 +57,46 @@ namespace cwing
 			srand(i);
 			int size = (rand() % 200) + 30;
 			int speed;
+			short int health;
 			if (size >= 200)
 			{
 				speed = 1;
+				health = 15;
 			}
 			else if (size >= 170)
 			{
 				speed = 3;
+				health = 13;
 			}
 			else if (size >= 150)
 			{
 				speed = 4;
+				health = 10;
 			}
 			else if (size >= 100)
 			{
 				speed = 5;
+				health = 8;
 			}
 			else if (size >= 80)
 			{
 				speed = 9;
+				health = 7;
 			}
 			else if (size >= 50)
 			{
 				speed = 12;
+				health = 4;
 			}
 			else if (size >= 30)
 			{
 				speed = 15;
+				health = 1;
 			}
 
 			std::ostringstream ostr;
 			ostr << debrisType;
-			session.addEnemyTypes(Debris::getInstance(1800, rand() % 650 - 30, size, size, "asteroid" + ostr.str() + ".png", speed));
+			session.addEnemyTypes(Debris::getInstance(1800, rand() % 650 - 30, size, size, "asteroid" + ostr.str() + ".png", speed, health));
 			debrisType++;
 			if (debrisType > debrisTypes)
 			{
