@@ -2,10 +2,10 @@
 #define BACKGROUND_H
 
 #include "Component.h"
-#include <string>
-#include <SDL2/SDL.h>
+#include "System.h"
+#include <SDL2/SDL_image.h>
 
-namespace cwing
+namespace space_invaders
 {
     class Background : public Component
     {

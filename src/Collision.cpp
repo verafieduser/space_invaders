@@ -1,15 +1,9 @@
-#include <SDL2/SDL_ttf.h>
 #include "System.h"
 #include "Collision.h"
-#include <SDL2/SDL_image.h>
 #include "Bullet.h"
-#include "Protagonist.h"
-#include "Enemy.h"
-#include "Debris.h"
 #include <iostream>
-#include <string>
 
-namespace cwing
+namespace space_invaders
 {
     bool Collision::AABB(const SDL_Rect &rectA, const SDL_Rect &rectB)
     {

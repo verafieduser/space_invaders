@@ -5,7 +5,7 @@
 #include <SDL2/SDL.h>
 #include "Component.h"
 
-namespace cwing
+namespace space_invaders
 {
     class Collision
     {

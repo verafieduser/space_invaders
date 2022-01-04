@@ -2,9 +2,9 @@
 #include <iostream>
 #include "System.h"
 #include <SDL2/SDL_image.h>
-#include <string>
+// #include <string>
 
-namespace cwing
+namespace space_invaders
 {
     Healthbar::Healthbar(int x, int y, int w, int h, std::string full_health_path, std::string half_health_path, std::string low_health_path) : Component(x, y, w, h)
     {

@@ -1,29 +1,11 @@
 #include <SDL2/SDL.h>
 #include "Background.h"
-#include "Label.h"
 #include "Session.h"
-#include "Button.h"
-#include "Sprite.h"
-#include "Debris.h"
-#include "Protagonist.h"
-#include <string>
-#include <iostream>
-#include "Bullet.h"
-#include "Enemy.h"
-#include "Healthbar.h"
 #include "Score.h"
 #include "System.h"
-#include <sstream>
-#include <time.h>
-#include "DynamicBackground.h"
-#include "Controller.h"
 #include "Spawner.h"
 
-// Paths to resource folders. Change to your own path!
-//std::string resPath = "./resources/";
-
-using namespace std;
-using namespace cwing;
+using namespace space_invaders;
 
 Session ses;
 int amountOfEnemiesToSpawn = 100;

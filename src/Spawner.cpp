@@ -1,12 +1,11 @@
 #include <sstream>
 #include "Spawner.h"
-#include "Controller.h"
 #include "Protagonist.h"
 #include "DynamicBackground.h"
 #include "Debris.h"
 #include "Enemy.h"
 
-namespace cwing
+namespace space_invaders
 {
 	Spawner::Spawner(Session &session) : session(session)
 	{
@@ -24,9 +23,6 @@ namespace cwing
 		Healthbar* healthbar = Healthbar::getInstance(20, 20, 200, 80, "full_health.png", "half_health.png", "low_health.png");
 		Healthbar& health = *healthbar;
 		Protagonist *protagonist = Protagonist::getInstance(200, 200, 100, 100, "protagonist.png", controller, health);
-		//protagonist->setHealthbar(healthbar);
-		// Controller *c = system.get_controller();
-		// protagonist->setController(c);
 		session.add(protagonist);
 		session.add(healthbar);
 	}

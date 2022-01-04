@@ -1,14 +1,11 @@
 #ifndef SESSION_H
 #define SESSION_H
 
-#include <string>
 #include <vector>
 #include "Component.h"
-#include <SDL2/SDL.h>
-#include "Controller.h"
 #include "System.h"
 
-namespace cwing
+namespace space_invaders
 {
 
 	class Session

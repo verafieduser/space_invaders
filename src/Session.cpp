@@ -1,17 +1,12 @@
-#include <SDL2/SDL.h>
 #include <iostream>
-#include <vector>
 #include <algorithm>
 #include <sstream>
-#include "Background.h"
 #include "Collision.h"
 #include "Session.h"
-#include "System.h"
 
-namespace cwing
-{
 #define FPS 60;
-
+namespace space_invaders
+{
 	Session::~Session()
 	{
 		//TODO: should we have something here perhaps?

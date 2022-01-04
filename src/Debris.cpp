@@ -1,18 +1,14 @@
 #include "Debris.h"
-#include "Sprite.h"
-#include <SDL2/SDL_ttf.h>
 #include "System.h"
-#include <SDL2/SDL_image.h>
-#include <iostream>
 
-namespace cwing
+namespace space_invaders
 {
 
     Debris::Debris(int x, int y, int w, int h, std::string image_path, int speed, short int hp) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-        SPEED = speed;
-        srand(SPEED + x + y + w + h);
+        speed = speed;
+        srand(speed + x + y + w + h);
         spinEveryXFrame = rand() % 3 + 3;
         spinDir = rand() % 2 - 1;
         if (spinDir == 0)
@@ -35,7 +31,7 @@ namespace cwing
 
     void Debris::moveLeft()
     {
-        int value = -1 * SPEED;
+        int value = -1 * speed;
         setX(value);
     }
 
@@ -60,7 +56,7 @@ namespace cwing
         spinCounter++;
         if (spinCounter == spinEveryXFrame)
         {
-            spinDebris(SPEED);
+            spinDebris(speed);
             spinCounter = 0;
         }
 

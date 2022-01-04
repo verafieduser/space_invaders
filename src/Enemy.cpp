@@ -1,11 +1,11 @@
 #include "Enemy.h"
-#include "Sprite.h"
+// #include "Sprite.h"
 #include "Bullet.h"
 #include "System.h"
 #include <SDL2/SDL_image.h>
-#include <iostream>
+// #include <iostream>
 
-namespace cwing
+namespace space_invaders
 {
 
     Enemy::Enemy(int x, int y, int w, int h, std::string image_path, int randomSeed) : Sprite(x, y, w, h, image_path)
@@ -15,7 +15,7 @@ namespace cwing
         health = 1;
         srand(randomSeed);
         movementPattern = rand() % 3;
-        SPEED = (rand() % 3) + 2;           //could also be affected by difficulty setting
+        speed = (rand() % 3) + 2;           //could also be affected by difficulty setting
         shootingSpeed = rand() % 200 + 100; //could be affected in a difficuly setting thing available in system?
     }   
 
@@ -31,12 +31,12 @@ namespace cwing
 
     Component *Enemy::shoot()
     {
-        return Bullet::getInstance((getX() - getW() - SPEED - 1), (getY() + 40), 100, 20, "laser2.png", 13, false);
+        return Bullet::getInstance((getX() - getW() - speed - 1), (getY() + 40), 100, 20, "laser2.png", 13, false);
     }
 
     void Enemy::moveLeft()
     {
-        int value = -1 * SPEED;
+        int value = -1 * speed;
         setX(value);
     }
 

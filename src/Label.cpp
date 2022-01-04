@@ -1,11 +1,8 @@
 #include "Label.h"
 #include <SDL2/SDL_ttf.h>
 #include "System.h"
-#include <iostream>
-#include <string>
-using namespace std;
 
-namespace cwing
+namespace space_invaders
 {
 	Label::Label(int x, int y, int w, int h,
 				 std::string txt) : Component(x, y, w, h), text(txt)
@@ -30,6 +27,10 @@ namespace cwing
 	{
 		SDL_DestroyTexture(texture);
 	}
+
+	void Label::draw() const {
+		SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect());
+		}
 
 	void Label::setText(std::string newText)
 	{

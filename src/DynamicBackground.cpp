@@ -1,11 +1,7 @@
 #include "DynamicBackground.h"
-#include <iostream>
-#include "Sprite.h"
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
 #include "System.h"
 
-namespace cwing
+namespace space_invaders
 {
 
     DynamicBackground *DynamicBackground::getInstance(int x, int y, int w, int h, std::string image_path)
@@ -18,7 +14,7 @@ namespace cwing
         if (speedCounter == moveEveryXFrame)
         {
             moveLeft();
-            // spinImage(SPEED);
+            // spinImage(speed);
             speedCounter = -1;
         }
 
@@ -47,7 +43,7 @@ namespace cwing
     void DynamicBackground::moveLeft()
     {
 
-        int value = -1 * SPEED;
+        int value = -1 * speed;
         setX(value);
     }
 
@@ -60,9 +56,9 @@ namespace cwing
         imagepath = image_path;
         name = "DynamicBackground";
         collidable = false;
-        SPEED = 1;
+        speed = 1;
         moveEveryXFrame = 2;
-        // srand(SPEED+x+y+w+h);
+        // srand(speed+x+y+w+h);
         // spinDir = rand() % 2-1;
         // if (spinDir == 0){
         //     spinDir = spinDir+1;

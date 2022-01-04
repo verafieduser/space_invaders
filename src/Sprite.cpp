@@ -1,10 +1,7 @@
 #include "Sprite.h"
-#include <SDL2/SDL_ttf.h>
-#include "System.h"
-#include <SDL2/SDL_image.h>
-#include <iostream>
 
-namespace cwing
+
+namespace space_invaders
 {
 
 	Sprite::Sprite(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
@@ -90,7 +87,7 @@ namespace cwing
 	{
 		if (isMovementAllowed(UP))
 		{
-			int value = -1 * SPEED;
+			int value = -1 * speed;
 			setY(value);
 		}
 	}
@@ -99,7 +96,7 @@ namespace cwing
 	{
 		if (isMovementAllowed(DOWN))
 		{
-			setY(SPEED);
+			setY(speed);
 		}
 	}
 
@@ -107,7 +104,7 @@ namespace cwing
 	{
 		if (isMovementAllowed(LEFT))
 		{
-			int value = -1 * SPEED;
+			int value = -1 * speed;
 			setX(value);
 		}
 	}
@@ -116,7 +113,7 @@ namespace cwing
 	{
 		if (isMovementAllowed(RIGHT))
 		{
-			setX(SPEED);
+			setX(speed);
 		}
 	}
 

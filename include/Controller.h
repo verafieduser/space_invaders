@@ -3,7 +3,7 @@
 
 #include <SDL2/SDL.h>
 
-namespace cwing
+namespace space_invaders
 {
     class Controller
     {

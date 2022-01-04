@@ -1,9 +1,6 @@
 #include "Background.h"
-#include <SDL2/SDL_ttf.h>
-#include "System.h"
-#include <SDL2/SDL_image.h>
-#include <string>
-namespace cwing
+
+namespace space_invaders
 {
     Background::Background(int w, int h, std::string background_image_path) : Component(0,
                                                                                         0, w, h)

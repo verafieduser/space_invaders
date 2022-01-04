@@ -3,11 +3,9 @@
 
 #include "Sprite.h"
 #include "Healthbar.h"
-#include <SDL2/SDL.h>
-#include <string>
 #include "Controller.h"
 
-namespace cwing
+namespace space_invaders
 {
 
     class Protagonist : public Sprite

@@ -1,21 +1,12 @@
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_ttf.h>
-#include <SDL2/SDL_image.h>
 #include "Bullet.h"
-#include "Sprite.h"
-#include "Session.h"
-#include "System.h"
-#include "Collision.h"
 
-namespace cwing
+namespace space_invaders
 {
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)//, SPEED(speed), isProtagonistBullet(isFromProtagonist)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path), isProtagonistBullet(isFromProtagonist)
     {
         name = "Bullet";
-        sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         health = 1;
-        isProtagonistBullet = isFromProtagonist;
-        SPEED = speed;
+        speed = speed;
         
         if (isFromProtagonist)
         {
@@ -39,12 +30,12 @@ namespace cwing
 
     void Bullet::moveRight()
     {
-        setX(SPEED);
+        setX(speed);
     }
 
     void Bullet::moveLeft()
     {
-        int value = -1 * SPEED;
+        int value = -1 * speed;
         setX(value);
     }
 

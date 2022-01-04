@@ -4,7 +4,7 @@
 #include <SDL2/SDL.h>
 #include <string>
 
-namespace cwing
+namespace space_invaders
 {
 	class Component
 	{

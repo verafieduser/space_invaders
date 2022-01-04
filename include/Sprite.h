@@ -2,12 +2,11 @@
 #define SPRITE_H
 
 #include "Component.h"
-#include "Session.h"
-#include <SDL2/SDL.h>
-#include <string>
-#include "Controller.h"
+#include "System.h"
+#include <SDL2/SDL_image.h>
+#include <iostream>
 
-namespace cwing
+namespace space_invaders
 {
 	class Sprite : public Component
 	{
@@ -20,7 +19,7 @@ namespace cwing
 			RIGHT
 		};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
-		int SPEED = 20;
+
 
 		const bool isOutOfBounds() const;
 		const bool isOutOfBoundsRight() const;
@@ -45,7 +44,7 @@ namespace cwing
         const Sprite &operator=(const Sprite&) = delete;
 		SDL_Texture *sprite;
 		short int health;
-	// private:
+		int speed = 20;
 	};
 }
 

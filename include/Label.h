@@ -1,11 +1,7 @@
 #ifndef LABEL_H
 #define LABEL_H
 #include "Component.h"
-#include <string>
-#include <SDL2/SDL.h>
-#include "System.h"
-#include "Session.h"
-namespace cwing
+namespace space_invaders
 {
 
     class Label : public Component
@@ -18,7 +14,7 @@ namespace cwing
         void kill(){};
         void takeDamage(){};
         void removal() { this->~Label(); };
-        void draw() const { SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()); }
+        void draw() const;
         void setColor(SDL_Color col) { color = col; }
         const SDL_Color &getColor() const { return color; };
         const SDL_Color &getOriginalColor() const { return originalColor; };

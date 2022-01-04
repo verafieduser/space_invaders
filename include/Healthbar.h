@@ -2,10 +2,8 @@
 #define HEALTHBAR_H
 
 #include "Component.h"
-#include <SDL2/SDL.h>
-#include <string>
 
-namespace cwing
+namespace space_invaders
 {
     class Healthbar : public Component
     {

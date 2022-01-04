@@ -2,11 +2,9 @@
 #define BULLET_H
 
 #include "Sprite.h"
-#include "Session.h"
-#include <SDL2/SDL.h>
-#include <string>
+// #include "Session.h"
 
-namespace cwing
+namespace space_invaders
 {
     class Bullet : public Sprite
     {

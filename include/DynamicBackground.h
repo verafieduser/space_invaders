@@ -2,9 +2,8 @@
 #define DYNAMIC_BACKGROUND_H
 
 #include "Sprite.h"
-#include <SDL2/SDL.h>
 
-namespace cwing
+namespace space_invaders
 {
     class DynamicBackground : public Sprite
     {

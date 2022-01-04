@@ -1,8 +1,5 @@
 #include <iostream>
 #include "System.h"
-#include <SDL2/SDL.h>
-#include <iostream>
-#include "Session.h"
 
 std::string IMAGES_PATH = "./images/";
 std::string SOUNDS_PATH = "./sounds/";
@@ -10,7 +7,7 @@ std::string FONTS_PATH = "./fonts/";
 int SCREEN_WIDTH = 1600;
 int SCREEN_HEIGHT = 720;
 
-namespace cwing
+namespace space_invaders
 {
 	System::System()
 	{

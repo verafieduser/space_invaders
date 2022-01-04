@@ -1,18 +1,14 @@
 #include "Protagonist.h"
-#include "Sprite.h"
+// #include "Sprite.h"
 #include "Bullet.h"
-#include "Controller.h"
-#include "System.h"
-#include <SDL2/SDL_image.h>
-#include <iostream>
-#include <string>
+//#include "Controller.h"
 
-namespace cwing
+
+namespace space_invaders
 {
     Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar& healthbar) : Sprite(x, y, w, h, image_path), controller(controller), healthbar(healthbar)
     {
-        sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-        SPEED = 10;
+        speed = 10;
         health = 3;
         name = "Protagonist";
     }
@@ -31,7 +27,7 @@ namespace cwing
 
     Component *Protagonist::shoot()
     {
-        return Bullet::getInstance((getX() + getW() + SPEED + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
+        return Bullet::getInstance((getX() + getW() + speed + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
     }
 
     Component *Protagonist::perform(SDL_Event event)

@@ -1,6 +1,6 @@
 #include "Component.h"
 
-namespace cwing
+namespace space_invaders
 {
 
 	Component::Component(int x, int y, int w, int h) : rect{x, y, w, h}

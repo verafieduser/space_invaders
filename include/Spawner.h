@@ -4,9 +4,8 @@
 #include "Controller.h"
 #include "Session.h"
 #include "System.h"
-#include <vector>
 
-namespace cwing
+namespace space_invaders
 {
     class Spawner
     {
