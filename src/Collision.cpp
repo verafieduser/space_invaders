@@ -26,25 +26,24 @@ namespace space_invaders
             return false;
         }
 
-        if (name1 == "Protagonist" && name2 == "Bullet")
+        if ((name1 == "Protagonist" && name2 == "Enemy Bullet") || (name2 == "Protagonist" && name1 == "Enemy Bullet"))
         {
-            Bullet* bullet = dynamic_cast<Bullet *> (c2);
-            if (!bullet->fromProtagonist() && Collision::AABB(c2->getRect(), c->getRect()))
+            if (Collision::AABB(c2->getRect(), c->getRect()))
             {
                 return true;
             }
         }
 
-        else if (name2 == "Bullet" && name1 == "Enemy" )
+        else if ((name2 == "Protagonist Bullet" && name1 == "Enemy")  || (name1 == "Protagonist Bullet" && name2 == "Enemy"))
         {
-            Bullet* bullet = dynamic_cast<Bullet *> (c2);
-            if (bullet->fromProtagonist() && Collision::AABB(c2->getRect(), c->getRect()))
+            if (Collision::AABB(c2->getRect(), c->getRect()))
             {
                 return true;
             }
         }
 
-        else if (name2 == "Bullet" && name1 == "Debris")
+        else if (((name2 == "Protagonist Bullet" && name1 == "Debris") || (name1 == "Protagonist Bullet" && name2 == "Debris")) || 
+                ((name2 == "Enemy Bullet" && name1 == "Debris") || (name1 == "Enemy Bullet" && name2 == "Debris")))
         {
             if (Collision::AABB(c2->getRect(), c->getRect()))
             {
@@ -62,7 +61,7 @@ namespace space_invaders
         //     }
         // }
 		
-        else if (name1 == "Protagonist" && name2 == "Debris")
+        else if ((name1 == "Protagonist" && name2 == "Debris") || (name2 == "Protagonist" && name1 == "Debris"))
         {
             if (Collision::AABB(c->getRect(), c2->getRect()))
             {
@@ -71,7 +70,7 @@ namespace space_invaders
             }
         }
 
-        else if (name1 == "Protagonist" && name2 == "Enemy")
+        else if ((name1 == "Protagonist" && name2 == "Enemy") || (name2 == "Protagonist" && name1 == "Enemy"))
         {
             if (Collision::AABB(c2->getRect(), c->getRect()))
             {
@@ -80,7 +79,7 @@ namespace space_invaders
             }
         }
 
-        else if (name1 == "Bullet" && name2 == "Bullet")
+        else if ((name1 == "Enemy Bullet" && name2 == "Protagonist Bullet") || (name2 == "Enemy Bullet" && name1 == "Protagonist Bullet"))
         {
             if (Collision::AABB(c2->getRect(), c->getRect()))
             {

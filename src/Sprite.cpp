@@ -35,11 +35,11 @@ namespace space_invaders
 		{
 			if (this != c && Collision::canCollideWith(this, c))
 			{
-				this->takeDamage();
-				Sprite *sprite = dynamic_cast<Sprite *> (c);
-				if (sprite != NULL){
-					sprite->takeDamage();
-				}
+				takeDamage();
+				// Sprite *sprite = dynamic_cast<Sprite *> (c);
+				// if (sprite != NULL){
+				// 	sprite->takeDamage();
+				// }
 
 			}
 		}

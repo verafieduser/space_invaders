@@ -20,41 +20,43 @@ namespace space_invaders
 		};
 		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
 
-
 		const bool isOutOfBounds() const;
 		const bool isOutOfBoundsRight() const;
 		const bool isOutOfBoundsLeft() const;
 		const bool isMovementAllowed(Direction dir) const;
 		void kill();
 		void damageCalculation(std::vector<space_invaders::Component *> comps);
-		void takeDamage(){
-		std::cout<< name;
-		if(name == "Protagonist"){
-			return;
-		}
-		health--;
-		if (health <= 0)
+		void takeDamage()
 		{
-			kill();
-		}};
-		void collisionConsequences(std::vector<Component *>& c);
+			// std::cout << name;
+			// if (name == "Protagonist")
+			// {
+			// 	return;
+			// }
+			health--;
+			if (health <= 0)
+			{
+				kill();
+			}
+		};
+		void collisionConsequences(std::vector<Component *> &c);
 		void removal() { this->~Sprite(); };
 
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		Component *perform(std::vector<Component *>& comps);
+		Component *perform(std::vector<Component *> &comps);
 		void draw() const;
 		~Sprite();
 
 	protected:
 		Sprite(int x, int y, int w, int h, std::string images_path);
 		Sprite(const Sprite &sprite) = delete;
-        const Sprite &operator=(const Sprite&) = delete;
+		const Sprite &operator=(const Sprite &) = delete;
 		SDL_Texture *sprite;
 		short int health;
-		int speed;
+		int speed = 20;
 	};
 }
 
