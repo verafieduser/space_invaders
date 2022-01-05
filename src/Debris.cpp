@@ -49,9 +49,9 @@ namespace space_invaders
         angle = newAngle;
     }
 
-    Component *Debris::perform(SDL_Event event)
+    Component *Debris::perform(std::vector<Component *>& comps)
     {
-
+        collisionConsequences(comps);
         moveLeft();
         spinCounter++;
         if (spinCounter == spinEveryXFrame)
@@ -60,10 +60,9 @@ namespace space_invaders
             spinCounter = 0;
         }
 
-        if (health <= 0)
+        if (isKilled())
         {
             name = "Destroyed debris";
-            kill();
         }
         else if (isOutOfBoundsLeft())
         {

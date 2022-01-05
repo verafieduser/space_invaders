@@ -16,7 +16,7 @@ namespace space_invaders
         void spinDebris(const int &speed);
         void setAngle(const int &angle);
         void draw() const;
-        Component *perform(SDL_Event event);
+        Component *perform(std::vector<Component *>& comps);
         ~Debris();
 
     protected:

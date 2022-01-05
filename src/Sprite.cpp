@@ -1,5 +1,5 @@
 #include "Sprite.h"
-
+#include "Collision.h"
 
 namespace space_invaders
 {
@@ -29,9 +29,27 @@ namespace space_invaders
 		return false;
 	}
 
+	void Sprite::collisionConsequences(std::vector<Component *>& comps)
+	{
+		for (Component *c : comps)
+		{
+			if (this != c && Collision::canCollideWith(this, c))
+			{
+				this->takeDamage();
+				Sprite *sprite = dynamic_cast<Sprite *> (c);
+				if (sprite != NULL){
+					sprite->takeDamage();
+				}
+
+			}
+		}
+	}
+
+
+
 	const bool Sprite::isOutOfBoundsLeft() const
 	{
-		if (getX()+getW() < 0)
+		if (getX() + getW() < 0)
 		{
 			return true;
 		}
@@ -40,7 +58,7 @@ namespace space_invaders
 
 	const bool Sprite::isOutOfBoundsRight() const
 	{
-		if (getX()-getW() > SCREEN_WIDTH - getW())
+		if (getX() - getW() > SCREEN_WIDTH - getW())
 		{
 			return true;
 		}
@@ -122,7 +140,7 @@ namespace space_invaders
 		killed = true;
 	}
 
-	Component *Sprite::perform(SDL_Event event)
+	Component *Sprite::perform(std::vector<Component *>& comps)
 	{
 		return NULL;
 	}

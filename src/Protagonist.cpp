@@ -3,40 +3,49 @@
 #include "Bullet.h"
 //#include "Controller.h"
 
-
 namespace space_invaders
 {
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar& healthbar) : Sprite(x, y, w, h, image_path), controller(controller), healthbar(healthbar)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar) : Sprite(x, y, w, h, image_path), controller(controller), healthbar(healthbar)
     {
         speed = 10;
         health = 3;
         name = "Protagonist";
     }
 
-    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar& healthbar)
+    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar)
     {
         return new Protagonist(x, y, w, h, image_path, controller, healthbar);
     }
 
     Protagonist::~Protagonist()
     {
-       healthbar.kill();
+        healthbar.kill();
         SDL_DestroyTexture(sprite);
     }
 
+    void Protagonist::takeDamage()
+    {
+        if (damageCooldown == 0)
+        {
+            healthbar.updateHealth(-1);
+            health--;
+        }
+        damageCooldown = 60;
+    };
 
     Component *Protagonist::shoot()
     {
         return Bullet::getInstance((getX() + getW() + speed + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
     }
 
-    Component *Protagonist::perform(SDL_Event event)
+    Component *Protagonist::perform(std::vector<Component *>& comps)
     {
-        if (health <= 0)
-        {
-            kill();
-            //TODO: return explosion here?
-        }
+        collisionConsequences(comps);
+        // if (health <= 0)
+        // {
+        //     kill();
+        //     //TODO: return explosion here?
+        // }
 
         if (damageCooldown > 0)
         {

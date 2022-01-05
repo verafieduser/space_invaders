@@ -11,7 +11,7 @@ namespace space_invaders
     public:
         static Enemy *getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed);
         Component *shoot();
-        Component *perform(SDL_Event event);
+        Component *perform(std::vector<Component *>& comps);
         int movementPattern;
         int movementCounter = 0;
         int shootingSpeed;

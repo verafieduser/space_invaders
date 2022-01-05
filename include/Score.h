@@ -12,7 +12,7 @@ namespace space_invaders
     {
     public:
         static Score *getInstance(int x, int y, int w, int h, std::string txt, Session &session);
-        Component *perform(SDL_Event event);
+        Component *perform(std::vector<Component *>& comps);
         void removal() { this->~Score(); };
         ~Score();
 

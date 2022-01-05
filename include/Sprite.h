@@ -26,15 +26,25 @@ namespace space_invaders
 		const bool isOutOfBoundsLeft() const;
 		const bool isMovementAllowed(Direction dir) const;
 		void kill();
-		void takeDamage() { health--; };
-
+		void damageCalculation(std::vector<space_invaders::Component *> comps);
+		void takeDamage(){
+		std::cout<< name;
+		if(name == "Protagonist"){
+			return;
+		}
+		health--;
+		if (health <= 0)
+		{
+			kill();
+		}};
+		void collisionConsequences(std::vector<Component *>& c);
 		void removal() { this->~Sprite(); };
 
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		Component *perform(SDL_Event event);
+		Component *perform(std::vector<Component *>& comps);
 		void draw() const;
 		~Sprite();
 
@@ -44,7 +54,7 @@ namespace space_invaders
         const Sprite &operator=(const Sprite&) = delete;
 		SDL_Texture *sprite;
 		short int health;
-		int speed = 20;
+		int speed;
 	};
 }
 

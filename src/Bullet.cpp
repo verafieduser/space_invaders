@@ -2,12 +2,18 @@
 
 namespace space_invaders
 {
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path), isProtagonistBullet(isFromProtagonist)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)
     {
         name = "Bullet";
+        isProtagonistBullet = isFromProtagonist;
+        // if(isFromProtagonist){
+        //     name = "Protagonist bullet";
+        // } else {
+        //     name = "Enemy bullet";
+        // }
         health = 1;
         speed = speed;
-        
+
         if (isFromProtagonist)
         {
             dir = RIGHT;
@@ -39,12 +45,12 @@ namespace space_invaders
         setX(value);
     }
 
-    Component *Bullet::perform(SDL_Event event)
+    Component *Bullet::perform(std::vector<Component *> &comps)
     {
         if (dir == RIGHT)
         {
             moveRight();
-            if (isOutOfBoundsRight() || health <= 0)
+            if (isOutOfBoundsRight())
             {
                 kill();
             }
@@ -52,11 +58,12 @@ namespace space_invaders
         else
         {
             moveLeft();
-            if (isOutOfBoundsLeft() || health <= 0)
+            if (isOutOfBoundsLeft())
             {
                 kill();
             }
         }
+        collisionConsequences(comps);
 
         return NULL;
     }

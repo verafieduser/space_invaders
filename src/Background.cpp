@@ -20,10 +20,10 @@ namespace space_invaders
         SDL_DestroyTexture(bg_tex);
     }
 
-    Component *Background::perform(SDL_Event event)
-    {
-        return NULL;
-    }
+    // Component *Background::perform(std::vector<Component *> c)
+    // {
+    //     return NULL;
+    // }
 
     void Background::kill() {}
 

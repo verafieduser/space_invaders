@@ -33,12 +33,12 @@ namespace space_invaders
 		void render(std::vector<Component *> &components);
 		void delayToNextTick(Uint32 nextTick);
 		void gameOver();
-		void gameActions(SDL_Event &event);
+		void gameActions();
 		void loadPendingComponents();
 		void removeComponents(std::vector<Component *> &components);
 		void removeComponents(std::vector<Component *> &components, int offset, bool dontDelete);
 		void enemySpawner();
-		void damageCalculation(Component *c);
+		// void damageCalculation(Component *c);
 		void deathCalculation(Component *c);
 		void cleanUp();
 

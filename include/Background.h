@@ -12,7 +12,7 @@ namespace space_invaders
     public:
         static Background *getInstance(int w, int h, std::string background_image_path);
         virtual ~Background();
-        Component *perform(SDL_Event event);
+        Component *perform(std::vector<Component *>& comps){return NULL;};
         void removal() { this->~Background(); };
         void draw() const;
         void takeDamage(){};

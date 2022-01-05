@@ -9,7 +9,7 @@ namespace space_invaders
         return new DynamicBackground(x, y, w, h, image_path);
     }
 
-    Component *DynamicBackground::perform(SDL_Event event)
+    Component *DynamicBackground::perform(std::vector<Component *>& comps)
     {
         if (speedCounter == moveEveryXFrame)
         {

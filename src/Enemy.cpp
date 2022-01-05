@@ -40,13 +40,15 @@ namespace space_invaders
         setX(value);
     }
 
-    Component *Enemy::perform(SDL_Event event)
+    Component *Enemy::perform(std::vector<Component *>& comps)
     {
-        if (health <= 0)
+        collisionConsequences(comps);
+        
+        if (isKilled())
         {
             name = "Defeated enemy";
-            kill();
         }
+
         else if (isOutOfBoundsLeft())
         {
             kill();

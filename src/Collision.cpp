@@ -17,59 +17,72 @@ namespace space_invaders
         return false;
     }
 
-    bool Collision::canCollide(Component *c, Component *c2)
-    {
+    const bool Collision::canCollideWith(const Component *c, Component *c2) {
+
         std::string name1 = c->getName();
         std::string name2 = c2->getName();
 
+        if(!c->isCollidable() || !c2->isCollidable()){
+            return false;
+        }
+
         if (name1 == "Protagonist" && name2 == "Bullet")
         {
-            Bullet *b = dynamic_cast<Bullet *>(c2);
-            if (!b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
+            Bullet* bullet = dynamic_cast<Bullet *> (c2);
+            if (!bullet->fromProtagonist() && Collision::AABB(c2->getRect(), c->getRect()))
             {
                 return true;
             }
         }
 
-        if (name1 == "Bullet" && name2 == "Enemy")
+        else if (name2 == "Bullet" && name1 == "Enemy" )
         {
-            Bullet *b = dynamic_cast<Bullet *>(c);
-            if (b->isFromProtagonist() && Collision::AABB(c->getRect(), c2->getRect()))
+            Bullet* bullet = dynamic_cast<Bullet *> (c2);
+            if (bullet->fromProtagonist() && Collision::AABB(c2->getRect(), c->getRect()))
             {
                 return true;
             }
         }
 
-        if (name1 == "Bullet" && name2 == "Debris")
+        else if (name2 == "Bullet" && name1 == "Debris")
         {
-            if (Collision::AABB(c->getRect(), c2->getRect()))
+            if (Collision::AABB(c2->getRect(), c->getRect()))
             {
 
                 return true;
             }
         }
 
-        if (name1 == "Protagonist" && name2 == "Debris")
-        {
-            if (Collision::AABB(c->getRect(), c2->getRect()))
-            {
+        // if (name1 == "Bullet" && name2 == "Debris")
+        // {
+        //     if (Collision::AABB(c2->getRect(), c->getRect()))
+        //     {
 
-                return true;
-            }
-        }
-
-        if (name1 == "Protagonist" && name2 == "Enemy")
-        {
-            if (Collision::AABB(c->getRect(), c2->getRect()))
-            {
-
-                return true;
-            }
-        }
-
-        if (name1 == "Bullet" && name2 == "Bullet")
+        //         return true;
+        //     }
+        // }
+		
+        else if (name1 == "Protagonist" && name2 == "Debris")
         {
             if (Collision::AABB(c->getRect(), c2->getRect()))
+            {
+
+                return true;
+            }
+        }
+
+        else if (name1 == "Protagonist" && name2 == "Enemy")
+        {
+            if (Collision::AABB(c2->getRect(), c->getRect()))
+            {
+
+                return true;
+            }
+        }
+
+        else if (name1 == "Bullet" && name2 == "Bullet")
+        {
+            if (Collision::AABB(c2->getRect(), c->getRect()))
             {
 
                 return true;
@@ -78,5 +91,4 @@ namespace space_invaders
 
         return false;
     }
-
 }

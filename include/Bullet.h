@@ -10,13 +10,13 @@ namespace space_invaders
     {
     public:
         static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist);
-
+        bool isProtagonistBullet;
+        bool fromProtagonist(){return isProtagonistBullet;};
         int SPEED = 40;
         Direction dir;
         void moveRight();
         void moveLeft();
-        bool isFromProtagonist() const { return isProtagonistBullet; };
-        Component *perform(SDL_Event event);
+        Component *perform(std::vector<Component *>& c);
         ~Bullet();
 
     protected:
@@ -24,7 +24,6 @@ namespace space_invaders
         Bullet(const Bullet &bullet) = delete;
         const Bullet &operator=(const Bullet &) = delete;
     private:
-        bool isProtagonistBullet;
     };
 }
 

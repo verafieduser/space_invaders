@@ -11,7 +11,7 @@ namespace space_invaders
     {
     public:
         static bool AABB(const SDL_Rect &rectA, const SDL_Rect &rectB);
-        static bool canCollide(Component *c, Component *c2);
+        static const bool canCollideWith(const Component *c, Component *c2);
     };
 }
 

@@ -9,7 +9,7 @@ namespace space_invaders
     {
     public:
         static DynamicBackground *getInstance(int x, int y, int w, int h, std::string image_path);
-        Component *perform(SDL_Event event);
+        Component *perform(std::vector<Component *>& comps);
         void moveLeft();
         void removal() { this->~DynamicBackground(); };
         void draw() const;

@@ -76,7 +76,7 @@ namespace space_invaders
 			// }
 
 			//TODO: we technically do not use the event parameter - it is sent into the perform of every comps, but no comps currently use it:
-			gameActions(event);
+			gameActions();
 			loadPendingComponents();
 			removeComponents(comps);
 			enemySpawner();
@@ -188,17 +188,17 @@ namespace space_invaders
 		toBeAdded.clear();
 	}
 
-	void Session::gameActions(SDL_Event &event)
+	void Session::gameActions()
 	{
 		for (Component *c : comps)
 		{
-			Component *newC = c->perform(event);
+			Component *newC = c->perform(comps);
 			if (newC != NULL)
 			{
 				add(newC);
 			}
 
-			damageCalculation(c);
+			// damageCalculation(c);
 
 			if (c->isKilled())
 			{
@@ -212,18 +212,18 @@ namespace space_invaders
 		}
 	}
 
-	void Session::damageCalculation(Component *c)
-	{
-		for (Component *c2 : comps)
-		{
-			if (c != c2 && Collision::canCollide(c, c2))
-			{
-				c->takeDamage();
-				c2->takeDamage();
-				//TODO: create damage sprite? takeDamage maybe should return a component?
-			}
-		}
-	}
+	// void Session::damageCalculation(Component *c)
+	// {
+	// 	for (Component *c2 : comps)
+	// 	{
+	// 		if (c != c2 && Collision::canCollide(c, c2))
+	// 		{
+	// 			c->takeDamage();
+	// 			c2->takeDamage();
+	// 			//TODO: create damage sprite? takeDamage maybe should return a component?
+	// 		}
+	// 	}
+	// }
 
 	void Session::deathCalculation(Component *c)
 	{

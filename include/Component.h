@@ -3,6 +3,7 @@
 
 #include <SDL2/SDL.h>
 #include <string>
+#include <vector>
 
 namespace space_invaders
 {
@@ -13,8 +14,7 @@ namespace space_invaders
 		virtual void draw() const = 0;
 		virtual void removal() = 0;
 		virtual void kill() = 0;
-		virtual Component *perform(SDL_Event event) = 0;
-		virtual void takeDamage() = 0;
+		virtual Component *perform(std::vector<Component *>& c) = 0;
 
 		//virtual void tick() = 0;
 		const bool isKilled() const { return killed; };
@@ -30,6 +30,8 @@ namespace space_invaders
 		const int getH() const { return rect.h; };
 		const std::string getName() const { return name; }; // const int getY() const {return rect.y;};
 															// const int getX() const {return rect.x;};
+		const bool canCollideWith(const Component *c) const;
+
 
 	protected:
 		Component(int x, int y, int w, int h);
