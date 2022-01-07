@@ -2,12 +2,12 @@
 
 namespace space_invaders
 {
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist) : Sprite(x, y, w, h, image_path), isProtagonistBullet(isFromProtagonist)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int s, bool isFromProtagonist) : Sprite(x, y, w, h, image_path), isProtagonistBullet(isFromProtagonist)
     {
         name = "Bullet";
         health = 1;
-        speed = speed;
-        
+        speed = s;
+
         if (isFromProtagonist)
         {
             dir = RIGHT;
