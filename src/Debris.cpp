@@ -4,10 +4,10 @@
 namespace space_invaders
 {
 
-    Debris::Debris(int x, int y, int w, int h, std::string image_path, int speed, short int hp) : Sprite(x, y, w, h, image_path)
+    Debris::Debris(int x, int y, int w, int h, std::string image_path, int s, short int hp) : Sprite(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-        speed = speed;
+        speed = s;
         srand(speed + x + y + w + h);
         spinEveryXFrame = rand() % 3 + 3;
         spinDir = rand() % 2 - 1;
