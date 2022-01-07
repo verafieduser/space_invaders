@@ -33,8 +33,4 @@ namespace space_invaders
 	extern System sys;
 }
 
-// extern std::string fontsPath;
-// extern std::string imagesPath;
-// extern std::string soundsPath;
-
 #endif

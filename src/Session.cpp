@@ -75,8 +75,6 @@ namespace space_invaders
 			// 	}
 			// }
 
-			//TODO: we technically do not use the event parameter - it is sent into the perform of every comps, but no comps currently use it:
-			gameActions();
 			loadPendingComponents();
 			removeComponents(comps);
 			enemySpawner();
@@ -211,19 +209,6 @@ namespace space_invaders
 			}
 		}
 	}
-
-	// void Session::damageCalculation(Component *c)
-	// {
-	// 	for (Component *c2 : comps)
-	// 	{
-	// 		if (c != c2 && Collision::canCollide(c, c2))
-	// 		{
-	// 			c->takeDamage();
-	// 			c2->takeDamage();
-	// 			//TODO: create damage sprite? takeDamage maybe should return a component?
-	// 		}
-	// 	}
-	// }
 
 	void Session::deathCalculation(Component *c)
 	{

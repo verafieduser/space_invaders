@@ -17,12 +17,11 @@ namespace space_invaders
 
     Score::~Score()
     {
-        SDL_DestroyTexture(texture);
+        SDL_DestroyTexture(sprite);
     }
 
-    Component *Score::perform(const std::vector<Component *>& comps)
+    const int Score::typeOfScore()
     {
-
         int value;
         if (message == "SCORE")
         {
@@ -49,18 +48,16 @@ namespace space_invaders
         {
             value = ses.getDebrisDestroyed();
         }
-        
 
-        std::ostringstream ostr;
-        ostr << value;
-        setText(message + ": " + ostr.str());
+        return value;
+    }
 
+    void Score::newLevelShowcase()
+    {
         if (newLevel)
         {
-
             if (counter == 0)
             {
-
                 setX(showcaseLocation);
                 setY(showcaseLocation);
                 setW(showcaseW);
@@ -83,7 +80,15 @@ namespace space_invaders
                 setColor(getOriginalColor());
             }
         }
+    }
 
+    Component *Score::perform(const std::vector<Component *> &comps)
+    {
+        std::ostringstream ostr;
+        ostr << typeOfScore();
+        setText(message + ": " + ostr.str());
+
+        newLevelShowcase();
         return NULL;
     }
 }

@@ -10,8 +10,8 @@ namespace space_invaders
     class Spawner
     {
     public:
-        ~Spawner();
         static Spawner *getInstance(Session &session);
+        ~Spawner();
         void createProtagonist();
         void createEnemies(int amountOfEnemies, int enemyTypes);
         void createDebris(int amountOfDebris, int debrisTypes);

@@ -12,25 +12,27 @@ namespace space_invaders
     {
     public:
         static Score *getInstance(int x, int y, int w, int h, std::string txt, Session &session);
-        Component *perform(const std::vector<Component *>& comps);
-        void removal() { this->~Score(); };
         ~Score();
+        Component *perform(const std::vector<Component *> &comps);
+        void removal() { this->~Score(); };
+        
 
     protected:
         Score(int x, int y, int w, int h, std::string txt, Session &session);
 
     private:
-        Score(const Score& background) = delete;
-        const Score &operator=(const Score&) = delete;
-        std::string text, message;
-        SDL_Texture *texture;
+        Score(const Score &background) = delete;
+        const Score &operator=(const Score &) = delete;
+        const int typeOfScore();
+        void newLevelShowcase();
+        Session &ses;    
         bool newLevel = false;
         int showNewLevelForXFrames = 360;
-        Session &ses;
         int counter, levelValue = 0;
         int showcaseLocation = 100;
         int showcaseW = 200;
-        int showcaseH = 50;
+        int showcaseH = 50; 
+        std::string text, message;
         int originalW, originalH;
     };
 
