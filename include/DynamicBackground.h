@@ -9,23 +9,19 @@ namespace space_invaders
     {
     public:
         static DynamicBackground *getInstance(int x, int y, int w, int h, std::string image_path);
+        ~DynamicBackground();
         Component *perform(const std::vector<Component *>& comps);
-        void moveLeft();
         void removal() { this->~DynamicBackground(); };
         void draw() const;
-        void setAngle(const int &angle);
-        void spinImage(int &SPEED);
-        ~DynamicBackground();
-
+        
     protected:
         DynamicBackground(int x, int y, int w, int h, std::string images_path);
-
+        void moveLeft();
     private:
         DynamicBackground(const DynamicBackground &dynamicBackground) = delete;
         const DynamicBackground &operator=(const DynamicBackground &) = delete;
         int speedCounter = 0;
-        int moveEveryXFrame, spinDir;
-        float angle = 0;
+        int moveEveryXFrame;
         std::string imagepath;
     };
 }
