@@ -29,11 +29,12 @@ namespace space_invaders
         {
             healthbar.updateHealth(-1);
             health--;
-        }
+            damageCooldown = 60;
+        } 
         if(health <= 0){
             kill();
         }
-        damageCooldown = 60;
+        //damageCooldown = 60;
     };
 
     Component *Protagonist::shoot()
