@@ -1,7 +1,5 @@
 #include "Protagonist.h"
-// #include "Actor.h"
 #include "Bullet.h"
-//#include "Controller.h"
 
 namespace space_invaders
 {
@@ -42,21 +40,7 @@ namespace space_invaders
         return Bullet::getInstance((getX() + getW() + speed + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
     }
 
-    Component *Protagonist::perform(const std::vector<Component *>& comps)
-    {
-        collisionConsequences(comps);
-        // if (health <= 0)
-        // {
-        //     kill();
-        //     //TODO: return explosion here?
-        // }
-
-        if (damageCooldown > 0)
-        {
-            damageCooldown--;
-        }
-
-        shootingCooldown -= 1;
+    Component* Protagonist::protagonistControl(){
 
         const Uint8 *state = controller.getKeyboardState();
 
@@ -101,7 +85,22 @@ namespace space_invaders
         {
             shootingCooldown = 10;
             return shoot();
+        } else {
+            return NULL;
         }
-        return NULL;
+    }
+
+    Component *Protagonist::perform(const std::vector<Component *>& comps)
+    {
+        collisionConsequences(comps);
+
+        if (damageCooldown > 0)
+        {
+            damageCooldown--;
+        }
+
+        shootingCooldown -= 1;
+
+        return protagonistControl();
     }
 }

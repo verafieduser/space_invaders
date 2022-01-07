@@ -54,28 +54,4 @@ int main(int argc, char **argv)
 	return 0;
 }
 
-// TODO: add return EXIT_FAILURE där error händer?:
-
-//if (SDL_Init(SDL_INIT_EVERYTHING) < 0)
-// 	{
-// 		std::cout << "Error SDL2 Initialization : " << SDL_GetError();
-// 		return EXIT_FAILURE;
-// 	}
-
-// 	if (TTF_Init() < 0)
-// 	{
-// 		std::cout << "Error SDL_ttf Initialization : " << SDL_GetError();
-// 		return EXIT_FAILURE;
-// 	}
-
-//TODO: 	// Städa innan programmet avslutas!
-
-// 	SDL_DestroyTexture(bg_tex);
-// 	SDL_DestroyRenderer(renderer);
-// 	SDL_DestroyWindow(window);
-
-// 	TTF_Quit();
-// 	SDL_Quit();
-
-// 	return EXIT_SUCCESS;
-// }
+// TODO: EXIT_SUCCESS EXIT_FAILURE?

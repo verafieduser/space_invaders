@@ -13,7 +13,7 @@ namespace space_invaders
 		collidable = false;
 		SDL_Surface *surf = TTF_RenderText_Solid(sys.get_font(), text.c_str(), color);
 
-		texture = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
+		sprite = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
 		SDL_FreeSurface(surf);
 	}
 
@@ -22,23 +22,19 @@ namespace space_invaders
 	{
 		return new Label(x, y, w, h, txt);
 	}
-	
+
 	Label::~Label()
 	{
-		SDL_DestroyTexture(texture);
+		SDL_DestroyTexture(sprite);
 	}
-
-	void Label::draw() const {
-		SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect());
-		}
 
 	void Label::setText(std::string newText)
 	{
 		text = newText;
-		SDL_DestroyTexture(texture);
+		SDL_DestroyTexture(sprite);
 		SDL_Surface *surf = TTF_RenderText_Solid(sys.get_font(),
 												 text.c_str(), color);
-		texture = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
+		sprite = SDL_CreateTextureFromSurface(sys.get_ren(), surf);
 		SDL_FreeSurface(surf);
 	}
 }

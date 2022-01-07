@@ -17,7 +17,7 @@ namespace space_invaders
         movementPattern = rand() % 3;
         speed = (rand() % 3) + 2;           //could also be affected by difficulty setting
         shootingSpeed = rand() % 200 + 100; //could be affected in a difficuly setting thing available in system?
-    }   
+    }
 
     Enemy *Enemy::getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed)
     {
@@ -40,10 +40,10 @@ namespace space_invaders
         setX(value);
     }
 
-    Component *Enemy::perform(const std::vector<Component *>& comps)
+    Component *Enemy::perform(const std::vector<Component *> &comps)
     {
         collisionConsequences(comps);
-        
+
         if (isKilled())
         {
             name = "Defeated enemy";
@@ -55,6 +55,20 @@ namespace space_invaders
         }
 
         moveLeft();
+        enemyMovementPattern();
+
+        shootingCooldown -= 1;
+
+        if (shootingCooldown <= 0)
+        {
+            shootingCooldown = shootingSpeed;
+            return shoot();
+        }
+        return NULL;
+    }
+
+    void Enemy::enemyMovementPattern()
+    {
         switch (movementPattern)
         {
         case 0:
@@ -105,14 +119,5 @@ namespace space_invaders
             movementCounter++;
             break;
         }
-
-        shootingCooldown -= 1;
-
-        if (shootingCooldown <= 0)
-        {
-            shootingCooldown = shootingSpeed;
-            return shoot();
-        }
-        return NULL;
     }
 }

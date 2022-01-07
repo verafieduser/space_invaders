@@ -25,6 +25,7 @@ namespace space_invaders
     private:
         Protagonist(const Protagonist &protagonist) = delete;
         const Protagonist &operator=(const Protagonist &) = delete;
+        Component *protagonistControl();
         int shootingCooldown = 0;
         int damageCooldown = 0;
         Healthbar &healthbar;

@@ -24,7 +24,7 @@ namespace space_invaders
 
     Healthbar::~Healthbar()
     {
-        SDL_DestroyTexture(texture);
+        SDL_DestroyTexture(sprite);
     }
 
     void Healthbar::updateTexture()
@@ -47,24 +47,12 @@ namespace space_invaders
 
     void Healthbar::setTexture(std::string image_path)
     {
-        //TODO: should we destroy old texture here?
-        //SDL_DestroyTexture(texture);
-        texture = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+        sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
     }
 
     void Healthbar::updateHealth(int i)
     {
         health += i;
         updateTexture();
-    }
-
-    void Healthbar::draw() const
-    {
-        int success = SDL_RenderCopy(sys.get_ren(), texture, NULL, &getRect()) + 1;
-        if (!success)
-        {
-            std::cout << SDL_GetError() << " in RenderCopy sprite in Healthbar \n"
-                      << " file was " << name + "\n";
-        }
     }
 }

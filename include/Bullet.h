@@ -22,7 +22,6 @@ namespace space_invaders
         void moveLeft();
         
     private:
-
         Direction dir;
         bool isProtagonistBullet;
     };
