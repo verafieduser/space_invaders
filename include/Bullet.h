@@ -1,12 +1,12 @@
 #ifndef BULLET_H
 #define BULLET_H
 
-#include "Sprite.h"
+#include "Actor.h"
 // #include "Session.h"
 
 namespace space_invaders
 {
-    class Bullet : public Sprite
+    class Bullet : public Actor
     {
     public:
         static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist);
@@ -16,7 +16,7 @@ namespace space_invaders
         Direction dir;
         void moveRight();
         void moveLeft();
-        Component *perform(std::vector<Component *>& c);
+        Component *perform(const std::vector<Component *>& c);
         ~Bullet();
 
     protected:

@@ -4,7 +4,7 @@
 namespace space_invaders
 {
 
-    Debris::Debris(int x, int y, int w, int h, std::string image_path, int s, short int hp) : Sprite(x, y, w, h, image_path)
+    Debris::Debris(int x, int y, int w, int h, std::string image_path, int s, short int hp) : Actor(x, y, w, h, image_path)
     {
         sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
         speed = s;
@@ -49,7 +49,7 @@ namespace space_invaders
         angle = newAngle;
     }
 
-    Component *Debris::perform(std::vector<Component *>& comps)
+    Component *Debris::perform(const std::vector<Component *>& comps)
     {
         collisionConsequences(comps);
         moveLeft();

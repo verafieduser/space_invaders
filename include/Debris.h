@@ -1,11 +1,11 @@
 #ifndef DEBRIS_H
 #define DEBRIS_H
 
-#include "Sprite.h"
+#include "Actor.h"
 
 namespace space_invaders
 {
-    class Debris : public Sprite
+    class Debris : public Actor
     {
     public:
         static Debris *getInstance(int x, int y, int w, int h, std::string image_path, int speed, short int health);
@@ -16,7 +16,7 @@ namespace space_invaders
         void spinDebris(const int &speed);
         void setAngle(const int &angle);
         void draw() const;
-        Component *perform(std::vector<Component *>& comps);
+        Component *perform(const std::vector<Component *>& comps);
         ~Debris();
 
     protected:

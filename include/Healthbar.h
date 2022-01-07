@@ -10,7 +10,7 @@ namespace space_invaders
     public:
         static Healthbar *getInstance(int x, int y, int w, int h, std::string full_health_image_path, std::string half_health_image_path, std::string low_health_image_path);
         void updateHealth(int i);
-        Component *perform(std::vector<Component *>& comps) { return NULL; };
+        Component *perform(const std::vector<Component *>& comps) { return NULL; };
         void updateTexture();
         void kill(){};
         void takeDamage(){};

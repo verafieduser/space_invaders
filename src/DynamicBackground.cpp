@@ -9,7 +9,7 @@ namespace space_invaders
         return new DynamicBackground(x, y, w, h, image_path);
     }
 
-    Component *DynamicBackground::perform(std::vector<Component *>& comps)
+    Component *DynamicBackground::perform(const std::vector<Component *>& comps)
     {
         if (speedCounter == moveEveryXFrame)
         {
@@ -51,7 +51,7 @@ namespace space_invaders
     {
         SDL_DestroyTexture(sprite);
     }
-    DynamicBackground::DynamicBackground(int x, int y, int w, int h, std::string image_path) : Sprite(x, y, w, h, image_path)
+    DynamicBackground::DynamicBackground(int x, int y, int w, int h, std::string image_path) : Actor(x, y, w, h, image_path)
     {
         imagepath = image_path;
         name = "DynamicBackground";
@@ -72,7 +72,7 @@ namespace space_invaders
         {
             return;
         }
-        Sprite::draw();
+        Actor::draw();
 
         // SDL_RendererFlip flip = SDL_FLIP_HORIZONTAL;
 

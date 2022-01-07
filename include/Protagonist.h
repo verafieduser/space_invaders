@@ -1,19 +1,19 @@
 #ifndef PROTAGONIST_H
 #define PROTAGONIST_H
 
-#include "Sprite.h"
+#include "Actor.h"
 #include "Healthbar.h"
 #include "Controller.h"
 
 namespace space_invaders
 {
 
-    class Protagonist : public Sprite
+    class Protagonist : public Actor
     {
     public:
         static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar);
         Component *shoot();
-        Component *perform(std::vector<Component *>& comps);
+        Component *perform(const std::vector<Component *>& comps);
         void setHealthbar(Healthbar *h);
         const int getDamageCooldown();
         void takeDamage();

@@ -1,11 +1,11 @@
 #include "Protagonist.h"
-// #include "Sprite.h"
+// #include "Actor.h"
 #include "Bullet.h"
 //#include "Controller.h"
 
 namespace space_invaders
 {
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar) : Sprite(x, y, w, h, image_path), healthbar(healthbar), controller(controller)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar) : Actor(x, y, w, h, image_path), healthbar(healthbar), controller(controller)
     {
         speed = 10;
         health = 3;
@@ -42,7 +42,7 @@ namespace space_invaders
         return Bullet::getInstance((getX() + getW() + speed + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
     }
 
-    Component *Protagonist::perform(std::vector<Component *>& comps)
+    Component *Protagonist::perform(const std::vector<Component *>& comps)
     {
         collisionConsequences(comps);
         // if (health <= 0)

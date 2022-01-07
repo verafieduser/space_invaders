@@ -1,26 +1,26 @@
-#include "Sprite.h"
+#include "Actor.h"
 #include "Collision.h"
 
 namespace space_invaders
 {
 
-	Sprite::Sprite(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
+	Actor::Actor(int x, int y, int w, int h, std::string image_path) : Component(x, y, w, h)
 	{
 		sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
 		collidable = true;
 	}
 
-	Sprite *Sprite::getInstance(int x, int y, int w, int h, std::string image_path)
+	Actor *Actor::getInstance(int x, int y, int w, int h, std::string image_path)
 	{
-		return new Sprite(x, y, w, h, image_path);
+		return new Actor(x, y, w, h, image_path);
 	}
 
-	Sprite::~Sprite()
+	Actor::~Actor()
 	{
 		SDL_DestroyTexture(sprite);
 	}
 
-	const bool Sprite::isOutOfBounds() const
+	const bool Actor::isOutOfBounds() const
 	{
 		if (getY() < 0 || getY() > SCREEN_HEIGHT - getH() || getX() < 0 || getX() > SCREEN_WIDTH - getW())
 		{
@@ -29,14 +29,14 @@ namespace space_invaders
 		return false;
 	}
 
-	void Sprite::collisionConsequences(std::vector<Component *>& comps)
+	void Actor::collisionConsequences(const std::vector<Component *>& comps)
 	{
 		for (Component *c : comps)
 		{
 			if (this != c && Collision::canCollideWith(this, c))
 			{
 				this->takeDamage();
-				Sprite *sprite = dynamic_cast<Sprite *> (c);
+				Actor *sprite = dynamic_cast<Actor *> (c);
 				if (sprite != NULL){
 					sprite->takeDamage();
 				}
@@ -47,7 +47,7 @@ namespace space_invaders
 
 
 
-	const bool Sprite::isOutOfBoundsLeft() const
+	const bool Actor::isOutOfBoundsLeft() const
 	{
 		if (getX() + getW() < 0)
 		{
@@ -56,7 +56,7 @@ namespace space_invaders
 		return false;
 	}
 
-	const bool Sprite::isOutOfBoundsRight() const
+	const bool Actor::isOutOfBoundsRight() const
 	{
 		if (getX() - getW() > SCREEN_WIDTH - getW())
 		{
@@ -65,7 +65,7 @@ namespace space_invaders
 		return false;
 	}
 
-	const bool Sprite::isMovementAllowed(Direction dir) const
+	const bool Actor::isMovementAllowed(Direction dir) const
 	{
 		switch (dir)
 		{
@@ -101,7 +101,7 @@ namespace space_invaders
 		return false;
 	}
 
-	void Sprite::moveUp()
+	void Actor::moveUp()
 	{
 		if (isMovementAllowed(UP))
 		{
@@ -110,7 +110,7 @@ namespace space_invaders
 		}
 	}
 
-	void Sprite::moveDown()
+	void Actor::moveDown()
 	{
 		if (isMovementAllowed(DOWN))
 		{
@@ -118,7 +118,7 @@ namespace space_invaders
 		}
 	}
 
-	void Sprite::moveLeft()
+	void Actor::moveLeft()
 	{
 		if (isMovementAllowed(LEFT))
 		{
@@ -127,7 +127,7 @@ namespace space_invaders
 		}
 	}
 
-	void Sprite::moveRight()
+	void Actor::moveRight()
 	{
 		if (isMovementAllowed(RIGHT))
 		{
@@ -135,22 +135,22 @@ namespace space_invaders
 		}
 	}
 
-	void Sprite::kill()
+	void Actor::kill()
 	{
 		killed = true;
 	}
 
-	Component *Sprite::perform(std::vector<Component *>& comps)
+	Component *Actor::perform(const std::vector<Component *>& comps)
 	{
 		return NULL;
 	}
 
-	void Sprite::draw() const
+	void Actor::draw() const
 	{
 		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) + 1;
 		if (!success)
 		{
-			std::cout << SDL_GetError() << " in RenderCopy sprite in Sprite \n"
+			std::cout << SDL_GetError() << " in RenderCopy sprite in Actor \n"
 					  << " file was " << name + "\n";
 		}
 	}

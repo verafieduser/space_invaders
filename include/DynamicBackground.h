@@ -1,15 +1,15 @@
 #ifndef DYNAMIC_BACKGROUND_H
 #define DYNAMIC_BACKGROUND_H
 
-#include "Sprite.h"
+#include "Actor.h"
 
 namespace space_invaders
 {
-    class DynamicBackground : public Sprite
+    class DynamicBackground : public Actor
     {
     public:
         static DynamicBackground *getInstance(int x, int y, int w, int h, std::string image_path);
-        Component *perform(std::vector<Component *>& comps);
+        Component *perform(const std::vector<Component *>& comps);
         void moveLeft();
         void removal() { this->~DynamicBackground(); };
         void draw() const;

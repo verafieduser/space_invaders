@@ -20,7 +20,7 @@ namespace space_invaders
         SDL_DestroyTexture(texture);
     }
 
-    Component *Score::perform(std::vector<Component *>& comps)
+    Component *Score::perform(const std::vector<Component *>& comps)
     {
 
         int value;

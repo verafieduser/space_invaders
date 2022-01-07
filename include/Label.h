@@ -9,7 +9,7 @@ namespace space_invaders
     public:
         static Label *getInstance(int x, int y, int w, int h, std::string txt);
         void setText(std::string text);
-        Component *perform(std::vector<Component *>& comps) { return NULL; };
+        Component *perform(const std::vector<Component *>& comps) { return NULL; };
         void updateTexture();
         void kill(){};
         void takeDamage(){};

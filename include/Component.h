@@ -14,7 +14,7 @@ namespace space_invaders
 		virtual void draw() const = 0;
 		virtual void removal() = 0;
 		virtual void kill() = 0;
-		virtual Component *perform(std::vector<Component *>& c) = 0;
+		virtual Component *perform(const std::vector<Component *>& c) = 0;
 
 		//virtual void tick() = 0;
 		const bool isKilled() const { return killed; };

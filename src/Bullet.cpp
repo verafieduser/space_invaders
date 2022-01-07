@@ -2,7 +2,7 @@
 
 namespace space_invaders
 {
-    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int s, bool isFromProtagonist) : Sprite(x, y, w, h, image_path)
+    Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int s, bool isFromProtagonist) : Actor(x, y, w, h, image_path)
     {
         name = "Bullet";
         isProtagonistBullet = isFromProtagonist;
@@ -45,7 +45,7 @@ namespace space_invaders
         setX(value);
     }
 
-    Component *Bullet::perform(std::vector<Component *> &comps)
+    Component *Bullet::perform(const std::vector<Component *> &comps)
     {
         if (dir == RIGHT)
         {

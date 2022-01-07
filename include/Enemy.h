@@ -1,17 +1,17 @@
 #ifndef ENEMY_H
 #define ENEMY_H
 
-#include "Sprite.h"
+#include "Actor.h"
 
 namespace space_invaders
 {
 
-    class Enemy : public Sprite
+    class Enemy : public Actor
     {
     public:
         static Enemy *getInstance(int x, int y, int w, int h, std::string image_path, int randomSeed);
         Component *shoot();
-        Component *perform(std::vector<Component *>& comps);
+        Component *perform(const std::vector<Component *>& comps);
         int movementPattern;
         int movementCounter = 0;
         int shootingSpeed;

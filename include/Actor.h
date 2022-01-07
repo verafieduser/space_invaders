@@ -1,5 +1,5 @@
-#ifndef SPRITE_H
-#define SPRITE_H
+#ifndef ACTOR_H
+#define ACTOR_H
 
 #include "Component.h"
 #include "System.h"
@@ -8,7 +8,7 @@
 
 namespace space_invaders
 {
-	class Sprite : public Component
+	class Actor : public Component
 	{
 	public:
 		enum Direction
@@ -18,8 +18,7 @@ namespace space_invaders
 			LEFT,
 			RIGHT
 		};
-		static Sprite *getInstance(int x, int y, int w, int h, std::string image_path);
-
+		static Actor *getInstance(int x, int y, int w, int h, std::string image_path);
 
 		const bool isOutOfBounds() const;
 		const bool isOutOfBoundsRight() const;
@@ -27,27 +26,29 @@ namespace space_invaders
 		const bool isMovementAllowed(Direction dir) const;
 		void kill();
 		void damageCalculation(std::vector<space_invaders::Component *> comps);
-		virtual void takeDamage(){
-		health--;
-		if (health <= 0)
+		virtual void takeDamage()
 		{
-			kill();
-		}};
-		void collisionConsequences(std::vector<Component *>& c);
-		void removal() { this->~Sprite(); };
+			health--;
+			if (health <= 0)
+			{
+				kill();
+			}
+		};
+		void collisionConsequences(const std::vector<Component *> &c);
+		void removal() { this->~Actor(); };
 
 		void moveUp();
 		void moveDown();
 		void moveLeft();
 		void moveRight();
-		Component *perform(std::vector<Component *>& comps);
+		Component *perform(const std::vector<Component *> &comps);
 		void draw() const;
-		~Sprite();
+		~Actor();
 
 	protected:
-		Sprite(int x, int y, int w, int h, std::string images_path);
-		Sprite(const Sprite &sprite) = delete;
-        const Sprite &operator=(const Sprite&) = delete;
+		Actor(int x, int y, int w, int h, std::string images_path);
+		Actor(const Actor &sprite) = delete;
+		const Actor &operator=(const Actor &) = delete;
 		SDL_Texture *sprite;
 		short int health;
 		int speed;
