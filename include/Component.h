@@ -4,6 +4,9 @@
 #include <SDL2/SDL.h>
 #include <string>
 #include <vector>
+#include <iostream>
+#include "System.h"
+
 
 namespace space_invaders
 {
@@ -11,38 +14,41 @@ namespace space_invaders
 	{
 	public:
 		virtual ~Component();
-		virtual void draw() const = 0;
-		virtual void removal() = 0;
-		virtual void kill() = 0;
-		virtual Component *perform(const std::vector<Component *>& c) = 0;
 
-		//virtual void tick() = 0;
-		const bool isKilled() const { return killed; };
-		const bool isCollidable() const { return collidable; };
+		virtual void removal() = 0;
+
+		virtual Component *perform(const std::vector<Component *>& comps);
+		virtual void draw() const;
+		virtual void kill();
+		
 		const SDL_Rect &getRect() const { return rect; }
-		void setY(int &value) { rect.y += value; };
-		void setX(int &value) { rect.x += value; };
-		void setW(int &value) { rect.w += value; };
-		void setH(int &value) { rect.h += value; };
 		const int getY() const { return rect.y; };
 		const int getX() const { return rect.x; };
 		const int getW() const { return rect.w; };
 		const int getH() const { return rect.h; };
-		const std::string getName() const { return name; }; // const int getY() const {return rect.y;};
-															// const int getX() const {return rect.x;};
+		 
+		const std::string getName() const { return name; };													
 		const bool canCollideWith(const Component *c) const;
+		const bool isKilled() const { return killed; };
+		const bool isCollidable() const { return collidable; };
 
+		void setY(int &value) { rect.y += value; };
+		void setX(int &value) { rect.x += value; };
+		void setW(int &value) { rect.w += value; };
+		void setH(int &value) { rect.h += value; };
 
 	protected:
 		Component(int x, int y, int w, int h);
-		bool killed = false;
-		bool collidable;
 		std::string name;
+		bool collidable;
+		bool killed = false;
+		SDL_Texture *sprite;
 
 	private:
-		SDL_Rect rect;
-		Component(const Component &) = delete;
 		const Component &operator=(const Component &) = delete;
+		Component(const Component &) = delete;
+		SDL_Rect rect;	
+
 	};
 }
 #endif

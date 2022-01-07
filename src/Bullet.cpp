@@ -4,13 +4,11 @@ namespace space_invaders
 {
     Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int s, bool isFromProtagonist) : Actor(x, y, w, h, image_path)
     {
-        name = "Bullet";
-        isProtagonistBullet = isFromProtagonist;
-        // if(isFromProtagonist){
-        //     name = "Protagonist bullet";
-        // } else {
-        //     name = "Enemy bullet";
-        // }
+        if(isFromProtagonist){
+            name = "Protagonist Bullet";
+        } else {
+            name = "Enemy Bullet";
+        }
         health = 1;
         speed = s;
 

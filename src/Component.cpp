@@ -12,63 +12,23 @@ namespace space_invaders
 	{
 	}
 
-	// const bool Component::canCollideWith(const Component *c) const {
+	Component *Component::perform(const std::vector<Component *> &comps)
+	{
+		return NULL;
+	}
 
-	// 	std::string name2 = c->getName();
+	void Component::draw() const
+	{
+		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) + 1;
+		if (!success)
+		{
+			std::cout << SDL_GetError() << " in RenderCopy sprite in Actor \n"
+					  << " file was " << name + "\n";
+		}	
+	}
 
-	//     if (name == "Protagonist" && name2 == "Enemy bullet")
-	//     {
-	//         if (Collision::AABB(getRect(), c->getRect()))
-	//         {
-	//             return true;
-	//         }
-	//     }
-
-	//     if (name == "Protagonist bullet" && name2 == "Enemy")
-	//     {
-	//         if (Collision::AABB(getRect(), c->getRect()))
-	//         {
-	//             return true;
-	//         }
-	//     }
-
-	//     if ((name == "Protagonist bullet" || name == "Enemy bullet") && name2 == "Debris")
-	//     {
-	//         if (Collision::AABB(getRect(), c->getRect()))
-	//         {
-
-	//             return true;
-	//         }
-	//     }
-
-	//     if (name == "Protagonist" && name2 == "Debris")
-	//     {
-	//         if (Collision::AABB(c->getRect(), c->getRect()))
-	//         {
-
-	//             return true;
-	//         }
-	//     }
-
-	//     if (name == "Protagonist" && name2 == "Enemy")
-	//     {
-	//         if (Collision::AABB(getRect(), c->getRect()))
-	//         {
-
-	//             return true;
-	//         }
-	//     }
-
-	//     if (name == "Protagonist bullet" && name2 == "Enemy bullet")
-	//     {
-	//         if (Collision::AABB(getRect(), c->getRect()))
-	//         {
-
-	//             return true;
-	//         }
-	//     }
-
-	//     return false;
-	// }
-
+	void Component::kill()
+	{
+		killed = true;
+	}
 }

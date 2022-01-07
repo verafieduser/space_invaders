@@ -10,10 +10,10 @@ namespace space_invaders
 		collidable = true;
 	}
 
-	Actor *Actor::getInstance(int x, int y, int w, int h, std::string image_path)
-	{
-		return new Actor(x, y, w, h, image_path);
-	}
+	// Actor *Actor::getInstance(int x, int y, int w, int h, std::string image_path)
+	// {
+	// 	return new Actor(x, y, w, h, image_path);
+	// }
 
 	Actor::~Actor()
 	{
@@ -29,23 +29,21 @@ namespace space_invaders
 		return false;
 	}
 
-	void Actor::collisionConsequences(const std::vector<Component *>& comps)
+	void Actor::collisionConsequences(const std::vector<Component *> &comps)
 	{
 		for (Component *c : comps)
 		{
 			if (this != c && Collision::canCollideWith(this, c))
 			{
 				this->takeDamage();
-				Actor *sprite = dynamic_cast<Actor *> (c);
-				if (sprite != NULL){
+				Actor *sprite = dynamic_cast<Actor *>(c);
+				if (sprite != NULL)
+				{
 					sprite->takeDamage();
 				}
-
 			}
 		}
 	}
-
-
 
 	const bool Actor::isOutOfBoundsLeft() const
 	{
@@ -101,6 +99,15 @@ namespace space_invaders
 		return false;
 	}
 
+	void Actor::takeDamage()
+	{
+		health--;
+		if (health <= 0)
+		{
+			kill();
+		}
+	};
+
 	void Actor::moveUp()
 	{
 		if (isMovementAllowed(UP))
@@ -138,20 +145,5 @@ namespace space_invaders
 	void Actor::kill()
 	{
 		killed = true;
-	}
-
-	Component *Actor::perform(const std::vector<Component *>& comps)
-	{
-		return NULL;
-	}
-
-	void Actor::draw() const
-	{
-		int success = SDL_RenderCopy(sys.get_ren(), sprite, NULL, &getRect()) + 1;
-		if (!success)
-		{
-			std::cout << SDL_GetError() << " in RenderCopy sprite in Actor \n"
-					  << " file was " << name + "\n";
-		}
 	}
 }

@@ -2,7 +2,6 @@
 #define BULLET_H
 
 #include "Actor.h"
-// #include "Session.h"
 
 namespace space_invaders
 {
@@ -10,20 +9,22 @@ namespace space_invaders
     {
     public:
         static Bullet *getInstance(int x, int y, int w, int h, std::string image_path, int speed, bool isFromProtagonist);
-        bool isProtagonistBullet;
-        bool fromProtagonist(){return isProtagonistBullet;};
-        int SPEED = 40;
-        Direction dir;
-        void moveRight();
-        void moveLeft();
-        Component *perform(const std::vector<Component *>& c);
         ~Bullet();
-
+        Component *perform(const std::vector<Component *>& c);
+        bool fromProtagonist(){return isProtagonistBullet;};
+        
     protected:
         Bullet(int x, int y, int w, int h, std::string images_path, int speed, bool isProtagonist);
         Bullet(const Bullet &bullet) = delete;
         const Bullet &operator=(const Bullet &) = delete;
+        
+        void moveRight();
+        void moveLeft();
+        
     private:
+
+        Direction dir;
+        bool isProtagonistBullet;
     };
 }
 
