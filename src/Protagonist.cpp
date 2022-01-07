@@ -5,7 +5,7 @@
 
 namespace space_invaders
 {
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar) : Sprite(x, y, w, h, image_path), controller(controller), healthbar(healthbar)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar) : Sprite(x, y, w, h, image_path), healthbar(healthbar), controller(controller)
     {
         speed = 10;
         health = 3;
@@ -29,6 +29,9 @@ namespace space_invaders
         {
             healthbar.updateHealth(-1);
             health--;
+        }
+        if(health <= 0){
+            kill();
         }
         damageCooldown = 60;
     };

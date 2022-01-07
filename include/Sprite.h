@@ -27,11 +27,7 @@ namespace space_invaders
 		const bool isMovementAllowed(Direction dir) const;
 		void kill();
 		void damageCalculation(std::vector<space_invaders::Component *> comps);
-		void takeDamage(){
-		std::cout<< name;
-		if(name == "Protagonist"){
-			return;
-		}
+		virtual void takeDamage(){
 		health--;
 		if (health <= 0)
 		{
