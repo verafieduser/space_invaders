@@ -29,17 +29,6 @@ namespace space_invaders
         SDL_DestroyTexture(sprite);
     }
 
-    Component *Enemy::shoot()
-    {
-        return Bullet::getInstance((getX() - getW() - speed - 1), (getY() + 40), 100, 20, "laser2.png", 13, false);
-    }
-
-    void Enemy::moveLeft()
-    {
-        int value = -1 * speed;
-        setX(value);
-    }
-
     Component *Enemy::perform(const std::vector<Component *> &comps)
     {
         collisionConsequences(comps);
@@ -65,6 +54,17 @@ namespace space_invaders
             return shoot();
         }
         return NULL;
+    }
+
+    void Enemy::moveLeft()
+    {
+        int value = -1 * speed;
+        setX(value);
+    }
+
+    Component *Enemy::shoot()
+    {
+        return Bullet::getInstance((getX() - getW() - speed - 1), (getY() + 40), 100, 20, "laser2.png", 13, false);
     }
 
     void Enemy::enemyMovementPattern()

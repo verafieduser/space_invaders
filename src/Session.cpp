@@ -10,24 +10,42 @@ namespace space_invaders
 	Session::~Session()
 	{
 		//TODO: should we have something here perhaps?
-		//remove vectors one by one 
+		//remove vectors one by one
 		//comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
 		loadPendingComponents();
-		for (Component * c : comps){
+		for (Component *c : comps)
+		{
 			remove(c);
 		}
-		for (Component * c : enemies){
+		for (Component *c : enemies)
+		{
 			remove(c);
 		}
-		for (Component * c : gameOverComps){
+		for (Component *c : gameOverComps)
+		{
 			remove(c);
 		}
-		
+
 		removeComponents(toBeAdded);
 		removeComponents(enemies);
 		removeComponents(gameOverComps);
 	}
-	
+
+	void Session::add(Component *c)
+	{
+		toBeAdded.push_back(c);
+	}
+
+	void Session::addEnemyTypes(Component *c)
+	{
+		enemies.push_back(c);
+	}
+
+	void Session::addGameOverComps(Component *c)
+	{
+		gameOverComps.push_back(c);
+	}
+
 	void Session::run()
 	{
 		//TODO: this should maybe be in main? or a function that can be called from main atleast?
@@ -85,26 +103,11 @@ namespace space_invaders
 		cleanUp();
 	}
 
-	void Session::add(Component *c)
-	{
-		toBeAdded.push_back(c);
-	}
-
-	void Session::addEnemyTypes(Component *c)
-	{
-		enemies.push_back(c);
-	}
-
-	void Session::addGameOverComps(Component *c)
-	{
-		gameOverComps.push_back(c);
-	}
-
 	void Session::remove(Component *c)
 	{
 		toBeRemoved.push_back(c);
 	}
-	
+
 	void Session::removeComponents(std::vector<Component *> &components)
 	{
 		removeComponents(components, 0, false);
@@ -140,21 +143,6 @@ namespace space_invaders
 		toBeRemoved.clear();
 	}
 
-	void Session::cleanUp()
-	{
-		sys.~System();
-		this->~Session();
-	}
-
-	void Session::delayToNextTick(Uint32 nextTick)
-	{
-		int delay = nextTick - SDL_GetTicks();
-		if (delay > 0)
-		{
-			SDL_Delay(delay);
-		}
-	}
-
 	void Session::render(std::vector<Component *> &components)
 	{
 		int success = SDL_SetRenderDrawColor(sys.get_ren(), 0, 0, 0, 0);
@@ -177,83 +165,15 @@ namespace space_invaders
 		SDL_RenderPresent(sys.get_ren());
 	}
 
-	void Session::loadPendingComponents()
+	void Session::delayToNextTick(Uint32 nextTick)
 	{
-		for (Component *c : toBeAdded)
+		int delay = nextTick - SDL_GetTicks();
+		if (delay > 0)
 		{
-			comps.push_back(c);
-		}
-		toBeAdded.clear();
-	}
-
-	void Session::gameActions()
-	{
-		for (Component *c : comps)
-		{
-			Component *newC = c->perform(comps);
-			if (newC != NULL)
-			{
-				add(newC);
-			}
-
-			// damageCalculation(c);
-
-			if (c->isKilled())
-			{
-				deathCalculation(c);
-				if (c->getName() == "Protagonist")
-				{
-					gameOver();
-					break;
-				}
-			}
+			SDL_Delay(delay);
 		}
 	}
 
-	void Session::deathCalculation(Component *c)
-	{
-		remove(c);
-		//TODO: consider ways to make which names lead to what behaviour added from main instead of
-		std::string name = c->getName();
-		if (name == "Defeated enemy")
-		{
-			enemiesDefeated++;
-		}
-		else if (name == "Destroyed debris")
-		{
-			debrisDestroyed++;
-		}
-	}
-
-	void Session::enemySpawner()
-	{
-		int amountOfEnemies = enemies.size();
-		spawnCounter++;
-
-		if (spawnCounter > spawnFrequency && amountOfEnemies > 0 && currentEnemy + 1 < amountOfEnemies)
-		{
-			spawnCounter = 0;
-
-			currentEnemy++;
-
-			//LEVEL ADVANCEMENT:
-			if (currentEnemy % newLevelEveryXSpawn == 0)
-			{
-				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
-				level++;
-
-				spawnCounter = betweenLevels * 1;
-			}
-
-			//WIN STATE:
-			if (amountOfEnemies == currentEnemy)
-			{
-			}
-
-			add(enemies.at(currentEnemy));
-		}
-	}	
-	
 	void Session::gameOver()
 	{
 		loadPendingComponents();
@@ -283,5 +203,88 @@ namespace space_invaders
 		{
 			add(c);
 		}
+	}
+
+	void Session::gameActions()
+	{
+		for (Component *c : comps)
+		{
+			Component *newC = c->perform(comps);
+			if (newC != NULL)
+			{
+				add(newC);
+			}
+
+			// damageCalculation(c);
+
+			if (c->isKilled())
+			{
+				deathCalculation(c);
+				if (c->getName() == "Protagonist")
+				{
+					gameOver();
+					break;
+				}
+			}
+		}
+	}
+
+	void Session::loadPendingComponents()
+	{
+		for (Component *c : toBeAdded)
+		{
+			comps.push_back(c);
+		}
+		toBeAdded.clear();
+	}
+
+	void Session::enemySpawner()
+	{
+		int amountOfEnemies = enemies.size();
+		spawnCounter++;
+
+		if (spawnCounter > spawnFrequency && amountOfEnemies > 0 && currentEnemy + 1 < amountOfEnemies)
+		{
+			spawnCounter = 0;
+
+			currentEnemy++;
+
+			//LEVEL ADVANCEMENT:
+			if (currentEnemy % newLevelEveryXSpawn == 0)
+			{
+				spawnFrequency = spawnFrequency / levelDifficultyIncrease;
+				level++;
+
+				spawnCounter = betweenLevels * 1;
+			}
+
+			//WIN STATE:
+			if (amountOfEnemies == currentEnemy)
+			{
+			}
+
+			add(enemies.at(currentEnemy));
+		}
+	}
+
+	void Session::deathCalculation(Component *c)
+	{
+		remove(c);
+		//TODO: consider ways to make which names lead to what behaviour added from main instead of
+		std::string name = c->getName();
+		if (name == "Defeated enemy")
+		{
+			enemiesDefeated++;
+		}
+		else if (name == "Destroyed debris")
+		{
+			debrisDestroyed++;
+		}
+	}
+
+	void Session::cleanUp()
+	{
+		sys.~System();
+		this->~Session();
 	}
 }

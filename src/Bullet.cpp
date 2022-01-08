@@ -4,9 +4,12 @@ namespace space_invaders
 {
     Bullet::Bullet(int x, int y, int w, int h, std::string image_path, int s, bool isFromProtagonist) : Actor(x, y, w, h, image_path)
     {
-        if(isFromProtagonist){
+        if (isFromProtagonist)
+        {
             name = "Protagonist Bullet";
-        } else {
+        }
+        else
+        {
             name = "Enemy Bullet";
         }
         health = 1;
@@ -32,17 +35,6 @@ namespace space_invaders
         SDL_DestroyTexture(sprite);
     }
 
-    void Bullet::moveRight()
-    {
-        setX(speed);
-    }
-
-    void Bullet::moveLeft()
-    {
-        int value = -1 * speed;
-        setX(value);
-    }
-
     Component *Bullet::perform(const std::vector<Component *> &comps)
     {
         if (dir == RIGHT)
@@ -66,4 +58,14 @@ namespace space_invaders
         return NULL;
     }
 
+    void Bullet::moveRight()
+    {
+        setX(speed);
+    }
+
+    void Bullet::moveLeft()
+    {
+        int value = -1 * speed;
+        setX(value);
+    }
 }

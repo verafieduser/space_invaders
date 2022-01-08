@@ -12,12 +12,12 @@ namespace space_invaders
     {
     public:
         static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar);
+        ~Protagonist();
         Component *shoot();
-        Component *perform(const std::vector<Component *>& comps);
+        Component *perform(const std::vector<Component *> &comps);
         void setHealthbar(Healthbar *h);
         const int getDamageCooldown();
         void takeDamage();
-        ~Protagonist();
 
     protected:
         Protagonist(int x, int y, int w, int h, std::string images_path, Controller &controller, Healthbar &healthbar);

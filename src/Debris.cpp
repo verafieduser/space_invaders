@@ -29,27 +29,7 @@ namespace space_invaders
         SDL_DestroyTexture(sprite);
     }
 
-    void Debris::moveLeft()
-    {
-        int value = -1 * speed;
-        setX(value);
-    }
-
-    void Debris::spinDebris(const int &speed)
-    {
-        if (angle > 360 || angle < -360)
-        {
-            angle = 0;
-        }
-        setAngle(angle + (speed * spinDir));
-    }
-
-    void Debris::setAngle(const int &newAngle)
-    {
-        angle = newAngle;
-    }
-
-    Component *Debris::perform(const std::vector<Component *>& comps)
+    Component *Debris::perform(const std::vector<Component *> &comps)
     {
         collisionConsequences(comps);
         moveLeft();
@@ -81,5 +61,25 @@ namespace space_invaders
         {
             std::cout << SDL_GetError() << " in RenderCopyEx sprite in Debris \n";
         }
+    }
+
+    void Debris::moveLeft()
+    {
+        int value = -1 * speed;
+        setX(value);
+    }
+
+    void Debris::spinDebris(const int &speed)
+    {
+        if (angle > 360 || angle < -360)
+        {
+            angle = 0;
+        }
+        setAngle(angle + (speed * spinDir));
+    }
+
+    void Debris::setAngle(const int &newAngle)
+    {
+        angle = newAngle;
     }
 }
