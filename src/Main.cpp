@@ -19,19 +19,32 @@ int distanceBetweenDynamicBackgrounds = 1800;
 
 int main(int argc, char **argv)
 {
+
+	//sets how many frames it should take until sprites start spawning upon game start
 	ses.setInitialWait(200);
+
+	//sets how much faster enemies should spawn for each level increase
 	ses.setLevelDifficultyIncrease(1.8);
+
+	//decides how many enemies and debris you need to survive before you proceed to the next level
 	ses.setNewLevelEveryXSpawn((amountOfEnemiesToSpawn + amountOfDebrisToSpawn) / amountOfLevels + 1);
+
+	//sets how often (every x frame) sprites should spawn: 
 	ses.setSpawnFrequency(50);
+
+	//sets how many frames of wait there should be until the next level starts spawning enemies
 	ses.setWaitBetweenLevels(300);
+
+	//decides whether enemies should keep spawning over the game over screen
 	ses.setSpawningToContinueAfterDeath(false);
+
+	//components to be displayed upon game over
 	ses.addGameOverComps(Label::getInstance(530, 200, 500, 70, "Game Over"));
 	ses.addGameOverComps(Score::getInstance(620, 500, 300, 35, "FINAL SCORE", ses));
 	ses.addGameOverComps(Score::getInstance(530, 600, 500, 30, "INNOCENT DEBRIS DESTROYED", ses));
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
-	//TODO: get_controller should maybe be &?
 
-
+	//Background image
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
 
@@ -42,7 +55,7 @@ int main(int argc, char **argv)
 	spawner->createEnemies(amountOfEnemiesToSpawn, enemyTypes);
 	spawner->createDebris(amountOfDebrisToSpawn, debrisTypes);
 
-	//Creating score and level labels
+	//Creating labels that display the current score and level
 	Score *score = Score::getInstance(250, 20, 200, 30, "SCORE", ses);
 	ses.add(score);
 
