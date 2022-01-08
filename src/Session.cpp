@@ -74,7 +74,7 @@ namespace space_invaders
 			// 		}
 			// 	}
 			// }
-
+			gameActions();
 			loadPendingComponents();
 			removeComponents(comps);
 			enemySpawner();

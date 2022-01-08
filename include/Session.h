@@ -12,9 +12,6 @@ namespace space_invaders
 	{
 	public:
 		~Session();
-		const int getEnemiesDefeated() const { return enemiesDefeated; };
-		const int getDebrisDestroyed() const { return debrisDestroyed; };
-		const int getLevel() const { return level; };
 		
 		void add(Component *c);
 		void addEnemyTypes(Component *c);

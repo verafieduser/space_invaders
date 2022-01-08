@@ -27,7 +27,7 @@ namespace space_invaders
         void newLevelShowcase();
         Session &ses;    
         bool newLevel = false;
-        int showNewLevelForXFrames = 360;
+        int showNewLevelForXFrames = 420;
         int counter, levelValue = 0;
         int showcaseLocation = 100;
         int showcaseW = 200;
