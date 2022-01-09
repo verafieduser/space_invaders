@@ -22,7 +22,7 @@ namespace space_invaders
 
     private:
         Session &session;
-        Controller& controller = sys.get_controller();
+        const Controller& controller = sys.get_controller();
     };
 
 extern System sys;

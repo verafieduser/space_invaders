@@ -3,14 +3,14 @@
 
 namespace space_invaders
 {
-    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar) : Actor(x, y, w, h, image_path), healthbar(healthbar), controller(controller)
+    Protagonist::Protagonist(int x, int y, int w, int h, std::string image_path, const Controller &controller, Healthbar &healthbar) : Actor(x, y, w, h, image_path), healthbar(healthbar), controller(controller)
     {
         speed = 10;
         health = 3;
         name = "Protagonist";
     }
 
-    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar)
+    Protagonist *Protagonist::getInstance(int x, int y, int w, int h, std::string image_path, const Controller &controller, Healthbar &healthbar)
     {
         return new Protagonist(x, y, w, h, image_path, controller, healthbar);
     }

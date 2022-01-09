@@ -11,7 +11,7 @@ namespace space_invaders
     class Protagonist : public Actor
     {
     public:
-        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, Controller &controller, Healthbar &healthbar);
+        static Protagonist *getInstance(int x, int y, int w, int h, std::string image_path, const Controller &controller, Healthbar &healthbar);
         ~Protagonist();
         Component *shoot();
         Component *perform(const std::vector<Component *> &comps);
@@ -20,7 +20,7 @@ namespace space_invaders
         void takeDamage();
 
     protected:
-        Protagonist(int x, int y, int w, int h, std::string images_path, Controller &controller, Healthbar &healthbar);
+        Protagonist(int x, int y, int w, int h, std::string images_path, const Controller &controller, Healthbar &healthbar);
 
     private:
         Protagonist(const Protagonist &protagonist) = delete;
@@ -29,7 +29,7 @@ namespace space_invaders
         int shootingCooldown = 0;
         int damageCooldown = 0;
         Healthbar &healthbar;
-        Controller &controller;
+        const Controller &controller;
     };
 }
 
