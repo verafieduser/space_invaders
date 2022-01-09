@@ -17,7 +17,7 @@ namespace space_invaders
 		~System();
 		SDL_Renderer *get_ren() const;
 		TTF_Font *get_font() const;
-		Controller& get_controller() { return controller; };
+		Controller& get_controller() { return *controller; };
 		void addBackgroundMusic(std::string music_path);
 
 	private:
@@ -27,7 +27,7 @@ namespace space_invaders
 		SDL_Renderer *ren;
 		TTF_Font *font;
 		Mix_Chunk *music_player;
-		Controller controller;
+		Controller * controller = Controller::getInstance();
 	};
 
 	extern System sys;

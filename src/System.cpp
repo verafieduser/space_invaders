@@ -38,7 +38,7 @@ namespace space_invaders
 
 	System::~System()
 	{
-		controller.~Controller();
+		controller->~Controller();
 		if(music_player != NULL){
 			Mix_Quit();
 		}
