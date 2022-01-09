@@ -27,6 +27,17 @@ namespace space_invaders
         SDL_DestroyTexture(sprite);
     }
 
+    void Healthbar::updateHealth(int i)
+    {
+        health += i;
+        updateTexture();
+    }
+
+    void Healthbar::setTexture(std::string image_path)
+    {
+        sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
+    }
+
     void Healthbar::updateTexture()
     {
         switch (health)
@@ -43,16 +54,5 @@ namespace space_invaders
         default:
             break;
         }
-    }
-
-    void Healthbar::setTexture(std::string image_path)
-    {
-        sprite = IMG_LoadTexture(sys.get_ren(), (IMAGES_PATH + image_path).c_str());
-    }
-
-    void Healthbar::updateHealth(int i)
-    {
-        health += i;
-        updateTexture();
     }
 }

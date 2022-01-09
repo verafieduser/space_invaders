@@ -49,13 +49,6 @@ namespace space_invaders
 		SDL_Quit();
 	}
 
-	void System::addBackgroundMusic(std::string music_path)
-	{
-		Mix_OpenAudio(20050, AUDIO_S16SYS, 2, 4096);
-		music_player = Mix_LoadWAV(music_path.c_str());
-		Mix_PlayChannel(-1, music_player, -1);
-	}
-
 	SDL_Renderer *System::get_ren() const
 	{
 		return ren;
@@ -67,4 +60,10 @@ namespace space_invaders
 	}
 	System sys;
 
+	void System::addBackgroundMusic(std::string music_path)
+	{
+		Mix_OpenAudio(20050, AUDIO_S16SYS, 2, 4096);
+		music_player = Mix_LoadWAV(music_path.c_str());
+		Mix_PlayChannel(-1, music_player, -1);
+	}
 }

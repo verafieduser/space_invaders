@@ -20,6 +20,16 @@ namespace space_invaders
         SDL_DestroyTexture(sprite);
     }
 
+    Component *Score::perform(const std::vector<Component *> &comps)
+    {
+        std::ostringstream ostr;
+        ostr << typeOfScore();
+        setText(message + ": " + ostr.str());
+
+        newLevelShowcase();
+        return NULL;
+    }
+
     const int Score::typeOfScore()
     {
         int value;
@@ -80,15 +90,5 @@ namespace space_invaders
                 setColor(getOriginalColor());
             }
         }
-    }
-
-    Component *Score::perform(const std::vector<Component *> &comps)
-    {
-        std::ostringstream ostr;
-        ostr << typeOfScore();
-        setText(message + ": " + ostr.str());
-
-        newLevelShowcase();
-        return NULL;
     }
 }

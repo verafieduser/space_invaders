@@ -21,6 +21,25 @@ namespace space_invaders
         SDL_DestroyTexture(sprite);
     }
 
+    Component *Protagonist::shoot()
+    {
+        return Bullet::getInstance((getX() + getW() + speed + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
+    }
+
+    Component *Protagonist::perform(const std::vector<Component *> &comps)
+    {
+        collisionConsequences(comps);
+
+        if (damageCooldown > 0)
+        {
+            damageCooldown--;
+        }
+
+        shootingCooldown -= 1;
+
+        return protagonistControl();
+    }
+
     void Protagonist::takeDamage()
     {
         if (damageCooldown == 0)
@@ -28,19 +47,16 @@ namespace space_invaders
             healthbar.updateHealth(-1);
             health--;
             damageCooldown = 60;
-        } 
-        if(health <= 0){
+        }
+        if (health <= 0)
+        {
             kill();
         }
         //damageCooldown = 60;
     };
 
-    Component *Protagonist::shoot()
+    Component *Protagonist::protagonistControl()
     {
-        return Bullet::getInstance((getX() + getW() + speed + 1), (getY() + 45), 30, 10, "laser.png", 30, true);
-    }
-
-    Component* Protagonist::protagonistControl(){
 
         const Uint8 *state = controller.getKeyboardState();
 
@@ -85,22 +101,10 @@ namespace space_invaders
         {
             shootingCooldown = 10;
             return shoot();
-        } else {
+        }
+        else
+        {
             return NULL;
         }
-    }
-
-    Component *Protagonist::perform(const std::vector<Component *>& comps)
-    {
-        collisionConsequences(comps);
-
-        if (damageCooldown > 0)
-        {
-            damageCooldown--;
-        }
-
-        shootingCooldown -= 1;
-
-        return protagonistControl();
     }
 }

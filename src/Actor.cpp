@@ -29,34 +29,18 @@ namespace space_invaders
 		return false;
 	}
 
-	void Actor::collisionConsequences(const std::vector<Component *> &comps)
+	const bool Actor::isOutOfBoundsRight() const
 	{
-		for (Component *c : comps)
-		{
-			if (this != c && Collision::canCollideWith(this, c))
-			{
-				this->takeDamage();
-				Actor *sprite = dynamic_cast<Actor *>(c);
-				if (sprite != NULL)
-				{
-					sprite->takeDamage();
-				}
-			}
-		}
-	}
-
-	const bool Actor::isOutOfBoundsLeft() const
-	{
-		if (getX() + getW() < 0)
+		if (getX() - getW() > SCREEN_WIDTH - getW())
 		{
 			return true;
 		}
 		return false;
 	}
 
-	const bool Actor::isOutOfBoundsRight() const
+	const bool Actor::isOutOfBoundsLeft() const
 	{
-		if (getX() - getW() > SCREEN_WIDTH - getW())
+		if (getX() + getW() < 0)
 		{
 			return true;
 		}
@@ -145,5 +129,21 @@ namespace space_invaders
 	void Actor::kill()
 	{
 		killed = true;
+	}
+
+	void Actor::collisionConsequences(const std::vector<Component *> &comps)
+	{
+		for (Component *c : comps)
+		{
+			if (this != c && Collision::canCollideWith(this, c))
+			{
+				this->takeDamage();
+				Actor *sprite = dynamic_cast<Actor *>(c);
+				if (sprite != NULL)
+				{
+					sprite->takeDamage();
+				}
+			}
+		}
 	}
 }

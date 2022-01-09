@@ -12,7 +12,7 @@ namespace space_invaders
 	{
 	public:
 		~Session();
-		
+
 		void add(Component *c);
 		void addEnemyTypes(Component *c);
 		void addGameOverComps(Component *c);
@@ -26,15 +26,16 @@ namespace space_invaders
 		const int getEnemiesDefeated() const { return enemiesDefeated; };
 		const int getDebrisDestroyed() const { return debrisDestroyed; };
 		const int getLevel() const { return level; };
+
 	private:
 		void remove(Component *c);
+		void removeComponents(std::vector<Component *> &components);
+		void removeComponents(std::vector<Component *> &components, int offset, bool dontDelete);
 		void render(std::vector<Component *> &components);
 		void delayToNextTick(Uint32 nextTick);
 		void gameOver();
 		void gameActions();
 		void loadPendingComponents();
-		void removeComponents(std::vector<Component *> &components);
-		void removeComponents(std::vector<Component *> &components, int offset, bool dontDelete);
 		void enemySpawner();
 		void deathCalculation(Component *c);
 		void cleanUp();
@@ -43,7 +44,6 @@ namespace space_invaders
 		bool spawningToContinueAfterDeath = true;
 		std::vector<Component *> comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
 		int betweenLevels, spawnCounter, currentEnemy, enemiesDefeated, debrisDestroyed, newLevelEveryXSpawn, spawnFrequency = 0;
-
 	};
 
 }
