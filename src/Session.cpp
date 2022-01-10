@@ -48,7 +48,6 @@ namespace space_invaders
 
 	void Session::run()
 	{
-		//TODO: this should maybe be in main? or a function that can be called from main atleast?
 		std::random_shuffle(enemies.begin(), enemies.end());
 
 		//controller = sys.get_controller();
@@ -99,7 +98,7 @@ namespace space_invaders
 			render(comps);
 			delayToNextTick(nextTick);
 
-		} //yttre while
+		}
 		cleanUp();
 	}
 
@@ -176,12 +175,19 @@ namespace space_invaders
 
 	void Session::gameOver()
 	{
-		loadPendingComponents();
+
 		for (Component *c : comps)
 		{
-			std::string name = c->getName();
-			//TODO: could be a vector of names added from main, for objects that should be exempt?
-			if (name != "DynamicBackground" && name != "Background" && name != "Label")
+
+			loadPendingComponents();
+			if (std::find(
+				namesExemptFromGameOverDestruction.begin(), 
+				namesExemptFromGameOverDestruction.end(), 
+				c->getName()) != namesExemptFromGameOverDestruction.end())
+			{
+				//do nothing
+			}
+			else
 			{
 				remove(c);
 			}
@@ -215,12 +221,10 @@ namespace space_invaders
 				add(newC);
 			}
 
-			// damageCalculation(c);
-
 			if (c->isKilled())
 			{
 				deathCalculation(c);
-				if (c->getName() == "Protagonist")
+				if (c->getName() == gameOverComponentName)
 				{
 					gameOver();
 					break;
@@ -270,15 +274,20 @@ namespace space_invaders
 	void Session::deathCalculation(Component *c)
 	{
 		remove(c);
-		//TODO: consider ways to make which names lead to what behaviour added from main instead of
 		std::string name = c->getName();
-		if (name == "Defeated enemy")
+		if (std::find(
+			componentNamesThatGiveScoreUponKill.begin(), 
+			componentNamesThatGiveScoreUponKill.end(), 
+			name) != componentNamesThatGiveScoreUponKill.end())
 		{
-			enemiesDefeated++;
+			score++;
 		}
-		else if (name == "Destroyed debris")
+		else if (std::find(
+			componentNamesThatGiveSecondaryScoreUponKill.begin(), 
+			componentNamesThatGiveSecondaryScoreUponKill.end(), 
+			name) != componentNamesThatGiveSecondaryScoreUponKill.end())
 		{
-			debrisDestroyed++;
+			secondaryScore++;
 		}
 	}
 

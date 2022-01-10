@@ -35,7 +35,7 @@ namespace space_invaders
         int value;
         if (message == "SCORE")
         {
-            value = ses.getEnemiesDefeated();
+            value = ses.getScore();
         }
         else if (message == "LEVEL")
         {
@@ -48,7 +48,7 @@ namespace space_invaders
         }
         else if (message == "FINAL SCORE")
         {
-            value = ses.getEnemiesDefeated();
+            value = ses.getScore();
         }
         else if (message == "FINAL LEVEL")
         {
@@ -56,7 +56,7 @@ namespace space_invaders
         }
         else if (message == "INNOCENT DEBRIS DESTROYED")
         {
-            value = ses.getDebrisDestroyed();
+            value = ses.getSecondaryScore();
         }
 
         return value;

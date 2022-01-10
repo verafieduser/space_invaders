@@ -20,6 +20,8 @@ int distanceBetweenDynamicBackgrounds = 1800;
 int main(int argc, char **argv)
 {
 
+	
+
 	//sets how many frames it should take until sprites start spawning upon game start
 	ses.setInitialWait(200);
 
@@ -44,6 +46,7 @@ int main(int argc, char **argv)
 	ses.addGameOverComps(Score::getInstance(530, 600, 500, 30, "INNOCENT DEBRIS DESTROYED", ses));
 	sys.addBackgroundMusic(SOUNDS_PATH + "music.wav");
 
+
 	//Background image
 	Background *bg = Background::getInstance(1600, 720, "bg.png");
 	ses.add(bg);
@@ -61,6 +64,23 @@ int main(int argc, char **argv)
 
 	Score *level = Score::getInstance(500, 20, 200, 30, "LEVEL", ses);
 	ses.add(level);
+
+
+	//adds names that the engine checks against to give score up, or game over, or save from destruction:
+	std::vector<std::string> namesExemptFromGameOverDestruction;
+	namesExemptFromGameOverDestruction.push_back("Dynamic Background");
+	namesExemptFromGameOverDestruction.push_back("Background");
+	namesExemptFromGameOverDestruction.push_back("Label");
+	std::vector<std::string> componentNamesThatGiveScoreUponKill;
+	componentNamesThatGiveScoreUponKill.push_back("Defeated enemy");
+	std::vector<std::string> componentNamesThatGiveSecondaryScoreUponKill;
+	componentNamesThatGiveSecondaryScoreUponKill.push_back("Destroyed debris");
+
+	ses.setNamesExemptFromGameOverDestruction(namesExemptFromGameOverDestruction);
+	ses.setNameOfComponentThatCauseGameOverUponKill("Protagonist");
+	ses.setNamesOfComponentsThatGiveScoreUponKill(componentNamesThatGiveScoreUponKill);
+	ses.setNamesOfComponentsThatGiveSecondaryScoreUponKill(componentNamesThatGiveSecondaryScoreUponKill);
+
 
 	ses.run();
 

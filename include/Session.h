@@ -23,8 +23,12 @@ namespace space_invaders
 		void setLevelDifficultyIncrease(float levelDifficultyInc) { levelDifficultyIncrease = levelDifficultyInc; };
 		void setSpawningToContinueAfterDeath(bool toContinue) { spawningToContinueAfterDeath = toContinue; };
 		void setNewLevelEveryXSpawn(int x) { newLevelEveryXSpawn = x; };
-		const int getEnemiesDefeated() const { return enemiesDefeated; };
-		const int getDebrisDestroyed() const { return debrisDestroyed; };
+		void setNamesExemptFromGameOverDestruction(std::vector<std::string> names){namesExemptFromGameOverDestruction = names;};
+		void setNameOfComponentThatCauseGameOverUponKill(std::string name){gameOverComponentName = name;};
+		void setNamesOfComponentsThatGiveScoreUponKill(std::vector<std::string> names ){componentNamesThatGiveScoreUponKill = names;};
+		void setNamesOfComponentsThatGiveSecondaryScoreUponKill(std::vector<std::string> names ){componentNamesThatGiveSecondaryScoreUponKill = names;};
+		const int getScore() const { return score; };
+		const int getSecondaryScore() const { return secondaryScore; };
 		const int getLevel() const { return level; };
 
 	private:
@@ -43,7 +47,9 @@ namespace space_invaders
 		float levelDifficultyIncrease = 1;
 		bool spawningToContinueAfterDeath = true;
 		std::vector<Component *> comps, toBeRemoved, toBeAdded, enemies, gameOverComps;
-		int betweenLevels, spawnCounter, currentEnemy, enemiesDefeated, debrisDestroyed, newLevelEveryXSpawn, spawnFrequency = 0;
+		std::vector<std::string> namesExemptFromGameOverDestruction, componentNamesThatGiveScoreUponKill, componentNamesThatGiveSecondaryScoreUponKill;
+		std::string gameOverComponentName;
+		int betweenLevels, spawnCounter, currentEnemy, score, secondaryScore, newLevelEveryXSpawn, spawnFrequency = 0;
 	};
 
 }
